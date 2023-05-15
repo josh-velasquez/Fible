@@ -2,6 +2,7 @@ import { Container, Header, Menu, Icon } from "semantic-ui-react";
 import { InView } from "react-intersection-observer";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import SearchRecipe from "./SearchRecipe";
 
 const menuStyle = {
   border: "none",
@@ -9,6 +10,7 @@ const menuStyle = {
   boxShadow: "none",
   marginBottom: "1em",
   transition: "box-shadow 0.5s ease, padding 0.5s ease",
+  backgroundColor: "#002642",
 };
 
 const fixedMenuStyle = {
@@ -26,25 +28,27 @@ const NavBar: React.FC = () => {
     <InView onChange={toggleTopMenu}>
       <Menu
         inverted
-        borderless
         fixed={menuFixed ? "top" : undefined}
         style={menuFixed ? fixedMenuStyle : menuStyle}
       >
         <Container text>
           <Menu.Item>
-            <Icon name="sort alphabet down" />
+            <Icon name="chess" />
           </Menu.Item>
           <Menu.Item>
             <Link to="/" onClick={() => navigate("/")}>
               <Header inverted as="h1">
-                Omnisort
+                Chef
               </Header>
             </Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/docs" onClick={() => navigate("/docs")}>
-              Docs
+            <Link to="/addRecipe" onClick={() => navigate("/addRecipe")}>
+              Add Recipe
             </Link>
+          </Menu.Item>
+          <Menu.Item position="right">
+            <SearchRecipe />
           </Menu.Item>
         </Container>
       </Menu>

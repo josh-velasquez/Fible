@@ -1,0 +1,22 @@
+body > #root > div {
+  /* height: 180vh; */
+  height: 100vh;
+  background-color: #e59500 !important;
+}
+
+div.app {
+  height: 100%;
+}
+
+.segment-container {
+  background-color: #457b9d !important;
+}
+
+.segment-content {
+  background-color: #a8dadc !important;
+}
+
+.input-styling {
+  margin-bottom: 5px !important;
+  background-color: #eff6e0 !important;
+}
