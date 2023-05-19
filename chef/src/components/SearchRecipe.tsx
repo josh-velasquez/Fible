@@ -1,16 +1,44 @@
 import React, { useState } from "react";
-import { Container, Grid, Header, Search, Segment } from "semantic-ui-react";
+import { Search, SearchProps, SearchResultData } from "semantic-ui-react";
+import _ from "lodash";
+import recipeList from "../samplePayload.json";
 
 const SearchRecipe: React.FC = () => {
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<string[]>();
   const [value, setValue] = useState("");
-  const onResultSelect = () => {
-    console.log("SELECTED");
+  const [recipe, setRecipe] = useState<Object>();
+  const onResultSelect = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    data: SearchResultData
+  ) => {
+    if (data.result !== undefined) {
+      setRecipe(data.result);
+      // console.log(data.result.id);
+    }
   };
 
-  const handleSearchChange = React.useCallback(() => {
-    console.log("Search change");
-  }, []);
+  const handleSearchChange = React.useCallback(
+    (event: React.MouseEvent<HTMLElement, MouseEvent>, data: SearchProps) => {
+      if (data.value !== undefined || data.value !== "") {
+        setValue(data.value ?? "");
+        const re = new RegExp(_.escapeRegExp(data.value), "i");
+        const isMatch = (result: Object) => {
+          const recipeJson = JSON.parse(JSON.stringify(result));
+          return (
+            re.test(recipeJson.name) ||
+            re.test(recipeJson.description) ||
+            re.test(recipeJson.tags)
+          );
+        };
+        const recipeJson = JSON.parse(
+          JSON.stringify(recipeList.data.recipeList)
+        );
+        const result = _.filter(recipeJson, isMatch);
+        setResults(result);
+      }
+    },
+    [setResults, setValue]
+  );
 
   return (
     <Search
