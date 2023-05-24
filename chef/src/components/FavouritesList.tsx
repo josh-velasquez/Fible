@@ -1,12 +1,18 @@
-import { Card, Container, Label, List } from "semantic-ui-react";
+import { useNavigate } from "react-router-dom";
+import { Card, CardProps, Container, Label, List } from "semantic-ui-react";
 
 interface FavouritesListProps {
   recipes: Object[];
 }
 
 const FavouritesList: React.FC<FavouritesListProps> = ({ recipes }) => {
-  const onSelectRecipe = () => {
-    console.warn("CLICKED");
+  let navigate = useNavigate();
+  const onSelectRecipe = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    data: CardProps
+  ) => {
+    console.warn(JSON.stringify(data));
+    // navigate(`/recipe${recipes.}`)
   };
   // TODO: set max text length so all cards are the same height
   return (

@@ -1,6 +1,5 @@
 body > #root > div {
-  /* height: 180vh; */
-  height: 100vh;
+  height: 180vh;
   background-color: #e59500 !important;
 }
 
