@@ -4,7 +4,11 @@ import {
   Container,
   Dropdown,
   DropdownItemProps,
+  DropdownProps,
   Form,
+  Icon,
+  Input,
+  List,
   Segment,
 } from "semantic-ui-react";
 import * as _ from "lodash";
@@ -17,8 +21,10 @@ const AddRecipe: React.FC = () => {
   const [description, setDescription] = useState("");
   const [prepTime, setPrepTime] = useState("");
   const [instructions, setInstructions] = useState<string[]>([]);
-  const [tags, setTags] = useState<string[]>(chefPayloadTags.data.tagsList);
+  const [instruction, setInstruction] = useState<string>();
+  const [tags, setTags] = useState<string[]>();
   const [image, setImage] = useState<File>();
+  const tagsAvailable: string[] = Object.values(chefPayloadTags.data.tagsList);
   const onUploadImage = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
@@ -29,8 +35,36 @@ const AddRecipe: React.FC = () => {
     setImage(undefined);
   };
 
+  const onRemoveRecipe = (id: number) => {
+    setInstructions(instructions.filter((_, index) => index !== id));
+  };
+
+  const onAddTags = (
+    _: React.SyntheticEvent<HTMLElement, Event>,
+    data: DropdownProps
+  ) => {
+    if (data.value === null) {
+      return;
+    }
+    if (typeof data.value === "object") {
+      const newTags: string[] = data.value.map((index) => {
+        if (typeof index === "number") {
+          return tagsAvailable[index];
+        }
+        return "";
+      });
+      setTags(newTags);
+    }
+  };
+
+  const onAddInstructionClick = () => {
+    if (instruction !== undefined) {
+      setInstructions(instructions.concat(instruction));
+    }
+  };
+
   const tagsOptions: DropdownItemProps[] = _.map(
-    tags,
+    tagsAvailable,
     (keyword: string, index: number) => ({
       key: index,
       text: keyword,
@@ -40,9 +74,10 @@ const AddRecipe: React.FC = () => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onResetImage();
-    if (image !== undefined) {
+    if (image !== undefined && tags !== undefined) {
       requestApi(recipeName, description, prepTime, instructions, tags, image);
     }
+    // TODO: redirect to the new page once done
   };
   return (
     <Container>
@@ -50,18 +85,57 @@ const AddRecipe: React.FC = () => {
         <Form onSubmit={onSubmit}>
           <Form.Field>
             <label>Recipe Name</label>
-            <input placeholder="Recipe Name" content={recipeName} />
+            <input
+              placeholder="Recipe Name"
+              onChange={(e) => setRecipeName(e.target.value)}
+            />
           </Form.Field>
           <Form.Field>
             <label>Description</label>
-            <input placeholder="Description" content={description} />
+            <input
+              placeholder="Description"
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </Form.Field>
           <Form.Field>
             <label>Prep time</label>
-            <input placeholder="Prep time" />
+            <input
+              placeholder="Prep time"
+              onChange={(e) => setPrepTime(e.target.value)}
+            />
           </Form.Field>
           <Form.Field>
             <label>Instructions</label>
+            {/* TODO: make this input field clearable after pressing add */}
+            <Input
+              action={{ icon: "add", onClick: () => onAddInstructionClick() }}
+              placeholder="Add recipe..."
+              onChange={(e) => setInstruction(e.target.value)}
+            />
+            {instructions.length !== 0 && (
+              <Segment>
+                <List divided animated ordered>
+                  {instructions.map((instruction) => {
+                    return (
+                      <List.Item key={instructions.indexOf(instruction)}>
+                        {instruction}
+                        <Button
+                          onClick={() =>
+                            onRemoveRecipe(instructions.indexOf(instruction))
+                          }
+                          size="mini"
+                          floated="right"
+                          color="red"
+                          icon
+                        >
+                          <Icon name="remove" />
+                        </Button>
+                      </List.Item>
+                    );
+                  })}
+                </List>
+              </Segment>
+            )}
           </Form.Field>
           <Form.Field>
             <label>Tags</label>
@@ -76,6 +150,7 @@ const AddRecipe: React.FC = () => {
               labeled
               icon="tag"
               defaultValue={0}
+              onChange={onAddTags}
               options={tagsOptions}
             />
           </Form.Field>

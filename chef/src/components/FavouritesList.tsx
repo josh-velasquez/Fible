@@ -1,5 +1,12 @@
+import { MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, CardProps, Container, Label, List } from "semantic-ui-react";
+import {
+  Card,
+  Container,
+  Label,
+  List,
+  ListItemProps,
+} from "semantic-ui-react";
 
 interface FavouritesListProps {
   recipes: Object[];
@@ -8,11 +15,10 @@ interface FavouritesListProps {
 const FavouritesList: React.FC<FavouritesListProps> = ({ recipes }) => {
   let navigate = useNavigate();
   const onSelectRecipe = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-    data: CardProps
+    event: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
+    data: ListItemProps
   ) => {
-    console.warn(JSON.stringify(data));
-    // navigate(`/recipe${recipes.}`)
+    navigate(`/recipe/${event.currentTarget.id}`);
   };
   // TODO: set max text length so all cards are the same height
   return (
@@ -27,32 +33,36 @@ const FavouritesList: React.FC<FavouritesListProps> = ({ recipes }) => {
           paddingTop: 30,
         }}
       >
-        {recipes.map((recipe: Object) => {
-          const recipeJson = JSON.parse(JSON.stringify(recipe));
-          if (recipeJson.favourite) {
-            return (
-              <List.Item key={recipes.indexOf(recipe)}>
-                <Card
-                  key={recipeJson.id}
+        {recipes &&
+          recipes.map((recipe: Object) => {
+            const recipeJson = JSON.parse(JSON.stringify(recipe));
+            if (recipeJson.favourite) {
+              return (
+                <List.Item
+                  id={recipeJson.id}
                   onClick={onSelectRecipe}
-                  image={recipeJson.image}
-                  header={recipeJson.name}
-                  meta={() => {
-                    return recipeJson.tags.map((tag: string) => {
-                      return (
-                        <Label key={tag} tag color="olive" size="mini">
-                          {tag}
-                        </Label>
-                      );
-                    });
-                  }}
-                  description={recipeJson.description}
-                  extra={recipeJson.time}
-                />
-              </List.Item>
-            );
-          }
-        })}
+                  key={recipes.indexOf(recipe)}
+                >
+                  <Card
+                    key={recipeJson.id}
+                    image={recipeJson.image}
+                    header={recipeJson.name}
+                    meta={() => {
+                      return recipeJson.tags.map((tag: string) => {
+                        return (
+                          <Label key={tag} tag color="olive" size="mini">
+                            {tag}
+                          </Label>
+                        );
+                      });
+                    }}
+                    description={recipeJson.description}
+                    extra={recipeJson.time}
+                  />
+                </List.Item>
+              );
+            }
+          })}
       </List>
     </Container>
   );

@@ -10,13 +10,16 @@ import {
   List,
   Segment,
 } from "semantic-ui-react";
+import recipePayload from "../samplePayload.json";
 
 interface RecipeObject {
   recipe: Object;
 }
 
-const Recipe: React.FC<RecipeObject> = ({ recipe }) => {
-  const recipeJson = JSON.parse(JSON.stringify(recipe));
+// TODO: make a create store and mapstate to props
+const Recipe: React.FC<RecipeObject> = () => {
+  const recipe = JSON.parse(JSON.stringify(recipePayload));
+  const recipeJson = recipe.data.recipeList[0];
 
   // TODO: Add timer here? We need to have an alarm set for baking etc...
   // TODO: Update wording for payloads

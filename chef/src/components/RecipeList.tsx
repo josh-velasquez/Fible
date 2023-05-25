@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Divider,
   Header,
   Image,
   List,
+  ListItemProps,
   Pagination,
   PaginationProps,
 } from "semantic-ui-react";
@@ -20,7 +22,7 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
   >();
   const [totalPages, setTotalPages] = useState<number>();
   const onPageChange = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    _: React.MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
     data: PaginationProps
   ) => {
     if (typeof data.activePage === "number") {
@@ -31,6 +33,13 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
       setActiveRecipeList(recipeCopy.splice(start, end - start));
     }
   };
+  let navigate = useNavigate();
+  const onSelectRecipe = (
+    event: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
+    _: ListItemProps
+  ) => {
+    navigate(`/recipe/${event.currentTarget.id}`);
+  };
 
   useEffect(() => {
     const recipeCopy = JSON.parse(JSON.stringify(recipes));
@@ -39,7 +48,6 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
     setTotalPages(totalPageCount);
   }, []);
 
-  // TODO: handle paging for numerous pages
   return (
     <Container style={{ padding: 50 }}>
       <Header>Recipes List</Header>
@@ -49,7 +57,11 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
           activeRecipeList.map((recipe: Object) => {
             const recipeJson = JSON.parse(JSON.stringify(recipe));
             return (
-              <List.Item key={recipeJson.id}>
+              <List.Item
+                id={recipeJson.id}
+                key={recipeJson.id}
+                onClick={onSelectRecipe}
+              >
                 <Image avatar src={recipeJson.image} />
                 <List.Content>
                   <List.Header as="a">{recipeJson.name}</List.Header>
