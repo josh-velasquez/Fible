@@ -11,18 +11,35 @@ import {
   Segment,
 } from "semantic-ui-react";
 import recipePayload from "../samplePayload.json";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { getRecipeApi } from "../state/action-creators";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
-interface RecipeObject {
-  recipe: Object;
-}
-
-// TODO: make a create store and mapstate to props
-const Recipe: React.FC<RecipeObject> = () => {
+const Recipe: React.FC = () => {
   const recipe = JSON.parse(JSON.stringify(recipePayload));
   const recipeJson = recipe.data.recipeList[0];
+  const { data, error, loading } = useTypedSelector((state) => state.results);
 
   // TODO: Add timer here? We need to have an alarm set for baking etc...
   // TODO: Update wording for payloads
+
+  // fetch the id from the nav bar
+  const { id } = useParams<string>();
+  console.warn(id);
+
+  useEffect(() => {
+    // fetch recipe by id
+    getRecipeApi(id ?? "");
+    if (error) {
+      console.warn("error")
+    } else if (loading) {
+      console.warn("loading")
+    } else if (!error && !loading && data) {
+      console.warn("data")
+    }
+  }, []);
+  // send request to server
   return (
     <Container textAlign="center">
       <Header as="h1">{recipeJson.name}</Header>
@@ -33,7 +50,7 @@ const Recipe: React.FC<RecipeObject> = () => {
           {recipeJson.tags &&
             recipeJson.tags.map((tag: string) => {
               return (
-                <Label key={tag} tag color="olive" size="mini">
+                <Label key={tag} color="olive" size="mini">
                   {tag}
                 </Label>
               );

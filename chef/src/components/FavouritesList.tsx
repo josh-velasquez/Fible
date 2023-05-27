@@ -50,7 +50,7 @@ const FavouritesList: React.FC<FavouritesListProps> = ({ recipes }) => {
                     meta={() => {
                       return recipeJson.tags.map((tag: string) => {
                         return (
-                          <Label key={tag} tag color="olive" size="mini">
+                          <Label key={tag} color="olive" size="mini">
                             {tag}
                           </Label>
                         );

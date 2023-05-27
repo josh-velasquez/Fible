@@ -19,7 +19,10 @@ namespace Chef.Controllers
 
             try
             {
-                using StreamReader reader = new(@"D:\Repository\Chef\backend\Chef\Chef\SamplePayloads\RecipeList.json");
+                // MACOS path
+                using StreamReader reader = new(@"/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/SamplePayloads/RecipeList.json");
+                // Windows path
+                //using StreamReader reader = new(@"D:\Repository\Chef\backend\Chef\Chef\SamplePayloads\RecipeList.json");
                 var json = reader.ReadToEnd();
                 PayloadSample payload = JsonConvert.DeserializeObject<PayloadSample>(json) ?? new PayloadSample();
 

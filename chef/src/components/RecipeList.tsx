@@ -10,12 +10,17 @@ import {
   Pagination,
   PaginationProps,
 } from "semantic-ui-react";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useActions } from "../hooks/useActions";
 
 interface RecipeListProps {
   recipes: Object[];
 }
 
 const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
+  // TODO: separate this reducer with recipe
+  const { data, loading, error } = useTypedSelector((state) => state.results);
+  const { requestRecipeListApi } = useActions();
   const MAX_RECIPES_PER_PAGE = 10;
   const [activeRecipeList, setActiveRecipeList] = useState<
     Object[] | undefined
@@ -42,10 +47,20 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
   };
 
   useEffect(() => {
-    const recipeCopy = JSON.parse(JSON.stringify(recipes));
-    setActiveRecipeList(recipeCopy.splice(0, MAX_RECIPES_PER_PAGE));
-    const totalPageCount = Math.ceil(recipes.length / MAX_RECIPES_PER_PAGE);
-    setTotalPages(totalPageCount);
+    // TODO: wait for the get request then process it -- since this function is executed only once it doesn't wait for data to be received from server.
+    // we need to send the get request and fire an action where the type selector catches it
+    // requestRecipeListApi();
+    if (error) {
+      console.warn("error");
+    } else if (loading) {
+      console.warn("loading");
+    } else if (!error && !loading && data) {
+      console.warn("data: " + JSON.stringify(data));
+    }
+    // const recipeCopy = JSON.parse(JSON.stringify(recipes));
+    // setActiveRecipeList(recipeCopy.splice(0, MAX_RECIPES_PER_PAGE));
+    // const totalPageCount = Math.ceil(recipes.length / MAX_RECIPES_PER_PAGE);
+    // setTotalPages(totalPageCount);
   }, []);
 
   return (

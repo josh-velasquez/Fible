@@ -14,7 +14,7 @@ import {
 import * as _ from "lodash";
 import chefPayloadTags from "../samplePayload.json";
 import UploadImage from "./UploadImage";
-import { requestApi } from "../state/action-creators";
+import { useActions } from "../hooks/useActions";
 
 const AddRecipe: React.FC = () => {
   const [recipeName, setRecipeName] = useState("");
@@ -25,6 +25,7 @@ const AddRecipe: React.FC = () => {
   const [tags, setTags] = useState<string[]>();
   const [image, setImage] = useState<File>();
   const tagsAvailable: string[] = Object.values(chefPayloadTags.data.tagsList);
+  const { createNewRecipeApi } = useActions();
   const onUploadImage = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
@@ -75,7 +76,14 @@ const AddRecipe: React.FC = () => {
     event.preventDefault();
     onResetImage();
     if (image !== undefined && tags !== undefined) {
-      requestApi(recipeName, description, prepTime, instructions, tags, image);
+      createNewRecipeApi(
+        recipeName,
+        description,
+        prepTime,
+        instructions,
+        tags,
+        image
+      );
     }
     // TODO: redirect to the new page once done
   };
