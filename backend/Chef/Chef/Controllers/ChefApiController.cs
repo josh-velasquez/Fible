@@ -20,9 +20,9 @@ namespace Chef.Controllers
             try
             {
                 // MACOS path
-                using StreamReader reader = new(@"/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/SamplePayloads/RecipeList.json");
+                //using StreamReader reader = new(@"/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/SamplePayloads/RecipeList.json");
                 // Windows path
-                //using StreamReader reader = new(@"D:\Repository\Chef\backend\Chef\Chef\SamplePayloads\RecipeList.json");
+                using StreamReader reader = new(@"C:\Users\Nemesis\Repositories\Chef\backend\Chef\Chef\SamplePayloads\RecipeList.json");
                 var json = reader.ReadToEnd();
                 PayloadSample payload = JsonConvert.DeserializeObject<PayloadSample>(json) ?? new PayloadSample();
 
@@ -34,6 +34,29 @@ namespace Chef.Controllers
                 };
             }
             catch (Exception ex)
+            {
+                return BadRequest("Error: " + ex);
+            }
+        }
+
+        [HttpGet("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        public ActionResult<Recipe> GetRecipe(Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                using StreamReader reader = new(@"C:\Users\Nemesis\Repositories\Chef\backend\Chef\Chef\SamplePayloads\RecipeList.json");
+                var json = reader.ReadToEnd();
+                PayloadSample payload = JsonConvert.DeserializeObject<PayloadSample>(json) ?? new PayloadSample();
+
+                //Recipe targetRecipe = payload.Recipes.Where(recipe => recipe.Id == id).FirstOrDefault();
+                Recipe targetRecipe = payload.Recipes[0];
+                return targetRecipe;
+            } catch (Exception ex)
             {
                 return BadRequest("Error: " + ex);
             }

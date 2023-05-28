@@ -70,12 +70,12 @@ export const getRecipeApi = (recipeId: string) => {
     });
     try {
       const { data } = await axios.get(
-        `http://localhost:7000/chef/api/${recipeId}`
+        // `http://localhost:7091/api/chef/${recipeId}`
+        `https://localhost:7091/api/chef/82D1892F-5B86-4B37-ADFD-83C4F91928BA`
       );
-      const result = data.payload;
       dispatch({
         type: ActionType.REQUEST_API_SUCCESS,
-        payload: result,
+        payload: data,
       });
     } catch (error: any) {
       dispatch({
