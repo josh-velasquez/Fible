@@ -10,28 +10,14 @@ import {
   List,
   Segment,
 } from "semantic-ui-react";
-import recipePayload from "../samplePayload.json";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
-
-interface Recipe {
-  id: string,
-  name: string,
-  date: string,
-  time: string,
-  description: string,
-  instructions: string[],
-  tags: string[],
-  image: string,
-  favourite: boolean
-}
+import { RecipePayload } from "./RecipePayload";
 
 const Recipe: React.FC = () => {
-  // const recipe = JSON.parse(JSON.stringify(recipePayload));
-  // const recipeJson = recipe.data.recipeList[0];
-  const [recipe, setRecipe] = useState<Recipe>();
+  const [recipe, setRecipe] = useState<RecipePayload>();
   const { getRecipeApi } = useActions();
   const { data, error, loading } = useTypedSelector((state) => state.results);
 
@@ -40,28 +26,29 @@ const Recipe: React.FC = () => {
 
   // fetch the id from the nav bar
   const { id } = useParams<string>();
-  console.warn(id);
 
-  useEffect(() => {
-    // fetch recipe by id
+  const getRecipe = () => {
     getRecipeApi(id ?? "");
-  }, []);
 
-  useEffect(() => {
     if (error) {
       console.warn("error");
     } else if (loading) {
       console.warn("loading");
     } else if (!error && !loading && data) {
-      if (data !== undefined) {
-        var recipe = JSON.parse(JSON.stringify(data)) as Recipe;
-        console.warn("DATAS: " + JSON.stringify(data))
+      var recipe = JSON.parse(JSON.stringify(data)) as RecipePayload;
+      console.warn("REPCIPE: " + recipe)
+      if (recipe !== undefined) {
+        console.warn("DATAS: " + JSON.stringify(data));
         setRecipe(recipe);
       }
-      
     }
-  }, [recipe]);
-  // send request to server
+  };
+
+  useEffect(() => {
+    // fetch recipe by id
+    getRecipe();
+  }, []);
+
   return (
     <Container textAlign="center">
       <Header as="h1">{recipe?.name}</Header>

@@ -2,19 +2,43 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { ActionType } from "../action-types";
 import { Action } from "../actions";
+import serverConfig from "../../serverConfig.json";
 
 // TODO: separate dispatch actions to its own reducers
-export const requestRecipeListApi = () => {
+export const getRecipeListApi = () => {
   return async (dispatch: Dispatch<Action>) => {
     dispatch({
       type: ActionType.REQUEST_API,
     });
     try {
-      const { data } = await axios.get("https://localhost:7091/api/chef");
-      const results = data.payload;
+      const { data } = await axios.get(
+        `${serverConfig.serverBaseUrl}/api/chef`
+      );
       dispatch({
         type: ActionType.REQUEST_API_SUCCESS,
-        payload: results,
+        payload: data,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: ActionType.REQUEST_API_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export const getFavouriteRecipes = () => {
+  return async (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.REQUEST_API,
+    });
+    try {
+      const { data } = await axios.get(
+        `${serverConfig.serverBaseUrl}/api/chef/favourites`
+      );
+      dispatch({
+        type: ActionType.REQUEST_API_SUCCESS,
+        payload: data,
       });
     } catch (error: any) {
       dispatch({
@@ -45,10 +69,13 @@ export const createNewRecipeApi = (
       formData.append("prepTime", prepTime);
       formData.append("tags", tags.join());
       formData.append("image", image);
-      const { data } = await axios.post("http://localhost:7091/chef", {
-        recipeName: recipeName,
-        instructions: instructions,
-      });
+      const { data } = await axios.post(
+        `${serverConfig.serverBaseUrl}/api/chef/create-recipe`,
+        {
+          recipeName: recipeName,
+          instructions: instructions,
+        }
+      );
       const results = data.payload;
       dispatch({
         type: ActionType.REQUEST_API_SUCCESS,
@@ -70,8 +97,7 @@ export const getRecipeApi = (recipeId: string) => {
     });
     try {
       const { data } = await axios.get(
-        // `http://localhost:7091/api/chef/${recipeId}`
-        `https://localhost:7091/api/chef/82D1892F-5B86-4B37-ADFD-83C4F91928BA`
+        `${serverConfig.serverBaseUrl}/api/chef/${recipeId}`
       );
       dispatch({
         type: ActionType.REQUEST_API_SUCCESS,

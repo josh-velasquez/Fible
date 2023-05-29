@@ -2,42 +2,32 @@ import React, { MouseEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
+  Dimmer,
   Divider,
   Header,
   Image,
   List,
   ListItemProps,
+  Loader,
   Pagination,
   PaginationProps,
+  Segment,
 } from "semantic-ui-react";
-import { useTypedSelector } from "../hooks/useTypedSelector";
+import { RecipePayload } from "./RecipePayload";
 import { useActions } from "../hooks/useActions";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import { RecipeListPayload } from "./RecipeListPayload";
 
-interface RecipeListProps {
-  recipes: Object[];
-}
-
-const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
-  // TODO: separate this reducer with recipe
-  const { data, loading, error } = useTypedSelector((state) => state.results);
-  const { requestRecipeListApi } = useActions();
+const RecipeList: React.FC = () => {
+  const [recipes, setRecipes] = useState<RecipePayload[]>();
+  const { data, error, loading } = useTypedSelector((state) => state.results);
+  const { getRecipeListApi } = useActions();
   const MAX_RECIPES_PER_PAGE = 10;
   const [activeRecipeList, setActiveRecipeList] = useState<
-    Object[] | undefined
+    RecipePayload[] | undefined
   >();
   const [totalPages, setTotalPages] = useState<number>();
-  const onPageChange = (
-    _: React.MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
-    data: PaginationProps
-  ) => {
-    if (typeof data.activePage === "number") {
-      const start =
-        data.activePage * MAX_RECIPES_PER_PAGE - MAX_RECIPES_PER_PAGE;
-      const end = data.activePage * MAX_RECIPES_PER_PAGE;
-      const recipeCopy = JSON.parse(JSON.stringify(recipes));
-      setActiveRecipeList(recipeCopy.splice(start, end - start));
-    }
-  };
+
   let navigate = useNavigate();
   const onSelectRecipe = (
     event: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
@@ -46,53 +36,88 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
     navigate(`/recipe/${event.currentTarget.id}`);
   };
 
-  useEffect(() => {
-    // TODO: wait for the get request then process it -- since this function is executed only once it doesn't wait for data to be received from server.
-    // we need to send the get request and fire an action where the type selector catches it
-    // requestRecipeListApi();
+  const onPageChange = (
+    _: React.MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
+    paginationData: PaginationProps
+  ) => {
+    if (typeof paginationData.activePage === "number") {
+      if (recipes !== undefined) {
+        const start =
+          paginationData.activePage * MAX_RECIPES_PER_PAGE -
+          MAX_RECIPES_PER_PAGE;
+        const end = paginationData.activePage * MAX_RECIPES_PER_PAGE;
+        setActiveRecipeList(recipes.splice(start, end - start));
+      }
+    }
+  };
+
+  const getRecipeLists = () => {
+    getRecipeListApi();
     if (error) {
       console.warn("error");
     } else if (loading) {
       console.warn("loading");
     } else if (!error && !loading && data) {
-      console.warn("data: " + JSON.stringify(data));
+      if (data !== undefined) {
+        const recipesPayload = JSON.parse(
+          JSON.stringify(data)
+        ) as RecipeListPayload;
+        const recipes = recipesPayload.recipes;
+        if (recipes !== undefined) {
+          setRecipes(recipes);
+          setActiveRecipeList(recipes.splice(0, MAX_RECIPES_PER_PAGE));
+          const totalPageCount = Math.ceil(
+            recipes.length / MAX_RECIPES_PER_PAGE
+          );
+          setTotalPages(totalPageCount);
+        }
+      }
     }
-    // const recipeCopy = JSON.parse(JSON.stringify(recipes));
-    // setActiveRecipeList(recipeCopy.splice(0, MAX_RECIPES_PER_PAGE));
-    // const totalPageCount = Math.ceil(recipes.length / MAX_RECIPES_PER_PAGE);
-    // setTotalPages(totalPageCount);
+  };
+
+  useEffect(() => {
+    getRecipeLists();
   }, []);
 
   return (
     <Container style={{ padding: 50 }}>
       <Header>Recipes List</Header>
       <Divider />
-      <List>
-        {activeRecipeList &&
-          activeRecipeList.map((recipe: Object) => {
-            const recipeJson = JSON.parse(JSON.stringify(recipe));
-            return (
-              <List.Item
-                id={recipeJson.id}
-                key={recipeJson.id}
-                onClick={onSelectRecipe}
-              >
-                <Image avatar src={recipeJson.image} />
-                <List.Content>
-                  <List.Header as="a">{recipeJson.name}</List.Header>
-                  <List.Description>{recipeJson.description}</List.Description>
-                </List.Content>
-                <Divider />
-              </List.Item>
-            );
-          })}
-      </List>
-      <Pagination
-        floated="right"
-        defaultActivePage={1}
-        totalPages={totalPages ?? 0}
-        onPageChange={onPageChange}
-      />
+      {loading && (
+        <Segment style={{ padding: 50 }}>
+          <Dimmer active inverted>
+            <Loader>Fetching recipes...</Loader>
+          </Dimmer>
+        </Segment>
+      )}
+      {!error && !loading && activeRecipeList && (
+        <React.Fragment>
+          <List>
+            {activeRecipeList.map((recipe: RecipePayload) => {
+              return (
+                <List.Item
+                  id={recipe.id}
+                  key={recipe.id}
+                  onClick={onSelectRecipe}
+                >
+                  <Image avatar src={recipe.image} />
+                  <List.Content>
+                    <List.Header as="a">{recipe.name}</List.Header>
+                    <List.Description>{recipe.description}</List.Description>
+                  </List.Content>
+                  <Divider />
+                </List.Item>
+              );
+            })}
+          </List>
+          <Pagination
+            floated="right"
+            defaultActivePage={1}
+            totalPages={totalPages ?? 0}
+            onPageChange={onPageChange}
+          />
+        </React.Fragment>
+      )}
     </Container>
   );
 };
