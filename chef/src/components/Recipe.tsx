@@ -28,7 +28,10 @@ const Recipe: React.FC = () => {
   const { id } = useParams<string>();
 
   const getRecipe = () => {
-    getRecipeApi(id ?? "");
+    if (id === undefined) {
+      return;
+    }
+    getRecipeApi(id);
 
     if (error) {
       console.warn("error");
@@ -36,8 +39,8 @@ const Recipe: React.FC = () => {
       console.warn("loading");
     } else if (!error && !loading && data) {
       var recipe = JSON.parse(JSON.stringify(data)) as RecipePayload;
-      console.warn("REPCIPE: " + recipe)
-      if (recipe !== undefined) {
+      console.warn("RECIPE THIS: " + JSON.stringify(recipe));
+      if (recipe !== undefined && recipe.tags !== undefined) {
         console.warn("DATAS: " + JSON.stringify(data));
         setRecipe(recipe);
       }
@@ -52,6 +55,7 @@ const Recipe: React.FC = () => {
   return (
     <Container textAlign="center">
       <Header as="h1">{recipe?.name}</Header>
+      <Divider />
       <Image centered src={recipe?.image} size="large" />
       <Header as="h4">{recipe?.description}</Header>
       <Grid centered relaxed="very">
@@ -59,7 +63,7 @@ const Recipe: React.FC = () => {
           {recipe?.tags &&
             recipe?.tags.map((tag: string) => {
               return (
-                <Label key={tag} color="olive" size="mini">
+                <Label key={recipe.tags.indexOf(tag)} color="olive" size="mini">
                   {tag}
                 </Label>
               );

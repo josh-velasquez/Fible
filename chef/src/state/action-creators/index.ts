@@ -35,7 +35,7 @@ export const getFavouriteRecipes = () => {
     try {
       const { data } = await axios.get(
         `${serverConfig.serverBaseUrl}/api/chef/favourites`
-      );
+      ).then(res => res.data);
       dispatch({
         type: ActionType.REQUEST_API_SUCCESS,
         payload: data,
