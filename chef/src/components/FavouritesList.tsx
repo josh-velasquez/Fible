@@ -15,13 +15,20 @@ import {
 import { RecipePayload } from "./RecipePayload";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
-import { RecipeListPayload } from "./RecipeListPayload";
 
 const FavouritesList: React.FC = () => {
-  const [favouriteRecipes, setFavouriteRecipes] = useState<RecipePayload[]>();
   const { data, error, loading } = useTypedSelector((state) => state.results);
   const { getFavouriteRecipes } = useActions();
   let navigate = useNavigate();
+
+  const concatDescription = (description: string): string => {
+    // only show up to 28 characters in the description
+    if (description.length <= 28) {
+      return description;
+    }
+    return description.slice(0, 25) + "...";
+  };
+
   const onSelectRecipe = (
     event: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
     _: ListItemProps
@@ -29,28 +36,10 @@ const FavouritesList: React.FC = () => {
     navigate(`/recipe/${event.currentTarget.id}`);
   };
 
-  const getFavouritesRecipesList = () => {
-    getFavouriteRecipes();
-    if (error) {
-      console.warn("error");
-    } else if (loading) {
-      console.warn("loading");
-    } else if (!error && !loading && data) {
-      if (data !== undefined) {
-        const recipesPayload = JSON.parse(
-          JSON.stringify(data)
-        ) as RecipeListPayload;
-        const recipes = recipesPayload.recipes;
-        setFavouriteRecipes(recipes);
-      }
-    }
-  };
-
   useEffect(() => {
-    getFavouritesRecipesList();
+    getFavouriteRecipes();
   }, []);
 
-  // TODO: set max text length so all cards are the same height
   return (
     <Container textAlign="center">
       <Header textAlign="center">Favourites List</Header>
@@ -62,7 +51,7 @@ const FavouritesList: React.FC = () => {
           </Dimmer>
         </Segment>
       )}
-      {!error && !loading && favouriteRecipes && (
+      {!error && !loading && data && (
         <List
           horizontal
           size="big"
@@ -73,20 +62,23 @@ const FavouritesList: React.FC = () => {
             paddingTop: 30,
           }}
         >
-          {favouriteRecipes.map((recipe: RecipePayload) => {
-            if (recipe.favourite) {
+          {data.map((recipe: Object) => {
+            const recipeJson = JSON.parse(
+              JSON.stringify(recipe)
+            ) as RecipePayload;
+            if (recipeJson.favourite) {
               return (
                 <List.Item
-                  id={recipe.id}
+                  id={recipeJson.id}
                   onClick={onSelectRecipe}
-                  key={favouriteRecipes.indexOf(recipe)}
+                  key={recipeJson.id}
                 >
                   <Card
-                    key={recipe.id}
-                    image={recipe.image}
-                    header={recipe.name}
+                    key={recipeJson.id}
+                    image={recipeJson.image}
+                    header={recipeJson.name}
                     meta={() => {
-                      return recipe.tags.map((tag: string) => {
+                      return recipeJson.tags.map((tag: string) => {
                         return (
                           <Label key={tag} color="olive" size="mini">
                             {tag}
@@ -94,8 +86,8 @@ const FavouritesList: React.FC = () => {
                         );
                       });
                     }}
-                    description={recipe.description}
-                    extra={recipe.time}
+                    description={concatDescription(recipeJson.description)}
+                    extra={recipeJson.time}
                   />
                 </List.Item>
               );

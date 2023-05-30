@@ -3,6 +3,7 @@ import { Dispatch } from "redux";
 import { ActionType } from "../action-types";
 import { Action } from "../actions";
 import serverConfig from "../../serverConfig.json";
+import { RecipeListPayload } from "../../components/RecipeListPayload";
 
 // TODO: separate dispatch actions to its own reducers
 export const getRecipeListApi = () => {
@@ -14,9 +15,11 @@ export const getRecipeListApi = () => {
       const { data } = await axios.get(
         `${serverConfig.serverBaseUrl}/api/chef`
       );
+      const recipeList = JSON.parse(JSON.stringify(data));
+      const recipes = recipeList.recipes;
       dispatch({
         type: ActionType.REQUEST_API_SUCCESS,
-        payload: data,
+        payload: recipes,
       });
     } catch (error: any) {
       dispatch({
@@ -35,10 +38,12 @@ export const getFavouriteRecipes = () => {
     try {
       const { data } = await axios.get(
         `${serverConfig.serverBaseUrl}/api/chef/favourites`
-      ).then(res => res.data);
+      );
+      const favouriteRecipesList = JSON.parse(JSON.stringify(data));
+      const favouriteRecipes = favouriteRecipesList.recipes;
       dispatch({
         type: ActionType.REQUEST_API_SUCCESS,
-        payload: data,
+        payload: favouriteRecipes,
       });
     } catch (error: any) {
       dispatch({
