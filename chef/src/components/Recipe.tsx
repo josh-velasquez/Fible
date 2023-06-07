@@ -54,13 +54,19 @@ const Recipe: React.FC = () => {
   useEffect(() => {
     // fetch recipe by id
     getRecipe();
+    deconstructData();
   }, []);
+
+  const deconstructData = () => {
+    const recipe = JSON.parse(JSON.stringify(data)) as RecipePayload;
+    setRecipe(recipe);
+  };
 
   return (
     <Container textAlign="center">
       {!error && !loading && data && (
         <React.Fragment>
-          <Header as="h1">{data.name}</Header>
+          <Header as="h1">{recipe?.name}</Header>
           <Divider />
           <Image centered src={recipe?.image} size="large" />
           <Header as="h4">{recipe?.description}</Header>

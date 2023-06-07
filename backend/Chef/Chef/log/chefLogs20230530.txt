@@ -1,0 +1,185 @@
+2023-05-30 14:55:16.113 -06:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2023-05-30 14:55:16.217 -06:00 [DBG] Hosting starting
+2023-05-30 14:55:16.459 -06:00 [DBG] Using development certificate: CN=localhost (Thumbprint: A377E5170CC74625CE6FB30536DA89F04E571486)
+2023-05-30 14:55:16.589 -06:00 [INF] Now listening on: https://localhost:7091
+2023-05-30 14:55:16.589 -06:00 [INF] Now listening on: http://localhost:5115
+2023-05-30 14:55:16.589 -06:00 [DBG] Loaded hosting startup assembly Chef
+2023-05-30 14:55:16.589 -06:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-05-30 14:55:16.590 -06:00 [INF] Hosting environment: Development
+2023-05-30 14:55:16.590 -06:00 [INF] Content root path: /Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/
+2023-05-30 14:55:16.590 -06:00 [DBG] Hosting started
+2023-05-30 14:55:16.623 -06:00 [DBG] Connection id "0HMR1A0LVLL9J" accepted.
+2023-05-30 14:55:16.624 -06:00 [DBG] Connection id "0HMR1A0LVLL9J" started.
+2023-05-30 14:55:17.609 -06:00 [DBG] Connection id "0HMR1A0LVLL9J" received FIN.
+2023-05-30 14:55:17.626 -06:00 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException:  Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.<FillHandshakeBufferAsync>g__InternalFillHandshakeBufferAsync|189_0[TIOAdapter](TIOAdapter adap, ValueTask`1 task, Int32 minSize)
+   at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2023-05-30 14:55:17.676 -06:00 [DBG] Connection id "0HMR1A0LVLL9J" stopped.
+2023-05-30 14:55:17.679 -06:00 [DBG] Connection id "0HMR1A0LVLL9J" sending FIN because: "The Socket transport's send loop completed gracefully."
+2023-05-30 14:55:17.819 -06:00 [DBG] Connection id "0HMR1A0LVLL9K" accepted.
+2023-05-30 14:55:17.820 -06:00 [DBG] Connection id "0HMR1A0LVLL9K" started.
+2023-05-30 14:55:17.821 -06:00 [DBG] Connection id "0HMR1A0LVLL9L" accepted.
+2023-05-30 14:55:17.823 -06:00 [DBG] Connection id "0HMR1A0LVLL9L" started.
+2023-05-30 14:55:17.905 -06:00 [DBG] Connection 0HMR1A0LVLL9K established using the following protocol: "Tls12"
+2023-05-30 14:55:17.905 -06:00 [DBG] Connection 0HMR1A0LVLL9L established using the following protocol: "Tls12"
+2023-05-30 14:55:18.007 -06:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/ - -
+2023-05-30 14:55:18.009 -06:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2023-05-30 14:55:18.073 -06:00 [DBG] 1 candidate(s) found for the request path '/'
+2023-05-30 14:55:18.074 -06:00 [DBG] Request matched endpoint 'HTTP: GET /'
+2023-05-30 14:55:18.081 -06:00 [INF] Executing endpoint 'HTTP: GET /'
+2023-05-30 14:55:18.099 -06:00 [INF] Executed endpoint 'HTTP: GET /'
+2023-05-30 14:55:18.099 -06:00 [DBG] Connection id "0HMR1A0LVLL9L" completed keep alive response.
+2023-05-30 14:55:18.105 -06:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/ - - - 200 - text/plain;+charset=utf-8 106.8672ms
+2023-05-30 14:55:18.449 -06:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/favicon.ico - -
+2023-05-30 14:55:18.450 -06:00 [DBG] No candidates found for the request path '/favicon.ico'
+2023-05-30 14:55:18.450 -06:00 [DBG] Request did not match any endpoints
+2023-05-30 14:55:18.450 -06:00 [DBG] Connection id "0HMR1A0LVLL9L" completed keep alive response.
+2023-05-30 14:55:18.450 -06:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/favicon.ico - - - 404 0 - 1.0096ms
+2023-05-30 14:55:54.918 -06:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2023-05-30 14:55:55.010 -06:00 [DBG] Hosting starting
+2023-05-30 14:55:55.188 -06:00 [DBG] Using development certificate: CN=localhost (Thumbprint: A377E5170CC74625CE6FB30536DA89F04E571486)
+2023-05-30 14:55:55.296 -06:00 [INF] Now listening on: https://localhost:7091
+2023-05-30 14:55:55.296 -06:00 [INF] Now listening on: http://localhost:5115
+2023-05-30 14:55:55.296 -06:00 [DBG] Loaded hosting startup assembly Chef
+2023-05-30 14:55:55.296 -06:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-05-30 14:55:55.297 -06:00 [INF] Hosting environment: Development
+2023-05-30 14:55:55.297 -06:00 [INF] Content root path: /Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/
+2023-05-30 14:55:55.297 -06:00 [DBG] Hosting started
+2023-05-30 14:55:55.309 -06:00 [DBG] Connection id "0HMR1A11GJR47" accepted.
+2023-05-30 14:55:55.310 -06:00 [DBG] Connection id "0HMR1A11GJR47" started.
+2023-05-30 14:55:56.239 -06:00 [DBG] Connection id "0HMR1A11GJR47" received FIN.
+2023-05-30 14:55:56.259 -06:00 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException:  Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.<FillHandshakeBufferAsync>g__InternalFillHandshakeBufferAsync|189_0[TIOAdapter](TIOAdapter adap, ValueTask`1 task, Int32 minSize)
+   at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2023-05-30 14:55:56.316 -06:00 [DBG] Connection id "0HMR1A11GJR48" accepted.
+2023-05-30 14:55:56.324 -06:00 [DBG] Connection id "0HMR1A11GJR48" started.
+2023-05-30 14:55:56.325 -06:00 [DBG] Connection id "0HMR1A11GJR49" accepted.
+2023-05-30 14:55:56.325 -06:00 [DBG] Connection id "0HMR1A11GJR49" started.
+2023-05-30 14:55:56.339 -06:00 [DBG] Connection id "0HMR1A11GJR47" stopped.
+2023-05-30 14:55:56.357 -06:00 [DBG] Connection id "0HMR1A11GJR47" sending FIN because: "The Socket transport's send loop completed gracefully."
+2023-05-30 14:55:56.454 -06:00 [DBG] Connection 0HMR1A11GJR48 established using the following protocol: "Tls12"
+2023-05-30 14:55:56.454 -06:00 [DBG] Connection 0HMR1A11GJR49 established using the following protocol: "Tls12"
+2023-05-30 14:55:56.528 -06:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/ - -
+2023-05-30 14:55:56.530 -06:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2023-05-30 14:55:56.591 -06:00 [DBG] 1 candidate(s) found for the request path '/'
+2023-05-30 14:55:56.592 -06:00 [DBG] Request matched endpoint 'HTTP: GET /'
+2023-05-30 14:55:56.606 -06:00 [INF] Executing endpoint 'HTTP: GET /'
+2023-05-30 14:55:56.628 -06:00 [INF] Executed endpoint 'HTTP: GET /'
+2023-05-30 14:55:56.629 -06:00 [DBG] Connection id "0HMR1A11GJR48" completed keep alive response.
+2023-05-30 14:55:56.639 -06:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/ - - - 200 - text/plain;+charset=utf-8 114.3797ms
+2023-05-30 14:56:18.426 -06:00 [DBG] Connection id "0HMR1A11GJR4A" accepted.
+2023-05-30 14:56:18.427 -06:00 [DBG] Connection id "0HMR1A11GJR4A" started.
+2023-05-30 14:56:18.429 -06:00 [DBG] Connection id "0HMR1A11GJR4B" accepted.
+2023-05-30 14:56:18.453 -06:00 [DBG] Connection id "0HMR1A11GJR4B" started.
+2023-05-30 14:56:18.473 -06:00 [DBG] Connection 0HMR1A11GJR4A established using the following protocol: "Tls12"
+2023-05-30 14:56:18.483 -06:00 [DBG] Connection 0HMR1A11GJR4B established using the following protocol: "Tls12"
+2023-05-30 14:56:18.489 -06:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/api/chef - -
+2023-05-30 14:56:18.489 -06:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/api/chef/favourites - -
+2023-05-30 14:56:18.489 -06:00 [DBG] 1 candidate(s) found for the request path '/api/chef'
+2023-05-30 14:56:18.491 -06:00 [DBG] 1 candidate(s) found for the request path '/api/chef/favourites'
+2023-05-30 14:56:18.496 -06:00 [DBG] Endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)' with route pattern 'api/chef' is valid for the request path '/api/chef'
+2023-05-30 14:56:18.496 -06:00 [DBG] Endpoint 'Chef.Controllers.ChefApiController.GetFavouriteRecipes (Chef)' with route pattern 'api/chef/favourites' is valid for the request path '/api/chef/favourites'
+2023-05-30 14:56:18.497 -06:00 [DBG] Request matched endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-05-30 14:56:18.497 -06:00 [DBG] Request matched endpoint 'Chef.Controllers.ChefApiController.GetFavouriteRecipes (Chef)'
+2023-05-30 14:56:18.499 -06:00 [DBG] The request has an origin header: 'http://localhost:3000'.
+2023-05-30 14:56:18.499 -06:00 [DBG] The request has an origin header: 'http://localhost:3000'.
+2023-05-30 14:56:18.499 -06:00 [INF] CORS policy execution successful.
+2023-05-30 14:56:18.499 -06:00 [INF] CORS policy execution successful.
+2023-05-30 14:56:18.502 -06:00 [INF] Executing endpoint 'Chef.Controllers.ChefApiController.GetFavouriteRecipes (Chef)'
+2023-05-30 14:56:18.502 -06:00 [INF] Executing endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-05-30 14:56:18.531 -06:00 [INF] Route matched with {action = "GetFavouriteRecipes", controller = "ChefApi"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[Chef.Models.RecipePayload] GetFavouriteRecipes() on controller Chef.Controllers.ChefApiController (Chef).
+2023-05-30 14:56:18.531 -06:00 [INF] Route matched with {action = "GetRecipes", controller = "ChefApi"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[Chef.Models.RecipePayload] GetRecipes() on controller Chef.Controllers.ChefApiController (Chef).
+2023-05-30 14:56:18.532 -06:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2023-05-30 14:56:18.532 -06:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2023-05-30 14:56:18.532 -06:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2023-05-30 14:56:18.532 -06:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2023-05-30 14:56:18.532 -06:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+2023-05-30 14:56:18.532 -06:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+2023-05-30 14:56:18.532 -06:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2023-05-30 14:56:18.532 -06:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2023-05-30 14:56:18.532 -06:00 [DBG] Execution plan of result filters (in the following order): ["None"]
+2023-05-30 14:56:18.532 -06:00 [DBG] Execution plan of result filters (in the following order): ["None"]
+2023-05-30 14:56:18.533 -06:00 [DBG] Executing controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-05-30 14:56:18.533 -06:00 [DBG] Executing controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-05-30 14:56:18.533 -06:00 [DBG] Executed controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-05-30 14:56:18.533 -06:00 [DBG] Executed controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-05-30 14:56:18.803 -06:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2023-05-30 14:56:18.803 -06:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2023-05-30 14:56:18.808 -06:00 [DBG] No information found on request to perform content negotiation.
+2023-05-30 14:56:18.808 -06:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2023-05-30 14:56:18.808 -06:00 [DBG] No information found on request to perform content negotiation.
+2023-05-30 14:56:18.808 -06:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2023-05-30 14:56:18.808 -06:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2023-05-30 14:56:18.808 -06:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2023-05-30 14:56:18.809 -06:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2023-05-30 14:56:18.809 -06:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2023-05-30 14:56:18.809 -06:00 [INF] Executing ObjectResult, writing value of type 'Chef.Models.RecipePayload'.
+2023-05-30 14:56:18.809 -06:00 [INF] Executing ObjectResult, writing value of type 'Chef.Models.RecipePayload'.
+2023-05-30 14:56:18.948 -06:00 [INF] Executed action Chef.Controllers.ChefApiController.GetRecipes (Chef) in 410.7461ms
+2023-05-30 14:56:18.948 -06:00 [INF] Executed endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-05-30 14:56:18.948 -06:00 [INF] Executed action Chef.Controllers.ChefApiController.GetFavouriteRecipes (Chef) in 410.7435ms
+2023-05-30 14:56:18.948 -06:00 [DBG] Connection id "0HMR1A11GJR4B" completed keep alive response.
+2023-05-30 14:56:18.948 -06:00 [INF] Executed endpoint 'Chef.Controllers.ChefApiController.GetFavouriteRecipes (Chef)'
+2023-05-30 14:56:18.949 -06:00 [DBG] Connection id "0HMR1A11GJR4A" completed keep alive response.
+2023-05-30 14:56:18.949 -06:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/api/chef - - - 200 - application/json;+charset=utf-8 459.8465ms
+2023-05-30 14:56:18.949 -06:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/api/chef/favourites - - - 200 - application/json;+charset=utf-8 459.8875ms
+2023-05-30 14:58:04.566 -06:00 [DBG] Connection id "0HMR1A11GJR49" received FIN.
+2023-05-30 14:58:04.667 -06:00 [DBG] Connection id "0HMR1A11GJR49" sending FIN because: "The client closed the connection."
+2023-05-30 14:58:04.667 -06:00 [DBG] Connection id "0HMR1A11GJR49" disconnecting.
+2023-05-30 14:58:04.670 -06:00 [DBG] Connection id "0HMR1A11GJR49" stopped.
+2023-05-30 14:58:04.976 -06:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/api/chef/favourites - -
+2023-05-30 14:58:04.976 -06:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/api/chef - -
+2023-05-30 14:58:04.976 -06:00 [DBG] 1 candidate(s) found for the request path '/api/chef'
+2023-05-30 14:58:04.976 -06:00 [DBG] Endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)' with route pattern 'api/chef' is valid for the request path '/api/chef'
+2023-05-30 14:58:04.976 -06:00 [DBG] Request matched endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-05-30 14:58:04.977 -06:00 [DBG] The request has an origin header: 'http://localhost:3000'.
+2023-05-30 14:58:04.977 -06:00 [INF] CORS policy execution successful.
+2023-05-30 14:58:04.977 -06:00 [INF] Executing endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-05-30 14:58:04.977 -06:00 [INF] Route matched with {action = "GetRecipes", controller = "ChefApi"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[Chef.Models.RecipePayload] GetRecipes() on controller Chef.Controllers.ChefApiController (Chef).
+2023-05-30 14:58:04.977 -06:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2023-05-30 14:58:04.977 -06:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2023-05-30 14:58:04.977 -06:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+2023-05-30 14:58:04.977 -06:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2023-05-30 14:58:04.977 -06:00 [DBG] Execution plan of result filters (in the following order): ["None"]
+2023-05-30 14:58:04.978 -06:00 [DBG] Executing controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-05-30 14:58:04.978 -06:00 [DBG] Executed controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-05-30 14:58:04.978 -06:00 [DBG] 1 candidate(s) found for the request path '/api/chef/favourites'
+2023-05-30 14:58:04.978 -06:00 [DBG] Endpoint 'Chef.Controllers.ChefApiController.GetFavouriteRecipes (Chef)' with route pattern 'api/chef/favourites' is valid for the request path '/api/chef/favourites'
+2023-05-30 14:58:04.978 -06:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2023-05-30 14:58:04.978 -06:00 [DBG] Request matched endpoint 'Chef.Controllers.ChefApiController.GetFavouriteRecipes (Chef)'
+2023-05-30 14:58:04.979 -06:00 [DBG] No information found on request to perform content negotiation.
+2023-05-30 14:58:04.979 -06:00 [DBG] The request has an origin header: 'http://localhost:3000'.
+2023-05-30 14:58:04.979 -06:00 [INF] CORS policy execution successful.
+2023-05-30 14:58:04.979 -06:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2023-05-30 14:58:04.979 -06:00 [INF] Executing endpoint 'Chef.Controllers.ChefApiController.GetFavouriteRecipes (Chef)'
+2023-05-30 14:58:04.979 -06:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2023-05-30 14:58:04.979 -06:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2023-05-30 14:58:04.979 -06:00 [INF] Route matched with {action = "GetFavouriteRecipes", controller = "ChefApi"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[Chef.Models.RecipePayload] GetFavouriteRecipes() on controller Chef.Controllers.ChefApiController (Chef).
+2023-05-30 14:58:04.979 -06:00 [INF] Executing ObjectResult, writing value of type 'Chef.Models.RecipePayload'.
+2023-05-30 14:58:04.979 -06:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2023-05-30 14:58:04.979 -06:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2023-05-30 14:58:04.979 -06:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+2023-05-30 14:58:04.979 -06:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2023-05-30 14:58:04.979 -06:00 [DBG] Execution plan of result filters (in the following order): ["None"]
+2023-05-30 14:58:04.979 -06:00 [DBG] Executing controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-05-30 14:58:04.979 -06:00 [DBG] Executed controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-05-30 14:58:04.979 -06:00 [INF] Executed action Chef.Controllers.ChefApiController.GetRecipes (Chef) in 1.6978ms
+2023-05-30 14:58:04.979 -06:00 [INF] Executed endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-05-30 14:58:04.979 -06:00 [DBG] Connection id "0HMR1A11GJR4B" completed keep alive response.
+2023-05-30 14:58:04.979 -06:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2023-05-30 14:58:04.979 -06:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/api/chef - - - 200 - application/json;+charset=utf-8 3.4150ms
+2023-05-30 14:58:04.980 -06:00 [DBG] No information found on request to perform content negotiation.
+2023-05-30 14:58:04.980 -06:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2023-05-30 14:58:04.980 -06:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2023-05-30 14:58:04.980 -06:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2023-05-30 14:58:04.980 -06:00 [INF] Executing ObjectResult, writing value of type 'Chef.Models.RecipePayload'.
+2023-05-30 14:58:04.980 -06:00 [INF] Executed action Chef.Controllers.ChefApiController.GetFavouriteRecipes (Chef) in 1.4386ms
+2023-05-30 14:58:04.981 -06:00 [INF] Executed endpoint 'Chef.Controllers.ChefApiController.GetFavouriteRecipes (Chef)'
+2023-05-30 14:58:04.981 -06:00 [DBG] Connection id "0HMR1A11GJR4A" completed keep alive response.
+2023-05-30 14:58:04.981 -06:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/api/chef/favourites - - - 200 - application/json;+charset=utf-8 4.5582ms

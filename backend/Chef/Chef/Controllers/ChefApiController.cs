@@ -20,9 +20,9 @@ namespace Chef.Controllers
             try
             {
                 // MACOS path
-                //using StreamReader reader = new(@"/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/SamplePayloads/RecipeList.json");
+                using StreamReader reader = new(@"/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/SamplePayloads/RecipeList.json");
                 // Windows path
-                using StreamReader reader = new(@"C:\Users\Nemesis\Repositories\Chef\backend\Chef\Chef\SamplePayloads\RecipeList.json");
+                //using StreamReader reader = new(@"C:\Users\Nemesis\Repositories\Chef\backend\Chef\Chef\SamplePayloads\RecipeList.json");
                 var json = reader.ReadToEnd();
                 PayloadSample payload = JsonConvert.DeserializeObject<PayloadSample>(json) ?? new PayloadSample();
 
@@ -50,9 +50,9 @@ namespace Chef.Controllers
             try
             {
                 // MACOS path
-                //using StreamReader reader = new(@"/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/SamplePayloads/RecipeList.json");
+                using StreamReader reader = new(@"/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/SamplePayloads/RecipeList.json");
                 // Windows path
-                using StreamReader reader = new(@"C:\Users\Nemesis\Repositories\Chef\backend\Chef\Chef\SamplePayloads\RecipeList.json");
+                //using StreamReader reader = new(@"C:\Users\Nemesis\Repositories\Chef\backend\Chef\Chef\SamplePayloads\RecipeList.json");
                 var json = reader.ReadToEnd();
                 PayloadSample payload = JsonConvert.DeserializeObject<PayloadSample>(json) ?? new PayloadSample();
                 return new RecipePayload
@@ -79,8 +79,8 @@ namespace Chef.Controllers
             try
             {
                 // MACOS path
-                //using StreamReader reader = new(@"/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/SamplePayloads/RecipeList.json");
-                using StreamReader reader = new(@"C:\Users\Nemesis\Repositories\Chef\backend\Chef\Chef\SamplePayloads\RecipeList.json");
+                using StreamReader reader = new(@"/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/SamplePayloads/RecipeList.json");
+                //using StreamReader reader = new(@"C:\Users\Nemesis\Repositories\Chef\backend\Chef\Chef\SamplePayloads\RecipeList.json");
                 var json = reader.ReadToEnd();
                 PayloadSample payload = JsonConvert.DeserializeObject<PayloadSample>(json) ?? new PayloadSample();
 
