@@ -1,4 +1,4 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Card,
@@ -33,7 +33,9 @@ const FavouritesList: React.FC = () => {
     event: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
     _: ListItemProps
   ) => {
+    console.warn("THIS navgiates");
     navigate(`/recipe/${event.currentTarget.id}`);
+    console.warn("AFter navigate");
   };
 
   useEffect(() => {

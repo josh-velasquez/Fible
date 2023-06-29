@@ -1,13 +1,12 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { ActionType } from "../action-types";
-import { Action } from "../actions";
+import { RecipesAction, RecipeAction } from "../actions";
 import serverConfig from "../../serverConfig.json";
-import { RecipeListPayload } from "../../components/RecipeListPayload";
 
 // TODO: separate dispatch actions to its own reducers
 export const getRecipeListApi = () => {
-  return async (dispatch: Dispatch<Action>) => {
+  return async (dispatch: Dispatch<RecipesAction>) => {
     dispatch({
       type: ActionType.REQUEST_API,
     });
@@ -31,7 +30,7 @@ export const getRecipeListApi = () => {
 };
 
 export const getFavouriteRecipes = () => {
-  return async (dispatch: Dispatch<Action>) => {
+  return async (dispatch: Dispatch<RecipesAction>) => {
     dispatch({
       type: ActionType.REQUEST_API,
     });
@@ -62,7 +61,7 @@ export const createNewRecipeApi = (
   tags: string[],
   image: File
 ) => {
-  return async (dispatch: Dispatch<Action>) => {
+  return async (dispatch: Dispatch<RecipesAction>) => {
     dispatch({
       type: ActionType.REQUEST_API,
     });
@@ -96,7 +95,7 @@ export const createNewRecipeApi = (
 };
 
 export const getRecipeApi = (recipeId: string) => {
-  return async (dispatch: Dispatch<Action>) => {
+  return async (dispatch: Dispatch<RecipeAction>) => {
     dispatch({
       type: ActionType.REQUEST_API,
     });
@@ -104,6 +103,7 @@ export const getRecipeApi = (recipeId: string) => {
       const { data } = await axios.get(
         `${serverConfig.serverBaseUrl}/api/chef/${recipeId}`
       );
+      console.warn("DATA: " + JSON.stringify(data));
       dispatch({
         type: ActionType.REQUEST_API_SUCCESS,
         payload: data,

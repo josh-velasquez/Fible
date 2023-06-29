@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import chefReducer from "./chefReducer";
+import recipesReducer from "./recipesReducer";
+import recipeReducer from "./recipeReducer";
 
 const reducers = combineReducers({
-  results: chefReducer,
+  results: recipesReducer,
+  recipe: recipeReducer,
 });
 
 export default reducers;
