@@ -1,18 +1,21 @@
 ﻿<Properties StartupConfiguration="{E5CCAE50-7DA0-42C3-97E2-933074086C65}|Default">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Chef PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Chef/Controllers/ChefApiController.cs">
     <Files>
       <File FileName="Chef/Program.cs" />
-      <File FileName="Chef/Controllers/ChefApiController.cs" Line="77" Column="47" />
-      <File FileName="Chef/SamplePayloads/RecipeList.json" Line="39" Column="9" NotebookId="1" />
+      <File FileName="Chef/Controllers/ChefApiController.cs" Line="124" Column="33" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Chef" expanded="True">
             <Node name="Chef" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="ChefApiController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="SamplePayloads" expanded="True" />
             </Node>
           </Node>
@@ -20,11 +23,5 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Chef PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

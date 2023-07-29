@@ -26,11 +26,7 @@ const Recipe: React.FC = () => {
   const { id } = useParams<string>();
 
   useEffect(() => {
-    console.warn("HERE");
     getRecipeApi(id ?? "");
-    // fetch recipe by id
-    // console.warn("CALLED");
-    // getRecipe();
   }, []);
 
   return (
