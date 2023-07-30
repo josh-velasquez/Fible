@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   Button,
   Container,
@@ -15,6 +15,9 @@ import * as _ from "lodash";
 import chefPayloadTags from "../samplePayload.json";
 import UploadImage from "./UploadImage";
 import { useActions } from "../hooks/useActions";
+import { useNavigate } from "react-router-dom";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import { RecipePayload } from "./RecipePayload";
 
 const AddRecipe: React.FC = () => {
   const [recipeName, setRecipeName] = useState("");
@@ -25,13 +28,17 @@ const AddRecipe: React.FC = () => {
   const [tags, setTags] = useState<string[]>();
   const [image, setImage] = useState<File>();
   const tagsAvailable: string[] = Object.values(chefPayloadTags.data.tagsList);
+  const { data, loading, error } = useTypedSelector((state) => state.recipe);
+  let navigate = useNavigate();
   const { createNewRecipeApi } = useActions();
+
   const onUploadImage = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
       setImage(files[0]);
     }
   };
+
   const onResetImage = () => {
     setImage(undefined);
   };
@@ -72,7 +79,8 @@ const AddRecipe: React.FC = () => {
       value: index,
     })
   );
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onResetImage();
     if (image !== undefined && tags !== undefined) {
@@ -84,9 +92,19 @@ const AddRecipe: React.FC = () => {
         tags,
         image
       );
+      // await data -- set a state here?
+      // navigate(`/recipe/${newRecipe.id}`);
     }
     // TODO: redirect to the new page once done
   };
+  useEffect(() => {
+    if (data && !loading && !error) {
+      console.warn("TEST: RECIEVED " + JSON.stringify(data));
+      const recipe = JSON.parse(JSON.stringify(data)) as RecipePayload;
+      navigate(`/recipe/${recipe.id}`);
+    }
+  }, [data, error, loading, navigate]);
+
   return (
     <Container>
       <Segment>

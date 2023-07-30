@@ -1,0 +1,163 @@
+﻿[
+  {
+    "id": "93457EEC-7E8E-4DDD-9951-A8528D8BF146",
+    "name": "Mac and cheese",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "This is how you make mac and cheese",
+    "instructions": [ "First step", "Second step" ],
+    "tags": [ "breakfast", "snack", "easy" ],
+    "image": "food.png",
+    "favourite": true
+  },
+  {
+    "id": "240D7C7F-3EE8-44BB-B769-2843CC0BA9CC",
+    "name": "Chow mein",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "Very tasty noodles",
+    "instructions": [
+      "First step",
+      "Second step",
+      "Third step"
+    ],
+    "tags": [ "asian", "quick", "dinner" ],
+    "image": "food.png",
+    "favourite": true
+  },
+  {
+    "id": "89849CB2-83B3-40DD-9E89-2C04873754E5",
+    "name": "Sinigang",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "Filipino authentic recipe",
+    "instructions": [
+      "First step",
+      "Second step",
+      "Third step"
+    ],
+    "tags": [ "asian", "quick", "dinner", "soup" ],
+    "image": "food.png",
+    "favourite": true
+  },
+  {
+    "id": "B890E68E-E914-4AC8-B3BD-DB9B635A6385",
+    "name": "Tomato Soup",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "Basic tomato soup",
+    "instructions": [
+      "First step",
+      "Second step",
+      "Third step"
+    ],
+    "tags": [ "quick", "dinner", "soup" ],
+    "image": "food.png",
+    "favourite": false
+  },
+  {
+    "id": "02AFFD2F-43F8-499F-9D8A-9F4D7B2EC3AB",
+    "name": "Mushroom Soup",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "Basic mushroom soup",
+    "instructions": [
+      "First step",
+      "Second step",
+      "Third step"
+    ],
+    "tags": [ "quick", "dinner", "soup" ],
+    "image": "food.png",
+    "favourite": true
+  },
+  {
+    "id": "C0592AD5-AEF7-4A9A-92E2-CF63A130FF37",
+    "name": "Fried chicken",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "Deep fried chicken",
+    "instructions": [
+      "First step",
+      "Second step",
+      "Third step"
+    ],
+    "tags": [ "quick", "dinner" ],
+    "image": "food.png",
+    "favourite": false
+  },
+  {
+    "id": "73272994-3B73-4B85-AF72-71BA0E89E471",
+    "name": "Wonton Soup",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "Basic wonton soup",
+    "instructions": [
+      "First step",
+      "Second step",
+      "Third step"
+    ],
+    "tags": [ "quick", "dinner", "soup" ],
+    "image": "food.png",
+    "favourite": false
+  },
+  {
+    "id": "C5AF2687-E830-430B-9FEE-3E8980492F2F",
+    "name": "Samosas",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "Samosas to eat!",
+    "instructions": [
+      "First step",
+      "Second step",
+      "Third step"
+    ],
+    "tags": [ "quick", "dinner", "india" ],
+    "image": "food.png",
+    "favourite": false
+  },
+  {
+    "id": "F183E28F-57A2-4F81-935C-DDCB7F96643C",
+    "name": "Fries",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "French fries",
+    "instructions": [
+      "First step",
+      "Second step",
+      "Third step"
+    ],
+    "tags": [ "quick", "dinner", "snacks" ],
+    "image": "food.png",
+    "favourite": false
+  },
+  {
+    "id": "3601DA79-632D-470E-90A3-8436DFFE2095",
+    "name": "Quesadillas",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "Tasty quesadillas",
+    "instructions": [
+      "First step",
+      "Second step",
+      "Third step"
+    ],
+    "tags": [ "quick", "dinner", "snacks", "mexican" ],
+    "image": "food.png",
+    "favourite": false
+  },
+  {
+    "id": "3418F2B7-4550-4A50-A38A-C6963C96B028",
+    "name": "Ice cream",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "Ice cream for all!",
+    "instructions": [
+      "First step",
+      "Second step",
+      "Third step"
+    ],
+    "tags": [ "quick", "dinner", "snacks" ],
+    "image": "food.png",
+    "favourite": false
+  }
+]

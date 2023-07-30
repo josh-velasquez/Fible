@@ -187,3 +187,6 @@ C:/Users/Nemesis/Repositories/Chef/backend/Chef/Chef/obj/Debug/net6.0/ref/Chef.d
 /Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/obj/Debug/net6.0/Chef.pdb
 /Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/obj/Debug/net6.0/Chef.genruntimeconfig.cache
 /Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/obj/Debug/net6.0/ref/Chef.dll
+/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/bin/Debug/net6.0/Recipes.json
+/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/bin/Debug/net6.0/TagsList.json
+/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/bin/Debug/net6.0/RecipesTest.json

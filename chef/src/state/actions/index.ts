@@ -1,4 +1,4 @@
-import { ActionType } from "../action-types";
+import { ActionType, RecipeActionType } from "../action-types";
 
 interface RequestApiAction {
   type: ActionType.REQUEST_API;
@@ -15,16 +15,16 @@ interface RequestApiErrorAction {
 }
 
 interface RequestRecipeApiAction {
-  type: ActionType.REQUEST_API;
+  type: RecipeActionType.REQUEST_RECIPE_API;
 }
 
 interface RequestRecipeApiSuccessAction {
-  type: ActionType.REQUEST_API_SUCCESS;
+  type: RecipeActionType.REQUEST_RECIPE_API_SUCCESS;
   payload: Recipe;
 }
 
 interface RequestRecipeApiErrorAction {
-  type: ActionType.REQUEST_API_ERROR;
+  type: RecipeActionType.REQUEST_RECIPE_API_ERROR;
   payload: string;
 }
 
