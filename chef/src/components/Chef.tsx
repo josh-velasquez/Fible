@@ -3,7 +3,7 @@ import FavouritesList from "./FavouritesList";
 import RecipeList from "./RecipeList";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
-import { Dimmer, Loader, Segment } from "semantic-ui-react";
+import { Container, Dimmer, Loader, Segment } from "semantic-ui-react";
 import { RecipePayload } from "./RecipePayload";
 
 const Chef: React.FC = () => {
@@ -15,7 +15,7 @@ const Chef: React.FC = () => {
   }, []);
 
   return (
-    <React.Fragment>
+    <Container style={{ paddingTop: "30px" }}>
       {loading && (
         <Segment style={{ padding: 50 }}>
           <Dimmer active inverted>
@@ -33,7 +33,7 @@ const Chef: React.FC = () => {
           />
         </>
       )}
-    </React.Fragment>
+    </Container>
   );
 };
 

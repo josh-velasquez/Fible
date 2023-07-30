@@ -13,7 +13,6 @@ const SearchRecipe: React.FC = () => {
   ) => {
     if (data.result !== undefined) {
       setRecipe(data.result);
-      // console.log(data.result.id);
     }
   };
 
