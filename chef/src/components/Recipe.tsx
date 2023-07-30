@@ -66,9 +66,9 @@ const Recipe: React.FC = () => {
           <Divider />
           <Segment textAlign="left" inverted>
             <List divided animated ordered inverted>
-              {recipe.instructions.map((instruction: string) => {
+              {recipe.instructions.map((instruction: string, index: number) => {
                 return (
-                  <List.Item>
+                  <List.Item key={index}>
                     <List.Content>{instruction}</List.Content>
                     <List.Content floated="right">
                       <Checkbox />

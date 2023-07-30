@@ -1,18 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Search, SearchProps, SearchResultData } from "semantic-ui-react";
 import _ from "lodash";
-import recipeList from "../samplePayload.json";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import { RecipePayload } from "./RecipePayload";
+import { useNavigate } from "react-router-dom";
+
+interface RecipeDropdown {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+}
 
 const SearchRecipe: React.FC = () => {
-  const [results, setResults] = useState<string[]>();
-  const [value, setValue] = useState("");
-  const [recipe, setRecipe] = useState<Object>();
+  const { data } = useTypedSelector((state) => state.results);
+  const [results, setResults] = useState<RecipeDropdown[]>();
+  const [value, setValue] = useState<string>();
+  const [recipes, setRecipes] = useState<RecipePayload[]>();
+  let navigate = useNavigate();
+
   const onResultSelect = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     data: SearchResultData
   ) => {
     if (data.result !== undefined) {
-      setRecipe(data.result);
+      const recipe = data.result as RecipeDropdown;
+      navigate(`/recipe/${recipe.id}`);
     }
   };
 
@@ -29,15 +42,27 @@ const SearchRecipe: React.FC = () => {
             re.test(recipeJson.tags)
           );
         };
-        const recipeJson = JSON.parse(
-          JSON.stringify(recipeList.data.recipeList)
+        const results = _.filter(recipes, isMatch);
+        const recipesList: RecipeDropdown[] = results.map(
+          (recipe: RecipePayload) => {
+            return {
+              id: recipe.id,
+              title: recipe.name,
+              description: recipe.description,
+              image: recipe.image,
+            } as RecipeDropdown;
+          }
         );
-        const result = _.filter(recipeJson, isMatch);
-        setResults(result);
+        setResults(recipesList);
       }
     },
-    [setResults, setValue]
+    [recipes]
   );
+
+  useEffect(() => {
+    const recipes = JSON.parse(JSON.stringify(data)) as RecipePayload[];
+    setRecipes(recipes);
+  }, [data]);
 
   return (
     <Search
