@@ -2,8 +2,6 @@
 using Chef.Util;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.IO;
-using System;
 
 namespace Chef.Controllers
 {
@@ -26,7 +24,7 @@ namespace Chef.Controllers
                 string fileContent = System.IO.File.ReadAllText(recipesFilePath);
                 if (!string.IsNullOrEmpty(fileContent))
                 {
-                    Recipe[] recipes = JsonConvert.DeserializeObject<Recipe[]>(fileContent) ?? new Recipe[] { };
+                    Recipe[] recipes = JsonConvert.DeserializeObject<Recipe[]>(fileContent) ?? Array.Empty<Recipe>();
                     return new RecipePayload
                     {
                         Id = Guid.NewGuid(),
@@ -55,7 +53,11 @@ namespace Chef.Controllers
                 return BadRequest(ModelState);
             }
             try
-            {   
+            {
+                string imagesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
+                // TODO: Fix image file upload
+                string imageFile = DataUtil.SaveImageToServer(recipe.Image, imagesFilePath);
+                string imageUrl = Url.Content(imageFile);
                 var newRecipe = new Recipe
                 {
                     Id = Guid.NewGuid(),
@@ -65,10 +67,10 @@ namespace Chef.Controllers
                     Description = recipe.Description,
                     Instructions = recipe.Instructions,
                     Tags = recipe.Tags,
-                    Image = recipe.Image.FileName,
+                    Image = imageUrl,
                     Favourite = recipe.Favourite,
                 };
-                string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Recipes.json");
+                string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
                 DataUtil.SaveRecipeToJson(newRecipe, recipesFilePath);
                 return newRecipe;
             }
