@@ -1,13 +1,12 @@
-import { Message } from "semantic-ui-react";
+import { Container, Message } from "semantic-ui-react";
 
 export const ErrorPage: React.FC = (): JSX.Element => {
   return (
-    <Message>
-      <Message.Header>Changes in Service</Message.Header>
-      <p>
-        We updated our privacy policy here to better service our customers. We
-        recommend reviewing the changes.
-      </p>
-    </Message>
+    <Container>
+      <Message>
+        <Message.Header>Page not found.</Message.Header>
+        <p>The page you are looking for does not exist :(.</p>
+      </Message>
+    </Container>
   );
 };

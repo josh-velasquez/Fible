@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { RecipePayload } from "./RecipePayload";
+import { getRecipeListApi } from "../state/action-creators";
 
 const Recipe: React.FC = (): JSX.Element => {
   const [recipe, setRecipe] = useState<RecipePayload>();
@@ -26,9 +27,14 @@ const Recipe: React.FC = (): JSX.Element => {
   const { id } = useParams<string>();
 
   useEffect(() => {
+    if (data.length === 0) {
+      console.warn("FAIL")
+      getRecipeListApi()
+    }
+    console.warn("HERE: " + JSON.stringify(data))
     const recipes = JSON.parse(JSON.stringify(data)) as RecipePayload[];
     setRecipe(recipes.find((recipe: RecipePayload) => recipe.id === id));
-  }, [id, data]);
+  }, [id, data, getRecipeListApi]);
 
   return (
     <Container style={{ paddingTop: "30px" }} textAlign="center">
