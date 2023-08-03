@@ -14,6 +14,7 @@ const Chef: React.FC = () => {
     getRecipeListApi();
   }, []);
 
+  // TODO: Show an error page if server is down
   return (
     <Container style={{ paddingTop: "30px" }}>
       {loading && (

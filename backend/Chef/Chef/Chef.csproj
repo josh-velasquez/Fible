@@ -21,11 +21,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Images\" />
     <None Remove="Util\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
     <Folder Include="Util\" />
+    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\" />
+    <Content Remove="wwwroot\images\" />
   </ItemGroup>
 </Project>

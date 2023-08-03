@@ -6,6 +6,7 @@ import "../styling.css";
 import NavBar from "./NavBar";
 import AddRecipe from "./AddRecipe";
 import Recipe from "./Recipe";
+import { ErrorPage } from "./ErrorPage";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/" element={<Chef />} />
             <Route path="/recipe/:id" element={<Recipe />} />
             <Route path="/addRecipe" element={<AddRecipe />} />
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </BrowserRouter>
       </div>

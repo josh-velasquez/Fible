@@ -15,7 +15,7 @@ import React, { useEffect, useState } from "react";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { RecipePayload } from "./RecipePayload";
 
-const Recipe: React.FC = () => {
+const Recipe: React.FC = (): JSX.Element => {
   const [recipe, setRecipe] = useState<RecipePayload>();
   const { data } = useTypedSelector((state) => state.results);
 

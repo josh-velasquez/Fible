@@ -26,7 +26,7 @@ namespace Chef.Util
 			}
 		}
 
-		public static string SaveImageToServer(IFormFile file, string imagesPath)
+		public static string SaveImageToServer(string imagesPath, IFormFile file)
 		{
 			// TODO: Update the filename to be unique (so date time only to avoid file conflict
 			var imageFilePath = Path.Combine(imagesPath, file.FileName);
@@ -34,7 +34,7 @@ namespace Chef.Util
 			{
 				file.CopyTo(stream);
 			}
-			return "~/Images/" + file.FileName;
+			return file.FileName;
 		}
 
 		public static void EditRecipeFromJson(Recipe recipe, string filePath)

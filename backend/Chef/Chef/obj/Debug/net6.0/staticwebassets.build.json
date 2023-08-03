@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "HGNDGYMlf459XY3dgRZWwY68uVCS48uq+VI3TKXCBCM=",
+  "Hash": "uPeP1Qr8J82RBdzRt7OxM5DmQyJl7gCRSLvnE8cjhd8=",
   "Source": "Chef",
   "BasePath": "_content/Chef",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "Chef/wwwroot",
+      "Source": "Chef",
+      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
+      "BasePath": "_content/Chef",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/test.png",
+      "SourceId": "Chef",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
+      "BasePath": "_content/Chef",
+      "RelativePath": "images/test.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/test.png"
+    }
+  ]
 }

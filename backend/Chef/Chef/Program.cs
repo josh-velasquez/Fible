@@ -63,7 +63,7 @@ internal class Program
         app.MapGet("/", () => "Welcome to Chef!");
         app.UseHttpsRedirection();
         app.UseCors(CORSPOLICY);
-
+        app.UseStaticFiles();
         app.UseAuthorization();
         app.MapControllers();
 

@@ -53,11 +53,13 @@ namespace Chef.Controllers
                 return BadRequest(ModelState);
             }
             try
-            {
-                string imagesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
-                // TODO: Fix image file upload
-                string imageFile = DataUtil.SaveImageToServer(recipe.Image, imagesFilePath);
+            { 
+                string serverImageFilePath = Path.Combine("wwwroot", "images");
+                string imageFile = DataUtil.SaveImageToServer(serverImageFilePath, recipe.Image);
+                Console.WriteLine("IMAGE: " + imageFile);
                 string imageUrl = Url.Content(imageFile);
+                Console.WriteLine("IMAGE URL: " + imageUrl);
+                string payloadImageUrl = "http://localhost:7091/images/" + imageUrl;
                 var newRecipe = new Recipe
                 {
                     Id = Guid.NewGuid(),
@@ -67,7 +69,7 @@ namespace Chef.Controllers
                     Description = recipe.Description,
                     Instructions = recipe.Instructions,
                     Tags = recipe.Tags,
-                    Image = imageUrl,
+                    Image = payloadImageUrl,
                     Favourite = recipe.Favourite,
                 };
                 string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
