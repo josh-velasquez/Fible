@@ -101,7 +101,7 @@ const AddRecipe: React.FC = () => {
       navigate(`/recipe/${recipe.id}`);
     }
   }, [data, error, loading, navigate]);
-
+  // TODO: Add form validation before submission
   return (
     <Container>
       <Segment>
