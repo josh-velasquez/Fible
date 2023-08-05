@@ -4,7 +4,6 @@ import { ActionType, RecipeActionType } from "../action-types";
 import { RecipesAction, RecipeAction } from "../actions";
 import serverConfig from "../../serverConfig.json";
 
-// TODO: separate dispatch actions to its own reducers
 export const getRecipeListApi = (): ((
   dispatch: Dispatch<RecipesAction>
 ) => Promise<void>) => {
@@ -47,9 +46,9 @@ export const createNewRecipeApi = (
       const formData = new FormData();
       formData.append("name", recipeName);
       formData.append("description", description);
-      formData.append("instructions", instructions.join());
+      formData.append("instructions", instructions.join(";"));
       formData.append("time", prepTime);
-      formData.append("tags", tags.join());
+      formData.append("tags", tags.join(";"));
       formData.append("image", image);
       // TODO: Add option for user to favourite this on the FE
       formData.append("favourite", "false");
@@ -67,8 +66,7 @@ export const createNewRecipeApi = (
         type: RecipeActionType.REQUEST_RECIPE_API_SUCCESS,
         payload: newRecipe,
       });
-      // TODO: Refect the newly added recipe and make sure its sync with the currently added when we navigate back to home page
-      getRecipeListApi();
+      await getRecipeListApi()(dispatch);
     } catch (error: any) {
       dispatch({
         type: RecipeActionType.REQUEST_RECIPE_API_ERROR,

@@ -18,6 +18,7 @@ import { useActions } from "../hooks/useActions";
 import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { RecipePayload } from "./RecipePayload";
+import { getRecipeListApi } from "../state/action-creators";
 
 const AddRecipe: React.FC = () => {
   const [recipeName, setRecipeName] = useState("");
@@ -92,14 +93,10 @@ const AddRecipe: React.FC = () => {
         tags,
         image
       );
-      // await data -- set a state here?
-      // navigate(`/recipe/${newRecipe.id}`);
     }
-    // TODO: redirect to the new page once done
   };
   useEffect(() => {
     if (data && !loading && !error) {
-      console.warn("TEST: RECIEVED " + JSON.stringify(data));
       const recipe = JSON.parse(JSON.stringify(data)) as RecipePayload;
       navigate(`/recipe/${recipe.id}`);
     }

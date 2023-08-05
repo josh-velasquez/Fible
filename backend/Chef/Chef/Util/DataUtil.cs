@@ -2,6 +2,7 @@
 using Chef.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Chef.Util
 {
@@ -28,13 +29,13 @@ namespace Chef.Util
 
 		public static string SaveImageToServer(string imagesPath, IFormFile file)
 		{
-			// TODO: Update the filename to be unique (so date time only to avoid file conflict
-			var imageFilePath = Path.Combine(imagesPath, file.FileName);
-			using (var stream = new FileStream(imageFilePath, FileMode.Create))
+            string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            string filePath = Path.Combine(imagesPath, uniqueFileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
 			{
 				file.CopyTo(stream);
 			}
-			return file.FileName;
+			return uniqueFileName;
 		}
 
 		public static void EditRecipeFromJson(Recipe recipe, string filePath)

@@ -43,7 +43,7 @@ const NavBar: React.FC = () => {
             </Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/addRecipe" onClick={() => navigate("/addRecipe")}>
+            <Link to="/addRecipe" onClick={() => navigate("/")}>
               Add Recipe
             </Link>
           </Menu.Item>

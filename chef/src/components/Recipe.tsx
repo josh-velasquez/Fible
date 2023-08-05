@@ -33,8 +33,9 @@ const Recipe: React.FC = (): JSX.Element => {
     }
     console.warn("HERE: " + JSON.stringify(data))
     const recipes = JSON.parse(JSON.stringify(data)) as RecipePayload[];
-    setRecipe(recipes.find((recipe: RecipePayload) => recipe.id === id));
-  }, [id, data, getRecipeListApi]);
+    const recipe = recipes.find((recipe: RecipePayload) => recipe.id === id);
+    setRecipe(recipe);
+  }, [id, data]);
 
   return (
     <Container style={{ paddingTop: "30px" }} textAlign="center">
@@ -42,7 +43,7 @@ const Recipe: React.FC = (): JSX.Element => {
         <React.Fragment>
           <Header as="h1">{recipe.name}</Header>
           <Divider />
-          <Image centered src={recipe.image} size="large" />
+          <Image centered src={recipe.image} size="large" alt="Recipe Image" />
           <Header as="h4">{recipe.description}</Header>
           <Grid centered relaxed="very">
             <Grid.Row>

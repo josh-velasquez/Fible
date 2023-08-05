@@ -9,6 +9,20 @@ namespace Chef.Controllers
     [ProducesResponseType(StatusCodes.Status202Accepted)]
     public class ChefApiController : ControllerBase
     {
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly string imagesFolder;
+
+        public ChefApiController(IWebHostEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+            // create images directory
+            imagesFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+            if (!Directory.Exists(imagesFolder))
+            {
+                Directory.CreateDirectory(imagesFolder);
+            }
+        }
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<RecipePayload> GetRecipes()
@@ -20,6 +34,7 @@ namespace Chef.Controllers
 
             try
             {
+                // TODO: Update this to use local environment folder
                 string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
                 string fileContent = System.IO.File.ReadAllText(recipesFilePath);
                 if (!string.IsNullOrEmpty(fileContent))
@@ -54,12 +69,11 @@ namespace Chef.Controllers
             }
             try
             { 
-                string serverImageFilePath = Path.Combine("wwwroot", "images");
-                string imageFile = DataUtil.SaveImageToServer(serverImageFilePath, recipe.Image);
-                Console.WriteLine("IMAGE: " + imageFile);
-                string imageUrl = Url.Content(imageFile);
-                Console.WriteLine("IMAGE URL: " + imageUrl);
-                string payloadImageUrl = "http://localhost:7091/images/" + imageUrl;
+                string imageFile = DataUtil.SaveImageToServer(imagesFolder, recipe.Image);
+                // TODO: Fix this url (make sure its https)
+                string payloadImageUrl = "https://localhost:7091/images/" + imageFile;
+                string[] instructions = recipe.Instructions.Split(";");
+                string[] tags = recipe.Tags.Split(";");
                 var newRecipe = new Recipe
                 {
                     Id = Guid.NewGuid(),
@@ -67,11 +81,12 @@ namespace Chef.Controllers
                     Date = DateTime.Now,
                     Time = recipe.Time,
                     Description = recipe.Description,
-                    Instructions = recipe.Instructions,
-                    Tags = recipe.Tags,
+                    Instructions = instructions,
+                    Tags = tags,
                     Image = payloadImageUrl,
                     Favourite = recipe.Favourite,
                 };
+                // TODO: Update this folder to user the local environments folder
                 string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
                 DataUtil.SaveRecipeToJson(newRecipe, recipesFilePath);
                 return newRecipe;

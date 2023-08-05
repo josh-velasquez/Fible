@@ -26,10 +26,8 @@
   <ItemGroup>
     <Folder Include="Util\" />
     <Folder Include="wwwroot\" />
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\" />
-    <Content Remove="wwwroot\images\" />
   </ItemGroup>
 </Project>
