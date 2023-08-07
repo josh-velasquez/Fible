@@ -14,25 +14,25 @@ import {
   Segment,
 } from "semantic-ui-react";
 import * as _ from "lodash";
-import chefPayloadTags from "../samplePayload.json";
 import UploadImage from "./UploadImage";
 import { useActions } from "../hooks/useActions";
 import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { RecipeInfo } from "../state/actions";
+import { NewRecipeInfo } from "../state/actions";
 
 const AddRecipe: React.FC = () => {
   const [recipeName, setRecipeName] = useState("");
   const [description, setDescription] = useState("");
   const [prepTime, setPrepTime] = useState("");
   const [instructions, setInstructions] = useState<string[]>([]);
-  const [instruction, setInstruction] = useState<string>();
+  const [instruction, setInstruction] = useState<string>("");
   const [tags, setTags] = useState<string[]>();
   const [favourite, setFavourite] = useState<boolean>(false);
   const [image, setImage] = useState<File>();
-  // TODO: Migrate this to backend
-  const tagsAvailable: string[] = Object.values(chefPayloadTags.data.tagsList);
-  const { data, loading, error } = useTypedSelector((state) => state.recipe);
+  const { recipesData } = useTypedSelector((state) => state.results);
+  const { recipeInfo, loading, error } = useTypedSelector(
+    (state) => state.recipe
+  );
   let navigate = useNavigate();
   const { createNewRecipeApi } = useActions();
 
@@ -60,8 +60,8 @@ const AddRecipe: React.FC = () => {
     }
     if (typeof data.value === "object") {
       const newTags: string[] = data.value.map((index) => {
-        if (typeof index === "number") {
-          return tagsAvailable[index];
+        if (typeof index === "number" && recipesData) {
+          return recipesData.tags[index];
         }
         return "";
       });
@@ -72,6 +72,7 @@ const AddRecipe: React.FC = () => {
   const onAddInstructionClick = () => {
     if (instruction !== undefined) {
       setInstructions(instructions.concat(instruction));
+      setInstruction("");
     }
   };
 
@@ -87,7 +88,7 @@ const AddRecipe: React.FC = () => {
   };
 
   const tagsOptions: DropdownItemProps[] = _.map(
-    tagsAvailable,
+    recipesData?.tags,
     (keyword: string, index: number) => ({
       key: index,
       text: keyword,
@@ -99,24 +100,23 @@ const AddRecipe: React.FC = () => {
     event.preventDefault();
     onResetImage();
     if (image !== undefined && tags !== undefined) {
-      createNewRecipeApi(
-        recipeName,
-        description,
-        prepTime,
-        instructions,
-        tags,
-        favourite,
-        image
-      );
+      createNewRecipeApi({
+        name: recipeName,
+        description: description,
+        time: prepTime,
+        instructions: instructions,
+        tags: tags,
+        favourite: favourite,
+        image: image,
+      } as NewRecipeInfo);
     }
   };
 
   useEffect(() => {
-    if (data && !loading && !error) {
-      const recipe = JSON.parse(JSON.stringify(data)) as RecipeInfo;
-      navigate(`/recipe/${recipe.id}`);
+    if (!loading && !error && recipeInfo) {
+      navigate(`/recipe/${recipeInfo.id}`);
     }
-  }, [data, error, loading, navigate]);
+  }, [recipeInfo, error, loading, navigate]);
   // TODO: Add form validation before submission
   return (
     <Container>
@@ -124,21 +124,21 @@ const AddRecipe: React.FC = () => {
         <Form onSubmit={onSubmit}>
           <Form.Field>
             <label>Recipe Name</label>
-            <input
+            <Input
               placeholder="Recipe Name"
               onChange={(e) => setRecipeName(e.target.value)}
             />
           </Form.Field>
           <Form.Field>
             <label>Description</label>
-            <input
+            <Input
               placeholder="Description"
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Field>
           <Form.Field>
             <label>Prep time</label>
-            <input
+            <Input
               placeholder="Prep time"
               onChange={(e) => setPrepTime(e.target.value)}
             />
@@ -149,6 +149,7 @@ const AddRecipe: React.FC = () => {
             <Input
               action={{ icon: "add", onClick: () => onAddInstructionClick() }}
               placeholder="Add recipe..."
+              value={instruction}
               onChange={(e) => setInstruction(e.target.value)}
             />
             {instructions.length !== 0 && (

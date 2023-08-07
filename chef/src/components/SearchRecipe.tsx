@@ -13,7 +13,7 @@ interface RecipeDropdown {
 }
 
 const SearchRecipe: React.FC = () => {
-  const { data } = useTypedSelector((state) => state.results);
+  const { recipesData } = useTypedSelector((state) => state.results);
   const [results, setResults] = useState<RecipeDropdown[]>();
   const [value, setValue] = useState<string>();
   const [recipes, setRecipes] = useState<RecipeInfo[]>();
@@ -49,7 +49,7 @@ const SearchRecipe: React.FC = () => {
               id: recipe.id,
               title: recipe.name,
               description: recipe.description,
-              image: recipe.image,
+              image: recipe.image?.name,
             } as RecipeDropdown;
           }
         );
@@ -60,10 +60,10 @@ const SearchRecipe: React.FC = () => {
   );
 
   useEffect(() => {
-    if (Object.keys(data).length !== 0) {
-      setRecipes(data.recipes);
+    if (recipesData) {
+      setRecipes(recipesData.recipes);
     }
-  }, [data]);
+  }, [recipesData]);
 
   return (
     <Search

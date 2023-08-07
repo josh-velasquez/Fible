@@ -18,7 +18,7 @@ import { RecipeInfo } from "../state/actions";
 
 const Recipe: React.FC = (): JSX.Element => {
   const [recipe, setRecipe] = useState<RecipeInfo>();
-  const { data } = useTypedSelector((state) => state.results);
+  const { recipesData } = useTypedSelector((state) => state.results);
   let navigate = useNavigate();
 
   // TODO: Add timer here? We need to have an alarm set for baking etc...
@@ -32,14 +32,18 @@ const Recipe: React.FC = (): JSX.Element => {
     }
   };
 
+  const deleteRecipe = () => {
+    console.warn("DELETE");
+  };
+
   useEffect(() => {
-    if (Object.keys(data).length !== 0) {
-      const recipe = data.recipes.find(
+    if (recipesData) {
+      const recipe = recipesData.recipes.find(
         (recipe: RecipeInfo) => recipe.id === id
       );
       setRecipe(recipe);
     }
-  }, [id, data]);
+  }, [id, recipesData]);
 
   return (
     <Container style={{ paddingTop: "30px" }} textAlign="center">
@@ -73,6 +77,10 @@ const Recipe: React.FC = (): JSX.Element => {
             <Grid.Row>
               <Button size="large" color="red" icon onClick={editRecipe}>
                 <Icon name="edit" />
+              </Button>
+              <Button size="large" color="red" icon onClick={deleteRecipe}>
+                {/* TODO: add a pop up modal that asks if they want to delete the recipe */}
+                <Icon name="delete" />
               </Button>
             </Grid.Row>
             {recipe.favourite && (

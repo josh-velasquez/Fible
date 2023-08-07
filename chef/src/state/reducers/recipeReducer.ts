@@ -4,13 +4,13 @@ import { RecipeInfo, RecipeAction } from "../actions";
 interface RecipeState {
   loading: boolean;
   error: string | null;
-  data: RecipeInfo | null;
+  recipeInfo: RecipeInfo | null;
 }
 
 const initialState = {
   loading: false,
   error: null,
-  data: null,
+  recipeInfo: null,
 };
 
 const recipeReducer = (
@@ -19,11 +19,11 @@ const recipeReducer = (
 ): RecipeState => {
   switch (action.type) {
     case RecipeActionType.REQUEST_RECIPE_API:
-      return { loading: true, error: null, data: null };
+      return { loading: true, error: null, recipeInfo: null };
     case RecipeActionType.REQUEST_RECIPE_API_SUCCESS:
-      return { loading: false, error: null, data: action.payload };
+      return { loading: false, error: null, recipeInfo: action.payload };
     case RecipeActionType.REQUEST_RECIPE_API_ERROR:
-      return { loading: false, error: action.payload, data: null };
+      return { loading: false, error: action.payload, recipeInfo: null };
     default:
       return state;
   }

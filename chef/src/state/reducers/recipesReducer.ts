@@ -4,13 +4,13 @@ import { RecipesAction, RecipesData } from "../actions";
 interface RecipesState {
   loading: boolean;
   error: string | null;
-  data: RecipesData;
+  recipesData: RecipesData | null;
 }
 
 const initialState = {
   loading: false,
   error: null,
-  data: {} as RecipesData,
+  recipesData: null,
 };
 
 const recipesReducer = (
@@ -19,11 +19,15 @@ const recipesReducer = (
 ): RecipesState => {
   switch (action.type) {
     case ActionType.REQUEST_API:
-      return { loading: true, error: null, data: {} as RecipesData };
+      return { loading: true, error: null, recipesData: null };
     case ActionType.REQUEST_API_SUCCESS:
-      return { loading: false, error: null, data: action.payload };
+      return { loading: false, error: null, recipesData: action.payload };
     case ActionType.REQUEST_API_ERROR:
-      return { loading: false, error: action.payload, data: {} as RecipesData };
+      return {
+        loading: false,
+        error: action.payload,
+        recipesData: null,
+      };
     default:
       return state;
   }

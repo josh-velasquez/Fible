@@ -37,43 +37,38 @@
     "Favourite": true
   },
   {
-    "Id": "36808dc1-011e-4330-8142-0058dd0998af",
-    "Name": "Recipe name",
-    "Date": "2023-08-07T15:12:50.970223-06:00",
-    "Time": "12 mins",
-    "Description": "Recipe description",
+    "Id": "6bf99b86-c223-416a-a810-8670fc156348",
+    "Name": "Kim's truffle pasta",
+    "Date": "2023-08-07T17:24:20.627103-06:00",
+    "Time": "2 hours",
+    "Description": "Very naise",
     "Instructions": [
-      "Instruciton 1",
-      "Instruciton 2"
+      "Buy stuff",
+      "Cook it"
+    ],
+    "Tags": [
+      "dinner"
+    ],
+    "Image": "https://localhost:7091/images/eb5ff9f0-dd0a-48dc-80ef-9a5bb164e784.png",
+    "Favourite": true
+  },
+  {
+    "Id": "10b89818-cca5-4c90-865f-a93906921350",
+    "Name": "New recipe",
+    "Date": "2023-08-07T17:25:06.781604-06:00",
+    "Time": "3 min",
+    "Description": "asdf",
+    "Instructions": [
+      "sadf",
+      "",
+      "asdf"
     ],
     "Tags": [
       "asian",
       "quick",
-      "easy",
-      "lunch",
-      "drinks"
+      "dessert"
     ],
-    "Image": "https://localhost:7091/images/94667b88-caec-451a-9361-d52cc338e0e3.png",
-    "Favourite": true
-  },
-  {
-    "Id": "3f677891-a536-44e8-9680-ba0ec5252b69",
-    "Name": "Normal recipe",
-    "Date": "2023-08-07T15:14:21.144995-06:00",
-    "Time": "123 mins",
-    "Description": "Just a normal recipe",
-    "Instructions": [
-      "iksdfa",
-      "iksdfasdf",
-      "iksdfasdfasd",
-      "iksdfasdfasdfa",
-      "iksdfasdfasdfasdf"
-    ],
-    "Tags": [
-      "dessert",
-      "easy"
-    ],
-    "Image": "https://localhost:7091/images/145323ad-3495-44f9-b5b7-5f897276da65.png",
+    "Image": "https://localhost:7091/images/623ded90-d9aa-41a7-bced-c8bdcb39dc7f.png",
     "Favourite": false
   }
 ]

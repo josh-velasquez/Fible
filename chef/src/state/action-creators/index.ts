@@ -1,7 +1,12 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { ActionType, RecipeActionType } from "../action-types";
-import { RecipesAction, RecipeAction, RecipesData } from "../actions";
+import {
+  RecipesAction,
+  RecipeAction,
+  RecipesData,
+  NewRecipeInfo,
+} from "../actions";
 import serverConfig from "../../serverConfig.json";
 
 export const getRecipeListApi = (): ((
@@ -15,10 +20,10 @@ export const getRecipeListApi = (): ((
       const { data } = await axios.get(
         `${serverConfig.serverBaseUrl}/api/chef`
       );
-      const chefPayload = JSON.parse(JSON.stringify(data)) as RecipesData;
+      const recipesData = JSON.parse(JSON.stringify(data)) as RecipesData;
       dispatch({
         type: ActionType.REQUEST_API_SUCCESS,
-        payload: chefPayload,
+        payload: recipesData,
       });
     } catch (error: any) {
       dispatch({
@@ -30,13 +35,7 @@ export const getRecipeListApi = (): ((
 };
 
 export const createNewRecipeApi = (
-  recipeName: string,
-  description: string,
-  prepTime: string,
-  instructions: string[],
-  tags: string[],
-  favourite: boolean,
-  image: File
+  newRecipeInfo: NewRecipeInfo
 ): ((dispatch: Dispatch<RecipeAction>) => Promise<void>) => {
   return async (dispatch: Dispatch<RecipeAction>): Promise<void> => {
     dispatch({
@@ -44,13 +43,13 @@ export const createNewRecipeApi = (
     });
     try {
       const formData = new FormData();
-      formData.append("name", recipeName);
-      formData.append("description", description);
-      formData.append("instructions", instructions.join(";"));
-      formData.append("time", prepTime);
-      formData.append("tags", tags.join(";"));
-      formData.append("favourite", favourite.toString());
-      formData.append("image", image);
+      formData.append("name", newRecipeInfo.name);
+      formData.append("description", newRecipeInfo.description);
+      formData.append("instructions", newRecipeInfo.instructions.join(";"));
+      formData.append("time", newRecipeInfo.time);
+      formData.append("tags", newRecipeInfo.tags.join(";"));
+      formData.append("favourite", newRecipeInfo.favourite.toString());
+      formData.append("image", newRecipeInfo.image ?? "");
 
       const { data } = await axios.post(
         `${serverConfig.serverBaseUrl}/api/chef/create-recipe`,
@@ -76,14 +75,8 @@ export const createNewRecipeApi = (
   };
 };
 
-export const editRecipeApi = (
-  recipeName: string,
-  description: string,
-  prepTime: string,
-  instructions: string[],
-  tags: string[],
-  favourite: boolean,
-  image: File
+export const updateRecipeApi = (
+  newRecipeInfo: NewRecipeInfo
 ): ((dispatch: Dispatch<RecipeAction>) => Promise<void>) => {
   return async (dispatch: Dispatch<RecipeAction>): Promise<void> => {
     dispatch({
@@ -91,16 +84,16 @@ export const editRecipeApi = (
     });
     try {
       const formData = new FormData();
-      formData.append("name", recipeName);
-      formData.append("description", description);
-      formData.append("instructions", instructions.join(";"));
-      formData.append("time", prepTime);
-      formData.append("tags", tags.join(";"));
-      formData.append("favourite", favourite.toString());
-      formData.append("image", image);
+      formData.append("name", newRecipeInfo.name);
+      formData.append("description", newRecipeInfo.description);
+      formData.append("instructions", newRecipeInfo.instructions.join(";"));
+      formData.append("time", newRecipeInfo.time);
+      formData.append("tags", newRecipeInfo.tags.join(";"));
+      formData.append("favourite", newRecipeInfo.favourite.toString());
+      formData.append("image", newRecipeInfo.image ?? "");
 
       const { data } = await axios.post(
-        `${serverConfig.serverBaseUrl}/api/chef/create-recipe`,
+        `${serverConfig.serverBaseUrl}/api/chef/update-recipe`,
         formData,
         {
           headers: {

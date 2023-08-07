@@ -102,7 +102,7 @@ namespace Chef.Controllers
             }
         }
 
-        [HttpPut("edit-recipe")]
+        [HttpPut("update-recipe")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<Recipe> EditRecipe(FrontEndPayloadRecipe recipe)
         {

@@ -35,6 +35,16 @@ interface RequestRecipeApiErrorAction {
   payload: string;
 }
 
+export interface NewRecipeInfo {
+  name: string;
+  time: string;
+  description: string;
+  instructions: string[];
+  tags: string[];
+  image: File;
+  favourite: boolean;
+}
+
 export interface RecipeInfo {
   id: string;
   name: string;
@@ -43,7 +53,7 @@ export interface RecipeInfo {
   description: string;
   instructions: string[];
   tags: string[];
-  image: string;
+  image: File | undefined;
   favourite: boolean;
 }
 

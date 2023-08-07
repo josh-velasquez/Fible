@@ -6,7 +6,9 @@ import { useActions } from "../hooks/useActions";
 import { Container, Dimmer, Loader, Segment } from "semantic-ui-react";
 
 const Chef: React.FC = () => {
-  const { data, error, loading } = useTypedSelector((state) => state.results);
+  const { recipesData, error, loading } = useTypedSelector(
+    (state) => state.results
+  );
   const { getRecipeListApi } = useActions();
 
   useEffect(() => {
@@ -23,15 +25,15 @@ const Chef: React.FC = () => {
           </Dimmer>
         </Segment>
       )}
-      {Object.keys(data).length === 0 && (
+      {!recipesData && (
         <Segment piled>
           No recipes available. Create some recipes first!
         </Segment>
       )}
-      {!error && !loading && Object.keys(data).length !== 0 && (
+      {!error && !loading && recipesData && (
         <>
-          <FavouritesList recipesData={data} />
-          <RecipeList recipesData={data} />
+          <FavouritesList recipesData={recipesData} />
+          <RecipeList recipesData={recipesData} />
         </>
       )}
     </Container>
