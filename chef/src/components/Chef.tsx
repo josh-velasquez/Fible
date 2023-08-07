@@ -4,7 +4,6 @@ import RecipeList from "./RecipeList";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
 import { Container, Dimmer, Loader, Segment } from "semantic-ui-react";
-import { RecipePayload } from "./RecipePayload";
 
 const Chef: React.FC = () => {
   const { data, error, loading } = useTypedSelector((state) => state.results);
@@ -24,14 +23,15 @@ const Chef: React.FC = () => {
           </Dimmer>
         </Segment>
       )}
-      {!error && !loading && data && (
+      {Object.keys(data).length === 0 && (
+        <Segment piled>
+          No recipes available. Create some recipes first!
+        </Segment>
+      )}
+      {!error && !loading && Object.keys(data).length !== 0 && (
         <>
-          <FavouritesList
-            recipes={JSON.parse(JSON.stringify(data)) as RecipePayload[]}
-          />
-          <RecipeList
-            recipes={JSON.parse(JSON.stringify(data)) as RecipePayload[]}
-          />
+          <FavouritesList recipesData={data} />
+          <RecipeList recipesData={data} />
         </>
       )}
     </Container>

@@ -9,18 +9,18 @@ import {
   Pagination,
   PaginationProps,
 } from "semantic-ui-react";
-import { RecipePayload } from "./RecipePayload";
 import { useNavigate } from "react-router-dom";
+import { RecipeInfo, RecipesData } from "../state/actions";
 
 interface RecipeListProps {
-  recipes: RecipePayload[];
+  recipesData: RecipesData;
 }
 
-const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
+const RecipeList: React.FC<RecipeListProps> = ({ recipesData }) => {
   const [totalPages, setTotalPages] = useState<number>(0);
   const MAX_RECIPES_PER_PAGE = 5;
   const [activeRecipeList, setActiveRecipeList] = useState<
-    string[] | undefined
+    RecipeInfo[] | undefined
   >();
 
   let navigate = useNavigate();
@@ -39,18 +39,20 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
       const start =
         paginationData.activePage * MAX_RECIPES_PER_PAGE - MAX_RECIPES_PER_PAGE;
       const end = paginationData.activePage * MAX_RECIPES_PER_PAGE;
-      const recipeCopy = JSON.parse(JSON.stringify(recipes));
+      const recipeCopy = JSON.parse(JSON.stringify(recipesData.recipes));
       setActiveRecipeList(recipeCopy.splice(start, end - start));
     }
   };
 
   useEffect(() => {
-    const totalPageCount = Math.ceil(recipes.length / MAX_RECIPES_PER_PAGE);
+    const totalPageCount = Math.ceil(
+      recipesData.recipes.length / MAX_RECIPES_PER_PAGE
+    );
     setTotalPages(totalPageCount);
-    const recipesCopy = JSON.parse(JSON.stringify(recipes));
+    const recipesCopy = JSON.parse(JSON.stringify(recipesData.recipes));
     const activeRecipes = recipesCopy.splice(0, MAX_RECIPES_PER_PAGE);
     setActiveRecipeList(activeRecipes);
-  }, [recipes, setTotalPages]);
+  }, [recipesData, setTotalPages]);
 
   return (
     <Container style={{ padding: 50 }}>
@@ -58,7 +60,7 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
       <Divider />
       <List>
         {activeRecipeList &&
-          activeRecipeList.map((recipe: any) => {
+          activeRecipeList.map((recipe: RecipeInfo) => {
             return (
               <List.Item
                 id={recipe.id}

@@ -1,6 +1,26 @@
 {
   "Files": [
     {
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/230a4d96-4ba0-477e-8930-29a02a2ef0b3.png",
+      "PackagePath": "staticwebassets/images/230a4d96-4ba0-477e-8930-29a02a2ef0b3.png"
+    },
+    {
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/2cb56b8c-9344-4e95-8b1a-181c1bd46fdb.png",
+      "PackagePath": "staticwebassets/images/2cb56b8c-9344-4e95-8b1a-181c1bd46fdb.png"
+    },
+    {
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/d2346086-e25d-4140-a55e-a8085d1b52e5.png",
+      "PackagePath": "staticwebassets/images/d2346086-e25d-4140-a55e-a8085d1b52e5.png"
+    },
+    {
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/e549c4ac-c82a-42a2-98fa-705929076680.png",
+      "PackagePath": "staticwebassets/images/e549c4ac-c82a-42a2-98fa-705929076680.png"
+    },
+    {
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/f92d94f7-a033-4886-b540-3e72ffad7e72.png",
+      "PackagePath": "staticwebassets/images/f92d94f7-a033-4886-b540-3e72ffad7e72.png"
+    },
+    {
       "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/test.png",
       "PackagePath": "staticwebassets/images/test.png"
     },

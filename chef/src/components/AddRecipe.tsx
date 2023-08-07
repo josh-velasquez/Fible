@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   Button,
+  Checkbox,
+  CheckboxProps,
   Container,
   Dropdown,
   DropdownItemProps,
@@ -17,8 +19,7 @@ import UploadImage from "./UploadImage";
 import { useActions } from "../hooks/useActions";
 import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { RecipePayload } from "./RecipePayload";
-import { getRecipeListApi } from "../state/action-creators";
+import { RecipeInfo } from "../state/actions";
 
 const AddRecipe: React.FC = () => {
   const [recipeName, setRecipeName] = useState("");
@@ -27,7 +28,9 @@ const AddRecipe: React.FC = () => {
   const [instructions, setInstructions] = useState<string[]>([]);
   const [instruction, setInstruction] = useState<string>();
   const [tags, setTags] = useState<string[]>();
+  const [favourite, setFavourite] = useState<boolean>(false);
   const [image, setImage] = useState<File>();
+  // TODO: Migrate this to backend
   const tagsAvailable: string[] = Object.values(chefPayloadTags.data.tagsList);
   const { data, loading, error } = useTypedSelector((state) => state.recipe);
   let navigate = useNavigate();
@@ -72,6 +75,17 @@ const AddRecipe: React.FC = () => {
     }
   };
 
+  const onAddToFavourite = (
+    _: React.MouseEvent<HTMLInputElement, MouseEvent>,
+    data: CheckboxProps
+  ) => {
+    if (data.checked) {
+      setFavourite(data.checked);
+    } else {
+      setFavourite(false);
+    }
+  };
+
   const tagsOptions: DropdownItemProps[] = _.map(
     tagsAvailable,
     (keyword: string, index: number) => ({
@@ -91,13 +105,15 @@ const AddRecipe: React.FC = () => {
         prepTime,
         instructions,
         tags,
+        favourite,
         image
       );
     }
   };
+
   useEffect(() => {
     if (data && !loading && !error) {
-      const recipe = JSON.parse(JSON.stringify(data)) as RecipePayload;
+      const recipe = JSON.parse(JSON.stringify(data)) as RecipeInfo;
       navigate(`/recipe/${recipe.id}`);
     }
   }, [data, error, loading, navigate]);
@@ -183,6 +199,12 @@ const AddRecipe: React.FC = () => {
               image={image}
               onResetImage={onResetImage}
               onUploadImage={onUploadImage}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Checkbox
+              label="Add to my favourites!"
+              onClick={onAddToFavourite}
             />
           </Form.Field>
           <Button positive type="submit">

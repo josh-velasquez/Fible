@@ -36,15 +36,20 @@ namespace Chef.Controllers
             {
                 // TODO: Update this to use local environment folder
                 string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
-                string fileContent = System.IO.File.ReadAllText(recipesFilePath);
-                if (!string.IsNullOrEmpty(fileContent))
+                string recipesFile = System.IO.File.ReadAllText(recipesFilePath);
+                // TODO: Fix file path for tags list
+                string tagsFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TagsList.json");
+                string tagsFile = System.IO.File.ReadAllText(tagsFilePath);
+                if (!string.IsNullOrEmpty(recipesFile) || !string.IsNullOrEmpty(tagsFilePath))
                 {
-                    Recipe[] recipes = JsonConvert.DeserializeObject<Recipe[]>(fileContent) ?? Array.Empty<Recipe>();
+                    Recipe[] recipes = JsonConvert.DeserializeObject<Recipe[]>(recipesFile) ?? Array.Empty<Recipe>();
+                    string[] tags = JsonConvert.DeserializeObject<string[]>(tagsFile) ?? Array.Empty<string>();
                     return new RecipePayload
                     {
                         Id = Guid.NewGuid(),
                         Date = DateTime.Now,
-                        Recipes = recipes.ToArray()
+                        Recipes = recipes.ToArray(),
+                        Tags = tags
                     };
                 }
             }

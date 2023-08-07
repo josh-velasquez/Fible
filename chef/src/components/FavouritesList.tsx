@@ -9,19 +9,21 @@ import {
   List,
   ListItemProps,
 } from "semantic-ui-react";
-import { RecipePayload } from "./RecipePayload";
+import { RecipeInfo, RecipesData } from "../state/actions";
 
 interface FavouritesListProps {
-  recipes: RecipePayload[];
+  recipesData: RecipesData;
 }
 
-const FavouritesList: React.FC<FavouritesListProps> = ({ recipes }) => {
-  const [favouritesList, setFavouritesList] = useState<RecipePayload[]>([]);
+const FavouritesList: React.FC<FavouritesListProps> = ({ recipesData }) => {
+  const [favouritesList, setFavouritesList] = useState<RecipeInfo[]>([]);
   let navigate = useNavigate();
 
   useEffect(() => {
-    setFavouritesList(recipes.filter((recipe: any) => recipe.favourite));
-  }, [recipes, setFavouritesList]);
+    setFavouritesList(
+      recipesData.recipes.filter((recipe: RecipeInfo) => recipe.favourite)
+    );
+  }, [recipesData, setFavouritesList]);
 
   const concatDescription = (description: string): string => {
     // only show up to 28 characters in the description
@@ -52,7 +54,7 @@ const FavouritesList: React.FC<FavouritesListProps> = ({ recipes }) => {
           paddingTop: 30,
         }}
       >
-        {favouritesList.map((recipe: RecipePayload) => {
+        {favouritesList.map((recipe: RecipeInfo) => {
           return (
             <List.Item id={recipe.id} onClick={onSelectRecipe} key={recipe.id}>
               <Card

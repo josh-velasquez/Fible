@@ -5,8 +5,9 @@ import Chef from "./Chef";
 import "../styling.css";
 import NavBar from "./NavBar";
 import AddRecipe from "./AddRecipe";
-import Recipe from "./Recipe";
 import { ErrorPage } from "./ErrorPage";
+import EditRecipe from "./EditRecipe";
+import Recipe from "./Recipe";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/" element={<Chef />} />
             <Route path="/recipe/:id" element={<Recipe />} />
             <Route path="/addRecipe" element={<AddRecipe />} />
+            <Route path="/editRecipe" element={<EditRecipe />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </BrowserRouter>

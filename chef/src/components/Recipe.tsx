@@ -1,4 +1,5 @@
 import {
+  Button,
   Checkbox,
   Container,
   Divider,
@@ -10,25 +11,34 @@ import {
   List,
   Segment,
 } from "semantic-ui-react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { RecipePayload } from "./RecipePayload";
+import { RecipeInfo } from "../state/actions";
 
 const Recipe: React.FC = (): JSX.Element => {
-  const [recipe, setRecipe] = useState<RecipePayload>();
+  const [recipe, setRecipe] = useState<RecipeInfo>();
   const { data } = useTypedSelector((state) => state.results);
+  let navigate = useNavigate();
 
   // TODO: Add timer here? We need to have an alarm set for baking etc...
   // TODO: Update wording for payloads
 
-  // fetch the id from the nav bar
   const { id } = useParams<string>();
 
+  const editRecipe = () => {
+    if (recipe) {
+      navigate(`/editRecipe/${recipe.id}`);
+    }
+  };
+
   useEffect(() => {
-    const recipes = JSON.parse(JSON.stringify(data)) as RecipePayload[];
-    const recipe = recipes.find((recipe: RecipePayload) => recipe.id === id);
-    setRecipe(recipe);
+    if (Object.keys(data).length !== 0) {
+      const recipe = data.recipes.find(
+        (recipe: RecipeInfo) => recipe.id === id
+      );
+      setRecipe(recipe);
+    }
   }, [id, data]);
 
   return (
@@ -61,8 +71,15 @@ const Recipe: React.FC = (): JSX.Element => {
               </Label>
             </Grid.Row>
             <Grid.Row>
-              <Checkbox label="Add to my favourites!" />
+              <Button size="large" color="red" icon onClick={editRecipe}>
+                <Icon name="edit" />
+              </Button>
             </Grid.Row>
+            {recipe.favourite && (
+              <Grid.Row>
+                <Icon name="heart" />
+              </Grid.Row>
+            )}
           </Grid>
           <Divider />
           <Segment textAlign="left" inverted>

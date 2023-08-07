@@ -1,10 +1,10 @@
-import { ActionType, RecipeActionType } from "../action-types";
-import { Recipe, RecipeAction } from "../actions";
+import { RecipeActionType } from "../action-types";
+import { RecipeInfo, RecipeAction } from "../actions";
 
 interface RecipeState {
   loading: boolean;
   error: string | null;
-  data: Recipe | null;
+  data: RecipeInfo | null;
 }
 
 const initialState = {

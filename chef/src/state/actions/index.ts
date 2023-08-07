@@ -1,12 +1,19 @@
 import { ActionType, RecipeActionType } from "../action-types";
 
+export interface RecipesData {
+  id: string;
+  date: string;
+  recipes: RecipeInfo[];
+  tags: string[];
+}
+
 interface RequestApiAction {
   type: ActionType.REQUEST_API;
 }
 
 interface RequestApiSuccessAction {
   type: ActionType.REQUEST_API_SUCCESS;
-  payload: string[];
+  payload: RecipesData;
 }
 
 interface RequestApiErrorAction {
@@ -20,7 +27,7 @@ interface RequestRecipeApiAction {
 
 interface RequestRecipeApiSuccessAction {
   type: RecipeActionType.REQUEST_RECIPE_API_SUCCESS;
-  payload: Recipe;
+  payload: RecipeInfo;
 }
 
 interface RequestRecipeApiErrorAction {
@@ -28,13 +35,16 @@ interface RequestRecipeApiErrorAction {
   payload: string;
 }
 
-export interface Recipe {
+export interface RecipeInfo {
+  id: string;
   name: string;
-  image: string;
-  description: string;
-  tags: string[];
+  date: string;
   time: string;
+  description: string;
   instructions: string[];
+  tags: string[];
+  image: string;
+  favourite: boolean;
 }
 
 export type RecipeAction =

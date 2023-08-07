@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Search, SearchProps, SearchResultData } from "semantic-ui-react";
 import _ from "lodash";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { RecipePayload } from "./RecipePayload";
 import { useNavigate } from "react-router-dom";
+import { RecipeInfo } from "../state/actions";
 
 interface RecipeDropdown {
   id: string;
@@ -16,7 +16,7 @@ const SearchRecipe: React.FC = () => {
   const { data } = useTypedSelector((state) => state.results);
   const [results, setResults] = useState<RecipeDropdown[]>();
   const [value, setValue] = useState<string>();
-  const [recipes, setRecipes] = useState<RecipePayload[]>();
+  const [recipes, setRecipes] = useState<RecipeInfo[]>();
   let navigate = useNavigate();
 
   const onResultSelect = (
@@ -44,7 +44,7 @@ const SearchRecipe: React.FC = () => {
         };
         const results = _.filter(recipes, isMatch);
         const recipesList: RecipeDropdown[] = results.map(
-          (recipe: RecipePayload) => {
+          (recipe: RecipeInfo) => {
             return {
               id: recipe.id,
               title: recipe.name,
@@ -60,8 +60,9 @@ const SearchRecipe: React.FC = () => {
   );
 
   useEffect(() => {
-    const recipes = JSON.parse(JSON.stringify(data)) as RecipePayload[];
-    setRecipes(recipes);
+    if (Object.keys(data).length !== 0) {
+      setRecipes(data.recipes);
+    }
   }, [data]);
 
   return (
