@@ -31,6 +31,7 @@ const EditRecipe: React.FC = () => {
   const [instructions, setInstructions] = useState<string[]>([]);
   const [instruction, setInstruction] = useState<string>("");
   const [tags, setTags] = useState<string[]>();
+  const [selectedTags, setSelectedTags] = useState<number[]>();
   const [favourite, setFavourite] = useState<boolean>(false);
   const [image, setImage] = useState<File>();
   const { recipesData } = useTypedSelector((state) => state.results);
@@ -123,9 +124,12 @@ const EditRecipe: React.FC = () => {
       const recipe = recipesData.recipes.find(
         (recipe: RecipeInfo) => recipe.id === id
       );
+      const selectedTagIndices = recipe?.tags.map(tag => tagsOptions.findIndex(option => option.text === tag));
+      setSelectedTags(selectedTagIndices);
       setRecipe(recipe);
+      
     }
-  }, [id, recipesData]);
+  }, [id, recipesData, tagsOptions]);
 
   useEffect(() => {
     if (!loading && !error && recipeInfo) {
@@ -210,7 +214,9 @@ const EditRecipe: React.FC = () => {
               labeled
               icon="tag"
               // TODO: fix this default value to list of tags included
-              defaultValue={0}
+              // value={}
+              // defaultValue={0}
+              value={selectedTags}
               onChange={onAddTags}
               options={tagsOptions}
             />

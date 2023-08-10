@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XYAafa6BRMkI8iH2KzzZ3WWyAdkco6X6eHcEhVYfKJk=",
+  "Hash": "A5l29+Il0DSSAioZo3hvOtCv4Zc80na6Op6ZCpyuhzw=",
   "Source": "Chef",
   "BasePath": "_content/Chef",
   "Mode": "Default",
@@ -102,6 +102,23 @@
       "OriginalItemSpec": "wwwroot/images/5001f0f3-13a9-41ec-a13f-f99f57ba970f.png"
     },
     {
+      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/623ded90-d9aa-41a7-bced-c8bdcb39dc7f.png",
+      "SourceId": "Chef",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
+      "BasePath": "_content/Chef",
+      "RelativePath": "images/623ded90-d9aa-41a7-bced-c8bdcb39dc7f.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/623ded90-d9aa-41a7-bced-c8bdcb39dc7f.png"
+    },
+    {
       "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/94667b88-caec-451a-9361-d52cc338e0e3.png",
       "SourceId": "Chef",
       "SourceType": "Discovered",
@@ -168,6 +185,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/e549c4ac-c82a-42a2-98fa-705929076680.png"
+    },
+    {
+      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/eb5ff9f0-dd0a-48dc-80ef-9a5bb164e784.png",
+      "SourceId": "Chef",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
+      "BasePath": "_content/Chef",
+      "RelativePath": "images/eb5ff9f0-dd0a-48dc-80ef-9a5bb164e784.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/eb5ff9f0-dd0a-48dc-80ef-9a5bb164e784.png"
     },
     {
       "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/f92d94f7-a033-4886-b540-3e72ffad7e72.png",
