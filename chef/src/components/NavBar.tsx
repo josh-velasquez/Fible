@@ -33,7 +33,7 @@ const NavBar: React.FC = () => {
       >
         <Container text>
           <Menu.Item>
-            <Icon name="chess" />
+            <Icon name="book" />
           </Menu.Item>
           <Menu.Item>
             <Link to="/" onClick={() => navigate("/")}>

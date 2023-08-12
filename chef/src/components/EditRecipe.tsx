@@ -4,10 +4,12 @@ import {
   Checkbox,
   CheckboxProps,
   Container,
+  Divider,
   Dropdown,
   DropdownItemProps,
   DropdownProps,
   Form,
+  Header,
   Icon,
   Input,
   List,
@@ -31,7 +33,7 @@ const EditRecipe: React.FC = () => {
   const [instructions, setInstructions] = useState<string[]>([]);
   const [instruction, setInstruction] = useState<string>("");
   const [tags, setTags] = useState<string[]>();
-  const [selectedTags, setSelectedTags] = useState<number[]>();
+  // const [selectedTags, setSelectedTags] = useState<number[]>();
   const [favourite, setFavourite] = useState<boolean>(false);
   const [image, setImage] = useState<File>();
   const { recipesData } = useTypedSelector((state) => state.results);
@@ -73,6 +75,7 @@ const EditRecipe: React.FC = () => {
         return "";
       });
       setTags(newTags);
+      // setSelectedTags(newTags);
     }
   };
 
@@ -124,10 +127,14 @@ const EditRecipe: React.FC = () => {
       const recipe = recipesData.recipes.find(
         (recipe: RecipeInfo) => recipe.id === id
       );
-      const selectedTagIndices = recipe?.tags.map(tag => tagsOptions.findIndex(option => option.text === tag));
-      setSelectedTags(selectedTagIndices);
-      setRecipe(recipe);
-      
+      if (recipe) {
+        // const selectedTagIndices = recipe?.tags.map(tag => tagsOptions.findIndex(option => option.text === tag));
+        // setSelectedTags(selectedTagIndices);
+        setRecipe(recipe);
+        // TODO: set values manually
+        setRecipeName(recipe.name);
+        setTags(recipe.tags);
+      }
     }
   }, [id, recipesData, tagsOptions]);
 
@@ -141,12 +148,17 @@ const EditRecipe: React.FC = () => {
   return recipe ? (
     <Container>
       <Segment>
+        <Header as="h2">
+          <Icon name="food" />
+          <Header.Content>{recipe.name}</Header.Content>
+        </Header>
+        <Divider />
         <Form onSubmit={onSubmit}>
           <Form.Field>
             <label>Recipe Name</label>
             <input
               placeholder="Recipe Name"
-              value={recipe?.name}
+              value={recipeName}
               onChange={(e) => setRecipeName(e.target.value)}
             />
           </Form.Field>
@@ -154,7 +166,7 @@ const EditRecipe: React.FC = () => {
             <label>Description</label>
             <input
               placeholder="Description"
-              value={recipe?.description}
+              value={recipe.description}
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Field>
@@ -162,13 +174,12 @@ const EditRecipe: React.FC = () => {
             <label>Prep time</label>
             <input
               placeholder="Prep time"
-              value={recipe?.time}
+              value={recipe.time}
               onChange={(e) => setPrepTime(e.target.value)}
             />
           </Form.Field>
           <Form.Field>
             <label>Instructions</label>
-            {/* TODO: make this input field clearable after pressing add */}
             <Input
               action={{ icon: "add", onClick: () => onAddInstructionClick() }}
               placeholder="Add recipe..."
@@ -216,7 +227,7 @@ const EditRecipe: React.FC = () => {
               // TODO: fix this default value to list of tags included
               // value={}
               // defaultValue={0}
-              value={selectedTags}
+              // value={tags}
               onChange={onAddTags}
               options={tagsOptions}
             />

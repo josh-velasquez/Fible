@@ -4,10 +4,12 @@ import {
   Checkbox,
   CheckboxProps,
   Container,
+  Divider,
   Dropdown,
   DropdownItemProps,
   DropdownProps,
   Form,
+  Header,
   Icon,
   Input,
   List,
@@ -121,6 +123,11 @@ const AddRecipe: React.FC = () => {
   return (
     <Container>
       <Segment>
+        <Header as="h2">
+          <Icon name="food" />
+          <Header.Content>New Recipe</Header.Content>
+        </Header>
+        <Divider />
         <Form onSubmit={onSubmit}>
           <Form.Field>
             <label>Recipe Name</label>
@@ -145,7 +152,6 @@ const AddRecipe: React.FC = () => {
           </Form.Field>
           <Form.Field>
             <label>Instructions</label>
-            {/* TODO: make this input field clearable after pressing add */}
             <Input
               action={{ icon: "add", onClick: () => onAddInstructionClick() }}
               placeholder="Add recipe..."
