@@ -12,8 +12,8 @@ namespace Chef.Util
 		{
 			try
 			{
-                string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
-                string fileContent = System.IO.File.ReadAllText(recipesFilePath);
+                //string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
+                string fileContent = System.IO.File.ReadAllText(filePath);
                 Recipe[] recipes = JsonConvert.DeserializeObject<Recipe[]>(fileContent) ?? Array.Empty<Recipe>();
 
                 List<Recipe> recipesList = recipes.ToList();
@@ -24,6 +24,29 @@ namespace Chef.Util
             } catch(IOException ex)
 			{
 				Console.WriteLine("Failed to write new recipe: " + ex);
+			}
+		}
+
+		public static void UpdateRecipe(Recipe recipe, string filePath)
+		{
+			try
+            {
+                string fileContent = System.IO.File.ReadAllText(filePath);
+                Recipe[] recipes = JsonConvert.DeserializeObject<Recipe[]>(fileContent) ?? Array.Empty<Recipe>();
+                List<Recipe> recipesList = recipes.ToList();
+
+                int recipeIndex = recipesList.FindIndex(r => r.Id == recipe.Id);
+				if (recipeIndex != -1)
+				{
+					recipesList[recipeIndex] = recipe;
+				}
+				Recipe[] updatedRecipe = recipesList.ToArray();
+				string jsonData = JsonConvert.SerializeObject(updatedRecipe, Formatting.Indented);
+				File.WriteAllText(filePath, jsonData);
+
+            } catch(IOException ex)
+			{
+				Console.WriteLine("Failed to update new recipe: " + ex);
 			}
 		}
 

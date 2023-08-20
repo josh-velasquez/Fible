@@ -43,6 +43,7 @@ export const createNewRecipeApi = (
     });
     try {
       const formData = new FormData();
+      formData.append("id", "newId");
       formData.append("name", newRecipeInfo.name);
       formData.append("description", newRecipeInfo.description);
       formData.append("instructions", newRecipeInfo.instructions.join(";"));
@@ -84,14 +85,19 @@ export const updateRecipeApi = (
     });
     try {
       const formData = new FormData();
+      formData.append("id", newRecipeInfo.id);
       formData.append("name", newRecipeInfo.name);
       formData.append("description", newRecipeInfo.description);
       formData.append("instructions", newRecipeInfo.instructions.join(";"));
       formData.append("time", newRecipeInfo.time);
       formData.append("tags", newRecipeInfo.tags.join(";"));
       formData.append("favourite", newRecipeInfo.favourite.toString());
-      formData.append("image", newRecipeInfo.image);
-      
+      if (newRecipeInfo.image) {
+        formData.append("image", newRecipeInfo.image);
+      } else if (newRecipeInfo.imageUrl) {
+        formData.append("imageUrl", newRecipeInfo.imageUrl);
+      }
+
       const { data } = await axios.put(
         `${serverConfig.serverBaseUrl}/api/chef/update-recipe`,
         formData,

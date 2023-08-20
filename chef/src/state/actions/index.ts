@@ -36,13 +36,15 @@ interface RequestRecipeApiErrorAction {
 }
 
 export interface NewRecipeInfo {
+  id: string;
   name: string;
   time: string;
   description: string;
   instructions: string[];
   tags: string[];
-  image: File;
   favourite: boolean;
+  image?: File;
+  imageUrl?: string;
 }
 
 export interface RecipeInfo {

@@ -37,38 +37,21 @@
     "Favourite": true
   },
   {
-    "Id": "6bf99b86-c223-416a-a810-8670fc156348",
-    "Name": "Kim's truffle pasta",
-    "Date": "2023-08-07T17:24:20.627103-06:00",
-    "Time": "2 hours",
-    "Description": "Very naise",
+    "Id": "9369bc38-b0de-4a97-a585-27d3f9e9adb5",
+    "Name": "Test",
+    "Date": "0001-01-01T00:00:00",
+    "Time": "120 mins",
+    "Description": "Another test",
     "Instructions": [
-      "Buy stuff",
-      "Cook it"
-    ],
-    "Tags": [
-      "dinner"
-    ],
-    "Image": "https://localhost:7091/images/eb5ff9f0-dd0a-48dc-80ef-9a5bb164e784.png",
-    "Favourite": true
-  },
-  {
-    "Id": "10b89818-cca5-4c90-865f-a93906921350",
-    "Name": "New recipe",
-    "Date": "2023-08-07T17:25:06.781604-06:00",
-    "Time": "3 min",
-    "Description": "asdf",
-    "Instructions": [
-      "sadf",
-      "",
-      "asdf"
+      "First instruction",
+      "Second instruction",
+      "Third instruction"
     ],
     "Tags": [
       "asian",
-      "quick",
-      "dessert"
+      "quick"
     ],
-    "Image": "https://localhost:7091/images/623ded90-d9aa-41a7-bced-c8bdcb39dc7f.png",
+    "Image": "https://localhost:7091/images/6195af6e-606b-4184-b513-2547ee1d4265.png",
     "Favourite": false
   }
 ]

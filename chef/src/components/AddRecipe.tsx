@@ -111,6 +111,7 @@ const AddRecipe: React.FC = () => {
         tags: tags,
         favourite: favourite,
         image: image,
+        imageUrl: ""
       } as NewRecipeInfo);
     }
   };

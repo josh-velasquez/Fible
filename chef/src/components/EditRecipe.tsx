@@ -19,7 +19,6 @@ import {
 } from "semantic-ui-react";
 import * as _ from "lodash";
 import UploadImage from "./UploadImage";
-import { useActions } from "../hooks/useActions";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { NewRecipeInfo, RecipeAction, RecipeInfo } from "../state/actions";
@@ -31,6 +30,7 @@ import { RootState } from "../state";
 
 // TODO: Optimize this component as its the same as EditRecipe
 const EditRecipe: React.FC = () => {
+  const [recipeId, setRecipeId] = useState<string>("");
   const [recipeName, setRecipeName] = useState("");
   const [description, setDescription] = useState("");
   const [prepTime, setPrepTime] = useState("");
@@ -123,15 +123,19 @@ const EditRecipe: React.FC = () => {
         (index) => tagsOptions[index].text
       );
       // TODO: Fix the image payload error
+      console.warn("TEST: " + recipeName);
       dispatch(
         updateRecipeApi({
+          id: recipeId,
           name: recipeName,
           description: description,
           time: prepTime,
           instructions: instructions,
           tags: selectedTagValues,
           favourite: favourite,
-          image: image ? image : currentImage,
+          // TODO: Update this so we only set whatever is updated
+          image: image,
+          imageUrl: currentImage,
         } as NewRecipeInfo)
       );
     }
@@ -146,6 +150,8 @@ const EditRecipe: React.FC = () => {
         const selectedTagIndices = recipe.tags.map((tag) =>
           recipesData.tags.findIndex((option) => option === tag)
         );
+        console.warn("ID: " + JSON.stringify(recipe));
+        setRecipeId(recipe.id);
         setRecipeName(recipe.name);
         setDescription(recipe.description);
         setPrepTime(recipe.time);
