@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { Button, Container, Form, Icon, Label } from "semantic-ui-react";
+import { Button, Container, Form, Icon, Image, Label } from "semantic-ui-react";
 
 interface ImageInformation {
   image: File | undefined;
@@ -18,7 +18,7 @@ const UploadImage: React.FC<ImageInformation> = ({
         <>
           {image !== undefined ? (
             <Form.Field>
-              <img
+              <Image
                 style={{ maxWidth: 500, maxHeight: 500 }}
                 className="preview"
                 src={image.name}

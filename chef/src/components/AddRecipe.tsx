@@ -12,6 +12,7 @@ import {
   Header,
   Icon,
   Input,
+  Label,
   List,
   Segment,
 } from "semantic-ui-react";
@@ -130,28 +131,28 @@ const AddRecipe: React.FC = () => {
         <Divider />
         <Form onSubmit={onSubmit}>
           <Form.Field>
-            <label>Recipe Name</label>
+            <Label>Recipe Name</Label>
             <Input
               placeholder="Recipe Name"
               onChange={(e) => setRecipeName(e.target.value)}
             />
           </Form.Field>
           <Form.Field>
-            <label>Description</label>
+            <Label>Description</Label>
             <Input
               placeholder="Description"
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Field>
           <Form.Field>
-            <label>Prep time</label>
+            <Label>Prep time</Label>
             <Input
               placeholder="Prep time"
               onChange={(e) => setPrepTime(e.target.value)}
             />
           </Form.Field>
           <Form.Field>
-            <label>Instructions</label>
+            <Label>Instructions</Label>
             <Input
               action={{ icon: "add", onClick: () => onAddInstructionClick() }}
               placeholder="Add recipe..."
@@ -184,7 +185,7 @@ const AddRecipe: React.FC = () => {
             )}
           </Form.Field>
           <Form.Field>
-            <label>Tags</label>
+            <Label>Tags</Label>
             <Dropdown
               button
               multiple
@@ -201,7 +202,7 @@ const AddRecipe: React.FC = () => {
             />
           </Form.Field>
           <Form.Field>
-            <label>Upload image</label>
+            <Label>Upload image</Label>
             <UploadImage
               image={image}
               onResetImage={onResetImage}

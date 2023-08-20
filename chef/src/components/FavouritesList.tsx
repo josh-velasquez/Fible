@@ -5,6 +5,7 @@ import {
   Container,
   Divider,
   Header,
+  Image,
   Label,
   List,
   ListItemProps,
@@ -51,28 +52,34 @@ const FavouritesList: React.FC<FavouritesListProps> = ({ recipesData }) => {
           maxHeight: 600,
           backgroundColor: "#e9edc9",
           overflowY: "scroll",
-          paddingTop: 30,
+          paddingTop: 20,
+          padding: 20,
         }}
       >
         {favouritesList.map((recipe: RecipeInfo) => {
           return (
             <List.Item id={recipe.id} onClick={onSelectRecipe} key={recipe.id}>
-              <Card
-                key={recipe.id}
-                image={recipe.image}
-                header={recipe.name}
-                meta={() => {
-                  return recipe.tags.map((tag: string) => {
-                    return (
+              <Card>
+                <Image
+                  src={recipe.image}
+                  style={{ height: "250px", objectFit: "cover" }}
+                  alt={recipe.name}
+                />
+                <Card.Content>
+                  <Card.Header>{recipe.name}</Card.Header>
+                  <Card.Meta>
+                    {recipe.tags.map((tag) => (
                       <Label key={tag} color="olive" size="mini">
                         {tag}
                       </Label>
-                    );
-                  });
-                }}
-                description={concatDescription(recipe.description)}
-                extra={recipe.time}
-              />
+                    ))}
+                  </Card.Meta>
+                  <Card.Description>
+                    {concatDescription(recipe.description)}
+                  </Card.Description>
+                </Card.Content>
+                <Card.Content extra>{recipe.time}</Card.Content>
+              </Card>
             </List.Item>
           );
         })}

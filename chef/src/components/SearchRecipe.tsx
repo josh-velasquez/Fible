@@ -49,7 +49,10 @@ const SearchRecipe: React.FC = () => {
               id: recipe.id,
               title: recipe.name,
               description: recipe.description,
-              image: recipe.image?.name,
+              image:
+                typeof recipe.image === "string"
+                  ? recipe.image
+                  : recipe.image?.name,
             } as RecipeDropdown;
           }
         );

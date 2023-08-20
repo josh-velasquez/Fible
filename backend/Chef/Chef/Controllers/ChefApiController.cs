@@ -60,7 +60,7 @@ namespace Chef.Controllers
             catch (Exception ex)
             {
                 return BadRequest("Error: " + ex);
-            }
+            } 
             return BadRequest("Error.");
         }
 
@@ -73,10 +73,19 @@ namespace Chef.Controllers
                 return BadRequest(ModelState);
             }
             try
-            { 
-                string imageFile = DataUtil.SaveImageToServer(imagesFolder, recipe.Image);
-                // TODO: Fix this url (make sure its https)
-                string payloadImageUrl = "https://localhost:7091/images/" + imageFile;
+            {
+                var payloadImageUrl = "";
+                if (recipe.Image is IFormFile imageFile)
+                {
+                    // TODO: Fix this url (make sure its https)
+                    payloadImageUrl = "https://localhost:7091/images/" + DataUtil.SaveImageToServer(imagesFolder, imageFile); ;
+                }
+                else if (recipe.Image is string imageData)
+                {
+                    // TODO: We can let user upload an image link from online (implement this on the FE)
+                    payloadImageUrl = imageData;
+                }
+                
                 string[] instructions = recipe.Instructions.Split(";");
                 string[] tags = recipe.Tags.Split(";");
                 var newRecipe = new Recipe

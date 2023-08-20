@@ -90,9 +90,9 @@ export const updateRecipeApi = (
       formData.append("time", newRecipeInfo.time);
       formData.append("tags", newRecipeInfo.tags.join(";"));
       formData.append("favourite", newRecipeInfo.favourite.toString());
-      formData.append("image", newRecipeInfo.image ?? "");
-
-      const { data } = await axios.post(
+      formData.append("image", newRecipeInfo.image);
+      
+      const { data } = await axios.put(
         `${serverConfig.serverBaseUrl}/api/chef/update-recipe`,
         formData,
         {

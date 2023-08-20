@@ -53,7 +53,7 @@ export interface RecipeInfo {
   description: string;
   instructions: string[];
   tags: string[];
-  image: File | undefined;
+  image: File | string | undefined;
   favourite: boolean;
 }
 

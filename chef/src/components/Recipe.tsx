@@ -22,7 +22,6 @@ const Recipe: React.FC = (): JSX.Element => {
   let navigate = useNavigate();
 
   // TODO: Add timer here? We need to have an alarm set for baking etc...
-  // TODO: Update wording for payloads
 
   const { id } = useParams<string>();
 
