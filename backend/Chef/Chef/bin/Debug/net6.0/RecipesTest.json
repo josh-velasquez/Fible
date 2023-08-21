@@ -38,20 +38,49 @@
   },
   {
     "Id": "9369bc38-b0de-4a97-a585-27d3f9e9adb5",
-    "Name": "Test",
+    "Name": "New Recipe Test",
     "Date": "0001-01-01T00:00:00",
-    "Time": "120 mins",
-    "Description": "Another test",
+    "Time": "16 mins",
+    "Description": "This is just a test description",
     "Instructions": [
       "First instruction",
       "Second instruction",
-      "Third instruction"
+      "Third instruction",
+      "Fourth Instruction",
+      "Fifth instruction",
+      "Sixth instruction",
+      "Seventh instructions",
+      "Eight instruction"
     ],
     "Tags": [
-      "asian",
-      "quick"
+      "breakfast",
+      "lunch"
     ],
     "Image": "https://localhost:7091/images/6195af6e-606b-4184-b513-2547ee1d4265.png",
     "Favourite": false
+  },
+  {
+    "Id": "9ff41bec-374b-4802-b630-0fa5dfe10fb2",
+    "Name": "Another test recipe",
+    "Date": "0001-01-01T00:00:00",
+    "Time": "120 mins",
+    "Description": "Test description updated",
+    "Instructions": [
+      "ksajdfaksdf",
+      "asdfa",
+      "sdf",
+      "Testign this out",
+      "Testing this out too",
+      "Testing this out too",
+      "asdfasdf",
+      "asdfasdf"
+    ],
+    "Tags": [
+      "asian",
+      "quick",
+      "dessert"
+    ],
+    "Image": "https://localhost:7091/images/b109bf78-f33d-4af2-8970-9ed274b798af.png",
+    "Favourite": true
   }
 ]

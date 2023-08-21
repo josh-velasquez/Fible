@@ -73,20 +73,26 @@ const Recipe: React.FC = (): JSX.Element => {
                 Prep Time: {recipe.time}
               </Label>
             </Grid.Row>
-            <Grid.Row>
-              <Button size="large" color="red" icon onClick={editRecipe}>
-                <Icon name="edit" />
+            <Grid.Row style={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button size="tiny" color="twitter" icon onClick={editRecipe}>
+                Edit Recipe
               </Button>
-              <Button size="large" color="red" icon onClick={deleteRecipe}>
+              <Button size="tiny" color="red" icon onClick={deleteRecipe}>
                 {/* TODO: add a pop up modal that asks if they want to delete the recipe */}
-                <Icon name="delete" />
+                Delete Recipe
               </Button>
             </Grid.Row>
+            {/* TODO: Updaate this with a better icon */}
             {recipe.favourite && (
               <Grid.Row>
                 <Icon name="heart" />
               </Grid.Row>
             )}
+            <Grid.Row>
+              <Button size="tiny" color="green">
+                Start Cooking Timer
+              </Button>
+            </Grid.Row>
           </Grid>
           <Divider />
           <Segment textAlign="left" inverted>

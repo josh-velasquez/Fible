@@ -111,7 +111,7 @@ const AddRecipe: React.FC = () => {
         tags: tags,
         favourite: favourite,
         image: image,
-        imageUrl: ""
+        imageUrl: "",
       } as NewRecipeInfo);
     }
   };
@@ -121,6 +121,7 @@ const AddRecipe: React.FC = () => {
       navigate(`/recipe/${recipeInfo.id}`);
     }
   }, [recipeInfo, error, loading, navigate]);
+
   // TODO: Add form validation before submission
   return (
     <Container>
@@ -163,14 +164,12 @@ const AddRecipe: React.FC = () => {
             {instructions.length !== 0 && (
               <Segment>
                 <List divided animated ordered>
-                  {instructions.map((instruction) => {
+                  {instructions.map((instruction: string, index: number) => {
                     return (
-                      <List.Item key={instructions.indexOf(instruction)}>
+                      <List.Item key={index}>
                         {instruction}
                         <Button
-                          onClick={() =>
-                            onRemoveRecipe(instructions.indexOf(instruction))
-                          }
+                          onClick={() => onRemoveRecipe(index)}
                           size="mini"
                           floated="right"
                           color="red"

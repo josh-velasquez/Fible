@@ -122,8 +122,6 @@ const EditRecipe: React.FC = () => {
       const selectedTagValues = selectedTags.map(
         (index) => tagsOptions[index].text
       );
-      // TODO: Fix the image payload error
-      console.warn("TEST: " + recipeName);
       dispatch(
         updateRecipeApi({
           id: recipeId,
@@ -150,7 +148,6 @@ const EditRecipe: React.FC = () => {
         const selectedTagIndices = recipe.tags.map((tag) =>
           recipesData.tags.findIndex((option) => option === tag)
         );
-        console.warn("ID: " + JSON.stringify(recipe));
         setRecipeId(recipe.id);
         setRecipeName(recipe.name);
         setDescription(recipe.description);
@@ -170,7 +167,7 @@ const EditRecipe: React.FC = () => {
   }, [recipeInfo, error, loading, navigate]);
 
   // TODO: Add form validation before submission
-  return recipesData ? (
+  return (
     <Container>
       <Segment>
         <Header as="h2">
@@ -224,6 +221,7 @@ const EditRecipe: React.FC = () => {
                           floated="right"
                           color="red"
                           icon
+                          type="button"
                         >
                           <Icon name="remove" />
                         </Button>
@@ -280,8 +278,6 @@ const EditRecipe: React.FC = () => {
         </Form>
       </Segment>
     </Container>
-  ) : (
-    <ErrorPage />
   );
 };
 
