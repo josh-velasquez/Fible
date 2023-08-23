@@ -76,6 +76,7 @@ export const createNewRecipeApi = (
   };
 };
 
+// TODO: Update the dispatch type to UPDATE_RECIPE_REQUEST, UPDATE_RECIPE_SUCCESS, UPDATE_RECIPE_ERROR
 export const updateRecipeApi = (
   newRecipeInfo: NewRecipeInfo
 ): ((dispatch: Dispatch<RecipeAction>) => Promise<void>) => {
@@ -106,6 +107,33 @@ export const updateRecipeApi = (
             "Content-type": "multipart/form-data",
           },
         }
+      );
+      const newRecipe = JSON.parse(JSON.stringify(data));
+      dispatch({
+        type: RecipeActionType.REQUEST_RECIPE_API_SUCCESS,
+        payload: newRecipe,
+      });
+      await getRecipeListApi()(dispatch);
+    } catch (error: any) {
+      dispatch({
+        type: RecipeActionType.REQUEST_RECIPE_API_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export const deleteRecipeApi = (
+  recipeId: string
+): ((dispatch: Dispatch<RecipeAction>) => Promise<void>) => {
+  return async (dispatch: Dispatch<RecipeAction>): Promise<void> => {
+    dispatch({
+      type: RecipeActionType.REQUEST_RECIPE_API,
+    });
+    try {
+      // const encodedRecipeId = encodeURIComponent(recipeId);
+      const { data } = await axios.delete(
+        `${serverConfig.serverBaseUrl}/api/chef/delete-recipe?id=${recipeId}`
       );
       const newRecipe = JSON.parse(JSON.stringify(data));
       dispatch({

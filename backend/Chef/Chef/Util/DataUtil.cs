@@ -12,7 +12,6 @@ namespace Chef.Util
 		{
 			try
 			{
-                //string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
                 string fileContent = System.IO.File.ReadAllText(filePath);
                 Recipe[] recipes = JsonConvert.DeserializeObject<Recipe[]>(fileContent) ?? Array.Empty<Recipe>();
 
@@ -50,6 +49,29 @@ namespace Chef.Util
 			}
 		}
 
+		public static void DeleteRecipe(Guid recipeId, string filePath)
+		{
+			try
+			{
+                string fileContent = System.IO.File.ReadAllText(filePath);
+                Recipe[] recipes = JsonConvert.DeserializeObject<Recipe[]>(fileContent) ?? Array.Empty<Recipe>();
+                List<Recipe> recipesList = recipes.ToList();
+
+				Recipe recipeToDelete = recipesList.FirstOrDefault(recipe => recipe.Id == recipeId);
+				if (recipeToDelete != null)
+				{
+					recipesList.Remove(recipeToDelete);
+                    Recipe[] updatedRecipe = recipesList.ToArray();
+                    string jsonData = JsonConvert.SerializeObject(updatedRecipe, Formatting.Indented);
+                    File.WriteAllText(filePath, jsonData);
+                }
+            }
+			catch(IOException ex)
+			{
+				Console.WriteLine("Failed to delete recipe: " + ex);
+			}
+		}
+
 		public static string SaveImageToServer(string imagesPath, IFormFile file)
 		{
             string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
@@ -59,11 +81,6 @@ namespace Chef.Util
 				file.CopyTo(stream);
 			}
 			return uniqueFileName;
-		}
-
-		public static void EditRecipeFromJson(Recipe recipe, string filePath)
-		{
-			// TODO: edit recipe here
 		}
 	}
 }

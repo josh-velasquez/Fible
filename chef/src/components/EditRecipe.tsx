@@ -21,12 +21,8 @@ import * as _ from "lodash";
 import UploadImage from "./UploadImage";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { NewRecipeInfo, RecipeAction, RecipeInfo } from "../state/actions";
-import { ErrorPage } from "./ErrorPage";
-import { updateRecipeApi } from "../state/action-creators";
-import { useDispatch } from "react-redux";
-import { ThunkDispatch } from "redux-thunk";
-import { RootState } from "../state";
+import { NewRecipeInfo, RecipeInfo } from "../state/actions";
+import { useActions } from "../hooks/useActions";
 
 // TODO: Optimize this component as its the same as EditRecipe
 const EditRecipe: React.FC = () => {
@@ -44,10 +40,9 @@ const EditRecipe: React.FC = () => {
   const { recipeInfo, loading, error } = useTypedSelector(
     (state) => state.recipe
   );
+  const { updateRecipeApi } = useActions();
 
   const { id } = useParams<string>();
-
-  const dispatch: ThunkDispatch<RootState, null, RecipeAction> = useDispatch();
 
   let navigate = useNavigate();
 
@@ -122,20 +117,18 @@ const EditRecipe: React.FC = () => {
       const selectedTagValues = selectedTags.map(
         (index) => tagsOptions[index].text
       );
-      dispatch(
-        updateRecipeApi({
-          id: recipeId,
-          name: recipeName,
-          description: description,
-          time: prepTime,
-          instructions: instructions,
-          tags: selectedTagValues,
-          favourite: favourite,
-          // TODO: Update this so we only set whatever is updated
-          image: image,
-          imageUrl: currentImage,
-        } as NewRecipeInfo)
-      );
+      updateRecipeApi({
+        id: recipeId,
+        name: recipeName,
+        description: description,
+        time: prepTime,
+        instructions: instructions,
+        tags: selectedTagValues,
+        favourite: favourite,
+        // TODO: Update this so we only set whatever is updated
+        image: image,
+        imageUrl: currentImage,
+      } as NewRecipeInfo);
     }
   };
 
@@ -257,11 +250,17 @@ const EditRecipe: React.FC = () => {
                 onResetImage={onResetImage}
                 onUploadImage={onUploadImage}
               />
-            ) : (
+            ) : currentImage ? (
               <Image
                 src={currentImage}
                 style={{ height: "250px", objectFit: "cover" }}
                 alt={currentImage}
+              />
+            ) : (
+              <UploadImage
+                image={image}
+                onResetImage={onResetImage}
+                onUploadImage={onUploadImage}
               />
             )}
           </Form.Field>

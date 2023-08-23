@@ -111,6 +111,7 @@ const AddRecipe: React.FC = () => {
         tags: tags,
         favourite: favourite,
         image: image,
+        // TODO: Fix this on BE? I think the image is not being checked properly
         imageUrl: "",
       } as NewRecipeInfo);
     }

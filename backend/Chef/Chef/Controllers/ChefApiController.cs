@@ -132,7 +132,6 @@ namespace Chef.Controllers
                 string[] instructions = recipe.Instructions.Split(";");
                 string[] tags = recipe.Tags.Split(";");
                 Guid.TryParse(recipe.Id, out Guid guidValue);
-                Console.WriteLine("RECIPE: " + recipe.Name);
                 var updatedRecipe = new Recipe
                 {
                     Id = guidValue,
@@ -156,10 +155,21 @@ namespace Chef.Controllers
 
         [HttpDelete("delete-recipe")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<Recipe> DeleteRecipe(int id)
+        public ActionResult<Recipe> DeleteRecipe(Guid id)
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
-            return BadRequest("Deleted");
+
+            try
+            {
+                string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
+                DataUtil.DeleteRecipe(id, recipesFilePath);
+                return new Recipe();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("Error: " + ex);
+            }
+            
         }
     }
 }

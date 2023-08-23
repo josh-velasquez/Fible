@@ -15,11 +15,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { RecipeInfo } from "../state/actions";
+import DeleteModal from "./DeleteModal";
+import { useActions } from "../hooks/useActions";
 
 const Recipe: React.FC = (): JSX.Element => {
   const [recipe, setRecipe] = useState<RecipeInfo>();
+  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const { recipesData } = useTypedSelector((state) => state.results);
   let navigate = useNavigate();
+  const { deleteRecipeApi } = useActions();
 
   // TODO: Add timer here? We need to have an alarm set for baking etc...
 
@@ -31,8 +35,17 @@ const Recipe: React.FC = (): JSX.Element => {
     }
   };
 
-  const deleteRecipe = () => {
-    console.warn("DELETE");
+  const handleDeleteModalClose = () => {
+    setOpenDeleteModal(false);
+  };
+
+  const handleDeleteRecipe = () => {
+    deleteRecipeApi(id ?? "");
+    navigate("/", { replace: true });
+  };
+
+  const handleOpenDeleteRecipe = () => {
+    setOpenDeleteModal(true);
   };
 
   useEffect(() => {
@@ -77,8 +90,12 @@ const Recipe: React.FC = (): JSX.Element => {
               <Button size="tiny" color="twitter" icon onClick={editRecipe}>
                 Edit Recipe
               </Button>
-              <Button size="tiny" color="red" icon onClick={deleteRecipe}>
-                {/* TODO: add a pop up modal that asks if they want to delete the recipe */}
+              <Button
+                size="tiny"
+                color="red"
+                icon
+                onClick={handleOpenDeleteRecipe}
+              >
                 Delete Recipe
               </Button>
             </Grid.Row>
@@ -111,6 +128,11 @@ const Recipe: React.FC = (): JSX.Element => {
           </Segment>
         </React.Fragment>
       )}
+      <DeleteModal
+        open={openDeleteModal}
+        onClose={handleDeleteModalClose}
+        onDelete={handleDeleteRecipe}
+      />
     </Container>
   );
 };
