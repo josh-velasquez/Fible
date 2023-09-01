@@ -59,10 +59,27 @@ export interface RecipeInfo {
   favourite: boolean;
 }
 
+export interface RequestUpdateRecipeApiAction {
+  type: RecipeActionType.REQUEST_UPDATE_RECIPE_API;
+}
+
+export interface RequestUpdateRecipeApiSuccessAction {
+  type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_SUCCESS;
+  payload: RecipeInfo;
+}
+
+export interface RequestUpdateRecipeApiErrorAction {
+  type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_ERROR;
+  payload: string;
+}
+
 export type RecipeAction =
   | RequestRecipeApiAction
   | RequestRecipeApiSuccessAction
-  | RequestRecipeApiErrorAction;
+  | RequestRecipeApiErrorAction
+  | RequestUpdateRecipeApiAction
+  | RequestUpdateRecipeApiSuccessAction
+  | RequestUpdateRecipeApiErrorAction;
 
 export type RecipesAction =
   | RequestApiAction

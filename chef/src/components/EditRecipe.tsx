@@ -23,6 +23,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { NewRecipeInfo, RecipeInfo } from "../state/actions";
 import { useActions } from "../hooks/useActions";
+import { getDataFromStorage } from "../utils/LocalStorageUtil";
 
 // TODO: Optimize this component as its the same as EditRecipe
 const EditRecipe: React.FC = () => {
@@ -150,6 +151,8 @@ const EditRecipe: React.FC = () => {
         setFavourite(recipe.favourite);
         setCurrentImage(recipe.image as string);
       }
+    } else {
+      // TODO: recipesData = getDataFromStorage("recipes");
     }
   }, [id, recipesData]);
 
@@ -202,6 +205,7 @@ const EditRecipe: React.FC = () => {
               onChange={(e) => setInstruction(e.target.value)}
             />
             {instructions.length !== 0 && (
+              // TODO: Prevent submit after pressing enter
               <Segment>
                 <List divided animated ordered>
                   {instructions.map((instruction: string, index: number) => {

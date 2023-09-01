@@ -14,7 +14,7 @@
       "snack",
       "easy"
     ],
-    "Image": "food.png",
+    "Image": "https://localhost:7091/images/food.png",
     "Favourite": true
   },
   {
@@ -33,7 +33,43 @@
       "quick",
       "dinner"
     ],
-    "Image": "food.png",
+    "Image": "https://localhost:7091/images/food.png",
     "Favourite": true
+  },
+  {
+    "Id": "1eb4119c-73ad-4ab1-b43c-63468c71a599",
+    "Name": "Test recipe",
+    "Date": "2023-09-01T13:34:16.593187-06:00",
+    "Time": "12 mins",
+    "Description": "test description",
+    "Instructions": [
+      "First instructon",
+      "Second instruction",
+      "Third instruction"
+    ],
+    "Tags": [
+      "easy",
+      "dessert",
+      "dinner",
+      "breakfast"
+    ],
+    "Image": "https://localhost:7091/images/1eab8cd6-1603-4e62-896b-2150e09ea6d4.png",
+    "Favourite": true
+  },
+  {
+    "Id": "3c88b71f-c031-4074-ad69-b106c8027700",
+    "Name": "Test",
+    "Date": "2023-09-01T13:37:52.549562-06:00",
+    "Time": "asdfas",
+    "Description": "asdf",
+    "Instructions": [
+      "asdf"
+    ],
+    "Tags": [
+      "asian",
+      "quick"
+    ],
+    "Image": "https://localhost:7091/images/2ba821ac-16bd-4893-a3c2-3d0c45b39810.png",
+    "Favourite": false
   }
 ]

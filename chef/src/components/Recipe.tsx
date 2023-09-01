@@ -31,7 +31,10 @@ const Recipe: React.FC = (): JSX.Element => {
 
   const editRecipe = () => {
     if (recipe) {
+      console.warn("ID: " + recipe.id);
+      // TODO: Navigating to edit recipe doesn't do anything just refreshes the page
       navigate(`/editRecipe/${recipe.id}`);
+      // navigate("/");
     }
   };
 
@@ -49,11 +52,14 @@ const Recipe: React.FC = (): JSX.Element => {
   };
 
   useEffect(() => {
+    // console.warn("HERE RAN: " + JSON.stringify(recipesData));
     if (recipesData) {
       const recipe = recipesData.recipes.find(
         (recipe: RecipeInfo) => recipe.id === id
       );
       setRecipe(recipe);
+    } else {
+      // TODO: render stuff from local storage
     }
   }, [id, recipesData]);
 

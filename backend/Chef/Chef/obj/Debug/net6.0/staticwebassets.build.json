@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bErXAJcWyO5J3SLCprDTleUWAuRvWf4jg+RNG0lur1E=",
+  "Hash": "C6LTMe5kP6JoeVb2I2hsbY4mIGYHHwa2+UlIcBU2teU=",
   "Source": "Chef",
   "BasePath": "_content/Chef",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/8dedcbc5-808f-42a6-a67e-b4a07d5d6494.png",
+      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/.DS_Store",
       "SourceId": "Chef",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
       "BasePath": "_content/Chef",
-      "RelativePath": "images/8dedcbc5-808f-42a6-a67e-b4a07d5d6494.png",
+      "RelativePath": ".DS_Store",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,15 +31,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/8dedcbc5-808f-42a6-a67e-b4a07d5d6494.png"
+      "OriginalItemSpec": "wwwroot/.DS_Store"
     },
     {
-      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/a75b9b44-df88-4b80-8442-2ecdaa600c5f.png",
+      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/.DS_Store",
       "SourceId": "Chef",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
       "BasePath": "_content/Chef",
-      "RelativePath": "images/a75b9b44-df88-4b80-8442-2ecdaa600c5f.png",
+      "RelativePath": "images/.DS_Store",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -48,15 +48,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/a75b9b44-df88-4b80-8442-2ecdaa600c5f.png"
+      "OriginalItemSpec": "wwwroot/images/.DS_Store"
     },
     {
-      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/eb5ff9f0-dd0a-48dc-80ef-9a5bb164e784.png",
+      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/food.png",
       "SourceId": "Chef",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
       "BasePath": "_content/Chef",
-      "RelativePath": "images/eb5ff9f0-dd0a-48dc-80ef-9a5bb164e784.png",
+      "RelativePath": "images/food.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,41 +65,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/eb5ff9f0-dd0a-48dc-80ef-9a5bb164e784.png"
-    },
-    {
-      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/f92d94f7-a033-4886-b540-3e72ffad7e72.png",
-      "SourceId": "Chef",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
-      "BasePath": "_content/Chef",
-      "RelativePath": "images/f92d94f7-a033-4886-b540-3e72ffad7e72.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/f92d94f7-a033-4886-b540-3e72ffad7e72.png"
-    },
-    {
-      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/test.png",
-      "SourceId": "Chef",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
-      "BasePath": "_content/Chef",
-      "RelativePath": "images/test.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/test.png"
+      "OriginalItemSpec": "wwwroot/images/food.png"
     }
   ]
 }

@@ -24,6 +24,12 @@ const recipeReducer = (
       return { loading: false, error: null, recipeInfo: action.payload };
     case RecipeActionType.REQUEST_RECIPE_API_ERROR:
       return { loading: false, error: action.payload, recipeInfo: null };
+    case RecipeActionType.REQUEST_UPDATE_RECIPE_API:
+      return { loading: true, error: null, recipeInfo: null };
+    case RecipeActionType.REQUEST_UPDATE_RECIPE_API_SUCCESS:
+      return { loading: false, error: null, recipeInfo: action.payload };
+    case RecipeActionType.REQUEST_UPDATE_RECIPE_API_ERROR:
+      return { loading: false, error: action.payload, recipeInfo: null };
     default:
       return state;
   }

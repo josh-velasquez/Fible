@@ -8,6 +8,7 @@ import {
   NewRecipeInfo,
 } from "../actions";
 import serverConfig from "../../serverConfig.json";
+import { saveToLocalStorage } from "../../utils/LocalStorageUtil";
 
 export const getRecipeListApi = (): ((
   dispatch: Dispatch<RecipesAction>
@@ -25,6 +26,7 @@ export const getRecipeListApi = (): ((
         type: ActionType.REQUEST_API_SUCCESS,
         payload: recipesData,
       });
+      saveToLocalStorage("recipes", JSON.stringify(recipesData));
     } catch (error: any) {
       dispatch({
         type: ActionType.REQUEST_API_ERROR,
@@ -76,13 +78,12 @@ export const createNewRecipeApi = (
   };
 };
 
-// TODO: Update the dispatch type to UPDATE_RECIPE_REQUEST, UPDATE_RECIPE_SUCCESS, UPDATE_RECIPE_ERROR
 export const updateRecipeApi = (
   newRecipeInfo: NewRecipeInfo
 ): ((dispatch: Dispatch<RecipeAction>) => Promise<void>) => {
   return async (dispatch: Dispatch<RecipeAction>): Promise<void> => {
     dispatch({
-      type: RecipeActionType.REQUEST_RECIPE_API,
+      type: RecipeActionType.REQUEST_UPDATE_RECIPE_API,
     });
     try {
       const formData = new FormData();
@@ -110,13 +111,13 @@ export const updateRecipeApi = (
       );
       const newRecipe = JSON.parse(JSON.stringify(data));
       dispatch({
-        type: RecipeActionType.REQUEST_RECIPE_API_SUCCESS,
+        type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_SUCCESS,
         payload: newRecipe,
       });
       await getRecipeListApi()(dispatch);
     } catch (error: any) {
       dispatch({
-        type: RecipeActionType.REQUEST_RECIPE_API_ERROR,
+        type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_ERROR,
         payload: error.message,
       });
     }
@@ -128,22 +129,21 @@ export const deleteRecipeApi = (
 ): ((dispatch: Dispatch<RecipeAction>) => Promise<void>) => {
   return async (dispatch: Dispatch<RecipeAction>): Promise<void> => {
     dispatch({
-      type: RecipeActionType.REQUEST_RECIPE_API,
+      type: RecipeActionType.REQUEST_UPDATE_RECIPE_API,
     });
     try {
-      // const encodedRecipeId = encodeURIComponent(recipeId);
       const { data } = await axios.delete(
         `${serverConfig.serverBaseUrl}/api/chef/delete-recipe?id=${recipeId}`
       );
       const newRecipe = JSON.parse(JSON.stringify(data));
       dispatch({
-        type: RecipeActionType.REQUEST_RECIPE_API_SUCCESS,
+        type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_SUCCESS,
         payload: newRecipe,
       });
       await getRecipeListApi()(dispatch);
     } catch (error: any) {
       dispatch({
-        type: RecipeActionType.REQUEST_RECIPE_API_ERROR,
+        type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_ERROR,
         payload: error.message,
       });
     }

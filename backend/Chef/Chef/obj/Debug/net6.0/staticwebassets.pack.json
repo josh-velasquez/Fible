@@ -1,24 +1,16 @@
 {
   "Files": [
     {
-      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/8dedcbc5-808f-42a6-a67e-b4a07d5d6494.png",
-      "PackagePath": "staticwebassets/images/8dedcbc5-808f-42a6-a67e-b4a07d5d6494.png"
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/.DS_Store",
+      "PackagePath": "staticwebassets/.DS_Store"
     },
     {
-      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/a75b9b44-df88-4b80-8442-2ecdaa600c5f.png",
-      "PackagePath": "staticwebassets/images/a75b9b44-df88-4b80-8442-2ecdaa600c5f.png"
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/.DS_Store",
+      "PackagePath": "staticwebassets/images/.DS_Store"
     },
     {
-      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/eb5ff9f0-dd0a-48dc-80ef-9a5bb164e784.png",
-      "PackagePath": "staticwebassets/images/eb5ff9f0-dd0a-48dc-80ef-9a5bb164e784.png"
-    },
-    {
-      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/f92d94f7-a033-4886-b540-3e72ffad7e72.png",
-      "PackagePath": "staticwebassets/images/f92d94f7-a033-4886-b540-3e72ffad7e72.png"
-    },
-    {
-      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/test.png",
-      "PackagePath": "staticwebassets/images/test.png"
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/food.png",
+      "PackagePath": "staticwebassets/images/food.png"
     },
     {
       "Id": "obj/Debug/net6.0/staticwebassets/msbuild.Chef.Microsoft.AspNetCore.StaticWebAssets.props",
