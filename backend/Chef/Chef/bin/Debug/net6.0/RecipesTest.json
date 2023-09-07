@@ -37,83 +37,21 @@
     "Favourite": true
   },
   {
-    "Id": "1eb4119c-73ad-4ab1-b43c-63468c71a599",
-    "Name": "Test recipe",
-    "Date": "0001-01-01T00:00:00",
-    "Time": "12 mins",
-    "Description": "test description",
+    "Id": "9fcbee2e-4e3d-46a5-a796-289fec309e37",
+    "Name": "This is a test recipe",
+    "Date": "2023-09-07T00:11:59.704275-06:00",
+    "Time": "213 mins",
+    "Description": "This is a description",
     "Instructions": [
-      "First instructon",
-      "Second instruction",
-      "Third instruction"
+      "Cut veggies",
+      "Add soup"
     ],
     "Tags": [
-      "easy",
-      "dessert",
-      "dinner",
-      "breakfast",
       "quick",
-      "lunch",
-      "brunch",
-      "drinks"
-    ],
-    "Image": "https://localhost:7091/images/1eab8cd6-1603-4e62-896b-2150e09ea6d4.png",
-    "Favourite": true
-  },
-  {
-    "Id": "3c88b71f-c031-4074-ad69-b106c8027700",
-    "Name": "Test",
-    "Date": "0001-01-01T00:00:00",
-    "Time": "asdfas",
-    "Description": "asdf",
-    "Instructions": [
-      "asdf"
-    ],
-    "Tags": [
       "asian",
-      "quick"
+      "dessert"
     ],
-    "Image": "https://localhost:7091/images/2ba821ac-16bd-4893-a3c2-3d0c45b39810.png",
+    "Image": "https://localhost:7091/images/20c50206-13c7-431f-8456-604454d91208.png",
     "Favourite": true
-  },
-  {
-    "Id": "e4cbb3bd-3e6b-47b8-93eb-15d2074a4143",
-    "Name": "Test recipe",
-    "Date": "0001-01-01T00:00:00",
-    "Time": "123 mins",
-    "Description": "new Description",
-    "Instructions": [
-      "First Step",
-      "Second Step"
-    ],
-    "Tags": [
-      "dessert",
-      "easy",
-      "dinner",
-      "breakfast",
-      "lunch"
-    ],
-    "Image": "https://localhost:7091/images/976f5652-5f49-4713-b421-9c8cfb867700.png",
-    "Favourite": false
-  },
-  {
-    "Id": "bf2a5f48-290b-40f7-8e00-63cc1ce45b79",
-    "Name": "Test",
-    "Date": "0001-01-01T00:00:00",
-    "Time": "12 mins",
-    "Description": "test",
-    "Instructions": [
-      "sdklfjalksdfjlksdf",
-      "aksdjfkasjfksdfa",
-      "asdfasdfasdfasdf",
-      "fsdfasdfasdf"
-    ],
-    "Tags": [
-      "dessert",
-      "easy",
-      "dinner"
-    ],
-    "Image": "https://localhost:7091/images/b047e2ff-d9e8-4d3a-bce6-a4ac1698a4bb.png",
-    "Favourite": false
   }
 ]

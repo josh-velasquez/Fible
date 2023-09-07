@@ -78,7 +78,7 @@ const Recipe: React.FC = (): JSX.Element => {
                     <Label
                       key={recipe.tags.indexOf(tag)}
                       color="olive"
-                      size="mini"
+                      size="medium"
                     >
                       {tag}
                     </Label>
@@ -104,11 +104,11 @@ const Recipe: React.FC = (): JSX.Element => {
                 Delete Recipe
               </Button>
             </Grid.Row>
-            {/* TODO: Update this with a better icon */}
             {recipe.favourite && (
-              <Grid.Row>
+              <Button color="red">
                 <Icon name="heart" />
-              </Grid.Row>
+                Favourite
+              </Button>
             )}
             <Grid.Row>
               <Button size="tiny" color="green">
