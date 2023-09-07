@@ -51,11 +51,11 @@ const FavouritesList: React.FC<FavouritesListProps> = ({ recipesData }) => {
         horizontal
         size="big"
         style={{
-          maxHeight: 600,
+          maxHeight: 700,
           backgroundColor: "#e9edc9",
           overflowY: "scroll",
           paddingTop: 20,
-          padding: 20,
+          padding: 10,
         }}
       >
         {favouritesList.map((recipe: RecipeInfo) => {
@@ -70,19 +70,23 @@ const FavouritesList: React.FC<FavouritesListProps> = ({ recipesData }) => {
                 <Card.Content>
                   <Card.Header>{recipe.name}</Card.Header>
                   <Card.Meta>
-                    {recipe.tags
-                      .slice(0, MAX_TAGS_TO_DISPLAY)
-                      .map((tag, index) => (
-                        <>
-                          <Label key={tag} color="olive" size="mini">
-                            {tag}
-                          </Label>
-                          {index === MAX_TAGS_TO_DISPLAY - 1 &&
-                            recipe.tags.length > MAX_TAGS_TO_DISPLAY && (
-                              <span>...</span>
-                            )}
-                        </>
-                      ))}
+                    <Container
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      {recipe.tags
+                        .slice(0, MAX_TAGS_TO_DISPLAY)
+                        .map((tag, index) => (
+                          <div key={index}>
+                            <Label key={tag} color="olive" size="mini">
+                              {tag}
+                            </Label>
+                            {index === MAX_TAGS_TO_DISPLAY - 1 &&
+                              recipe.tags.length > MAX_TAGS_TO_DISPLAY && (
+                                <span>...</span>
+                              )}
+                          </div>
+                        ))}
+                    </Container>
                   </Card.Meta>
                   <Card.Description>
                     {concatDescription(recipe.description)}

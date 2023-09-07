@@ -58,7 +58,8 @@ namespace Chef.Util
                 List<Recipe> recipesList = recipes.ToList();
 
 				Recipe recipeToDelete = recipesList.FirstOrDefault(recipe => recipe.Id == recipeId);
-				if (recipeToDelete != null)
+                // TODO: Delete image first then the whole thing in the array
+                if (recipeToDelete != null)
 				{
 					recipesList.Remove(recipeToDelete);
                     Recipe[] updatedRecipe = recipesList.ToArray();

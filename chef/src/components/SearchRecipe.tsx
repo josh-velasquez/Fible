@@ -25,7 +25,7 @@ const SearchRecipe: React.FC = () => {
   ) => {
     if (data.result !== undefined) {
       const recipe = data.result as RecipeDropdown;
-      navigate(`/recipe/${recipe.id}`);
+      navigate(`/recipe/${recipe.id}`, { replace: true });
     }
   };
 

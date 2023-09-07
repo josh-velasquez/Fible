@@ -44,7 +44,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
         <Button basic color="red" inverted onClick={handleNoClick}>
           <Icon name="remove" /> No
         </Button>
-        <Button color="green" inverted onClick={onDelete}>
+        <Button color="red" inverted onClick={onDelete}>
           <Icon name="checkmark" /> Yes
         </Button>
       </Modal.Actions>

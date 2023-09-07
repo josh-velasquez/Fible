@@ -72,9 +72,23 @@ const AddRecipe: React.FC = () => {
     }
   };
 
-  const onAddInstructionClick = () => {
-    if (instruction !== undefined) {
-      setInstructions(instructions.concat(instruction));
+  const onEnterInstructionPress = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      updateInstructions();
+    }
+  };
+
+  const updateInstructions = (
+    event?: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    if (event) {
+      event.preventDefault();
+    }
+    if (instruction !== "") {
+      setInstructions([...instructions, instruction]);
       setInstruction("");
     }
   };
@@ -119,7 +133,7 @@ const AddRecipe: React.FC = () => {
 
   useEffect(() => {
     if (!loading && !error && recipeInfo) {
-      navigate(`/recipe/${recipeInfo.id}`);
+      navigate(`/recipe/${recipeInfo.id}`, { replace: true });
     }
   }, [recipeInfo, error, loading, navigate]);
 
@@ -157,10 +171,16 @@ const AddRecipe: React.FC = () => {
           <Form.Field>
             <Label>Instructions</Label>
             <Input
-              action={{ icon: "add", onClick: () => onAddInstructionClick() }}
+              action={{
+                icon: "add",
+                onClick: (
+                  event: React.MouseEvent<HTMLInputElement, MouseEvent>
+                ) => updateInstructions(event),
+              }}
               placeholder="Add recipe..."
               value={instruction}
               onChange={(e) => setInstruction(e.target.value)}
+              onKeyPress={onEnterInstructionPress}
             />
             {instructions.length !== 0 && (
               <Segment>
@@ -209,6 +229,7 @@ const AddRecipe: React.FC = () => {
               onResetImage={onResetImage}
               onUploadImage={onUploadImage}
             />
+            {/* TODO: add link instead for url */}
           </Form.Field>
           <Form.Field>
             <Checkbox

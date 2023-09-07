@@ -1,5 +1,6 @@
 import {
   Button,
+  ButtonProps,
   Checkbox,
   Container,
   Divider,
@@ -29,12 +30,13 @@ const Recipe: React.FC = (): JSX.Element => {
 
   const { id } = useParams<string>();
 
-  const editRecipe = () => {
+  const editRecipe = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    data: ButtonProps
+  ) => {
+    event.preventDefault();
     if (recipe) {
-      console.warn("ID: " + recipe.id);
-      // TODO: Navigating to edit recipe doesn't do anything just refreshes the page
-      navigate(`/editRecipe/${recipe.id}`);
-      // navigate("/");
+      navigate(`/editRecipe/${recipe.id}`, { replace: true });
     }
   };
 
@@ -52,14 +54,11 @@ const Recipe: React.FC = (): JSX.Element => {
   };
 
   useEffect(() => {
-    // console.warn("HERE RAN: " + JSON.stringify(recipesData));
     if (recipesData) {
       const recipe = recipesData.recipes.find(
         (recipe: RecipeInfo) => recipe.id === id
       );
       setRecipe(recipe);
-    } else {
-      // TODO: render stuff from local storage
     }
   }, [id, recipesData]);
 
@@ -105,7 +104,7 @@ const Recipe: React.FC = (): JSX.Element => {
                 Delete Recipe
               </Button>
             </Grid.Row>
-            {/* TODO: Updaate this with a better icon */}
+            {/* TODO: Update this with a better icon */}
             {recipe.favourite && (
               <Grid.Row>
                 <Icon name="heart" />

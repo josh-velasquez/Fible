@@ -23,10 +23,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { NewRecipeInfo, RecipeInfo } from "../state/actions";
 import { useActions } from "../hooks/useActions";
-import { getDataFromStorage } from "../utils/LocalStorageUtil";
 
 // TODO: Optimize this component as its the same as EditRecipe
-const EditRecipe: React.FC = () => {
+const EditRecipe: React.FC = (): JSX.Element => {
   const [recipeId, setRecipeId] = useState<string>("");
   const [recipeName, setRecipeName] = useState("");
   const [description, setDescription] = useState("");
@@ -41,6 +40,7 @@ const EditRecipe: React.FC = () => {
   const { recipeInfo, loading, error } = useTypedSelector(
     (state) => state.recipe
   );
+  const [updatedRecipe, setUpdatedRecipe] = useState<boolean>(false);
   const { updateRecipeApi } = useActions();
 
   const { id } = useParams<string>();
@@ -81,7 +81,21 @@ const EditRecipe: React.FC = () => {
     }
   };
 
-  const onAddInstructionClick = () => {
+  const onEnterInstructionPress = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      updateInstructions();
+    }
+  };
+
+  const updateInstructions = (
+    event?: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    if (event) {
+      event.preventDefault();
+    }
     if (instruction !== "") {
       setInstructions([...instructions, instruction]);
       setInstruction("");
@@ -130,6 +144,7 @@ const EditRecipe: React.FC = () => {
         image: image,
         imageUrl: currentImage,
       } as NewRecipeInfo);
+      setUpdatedRecipe(true);
     }
   };
 
@@ -151,16 +166,14 @@ const EditRecipe: React.FC = () => {
         setFavourite(recipe.favourite);
         setCurrentImage(recipe.image as string);
       }
-    } else {
-      // TODO: recipesData = getDataFromStorage("recipes");
     }
   }, [id, recipesData]);
 
   useEffect(() => {
-    if (!loading && !error && recipeInfo) {
-      navigate(`/recipe/${recipeInfo.id}`);
+    if (!loading && !error && recipeInfo && updatedRecipe) {
+      navigate(`/recipe/${recipeInfo.id}`, { replace: true });
     }
-  }, [recipeInfo, error, loading, navigate]);
+  }, [recipeInfo, error, loading, navigate, updatedRecipe]);
 
   // TODO: Add form validation before submission
   return (
@@ -199,13 +212,18 @@ const EditRecipe: React.FC = () => {
           <Form.Field>
             <Label>Instructions</Label>
             <Input
-              action={{ icon: "add", onClick: () => onAddInstructionClick() }}
+              action={{
+                icon: "add",
+                onClick: (
+                  event: React.MouseEvent<HTMLInputElement, MouseEvent>
+                ) => updateInstructions(event),
+              }}
               placeholder="Add recipe..."
               value={instruction}
               onChange={(e) => setInstruction(e.target.value)}
+              onKeyPress={onEnterInstructionPress}
             />
             {instructions.length !== 0 && (
-              // TODO: Prevent submit after pressing enter
               <Segment>
                 <List divided animated ordered>
                   {instructions.map((instruction: string, index: number) => {
@@ -266,6 +284,7 @@ const EditRecipe: React.FC = () => {
                 onResetImage={onResetImage}
                 onUploadImage={onUploadImage}
               />
+              // TODO: add link instead for url
             )}
           </Form.Field>
           <Form.Field>
