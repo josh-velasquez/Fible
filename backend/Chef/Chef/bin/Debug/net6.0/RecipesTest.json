@@ -53,5 +53,22 @@
     ],
     "Image": "https://localhost:7091/images/20c50206-13c7-431f-8456-604454d91208.png",
     "Favourite": true
+  },
+  {
+    "Id": "79d45d80-90fd-4e36-9711-32d287024a62",
+    "Name": "Test recipe",
+    "Date": "2023-09-10T02:14:24.370656-06:00",
+    "Time": "30 mins",
+    "Description": "Recipe description",
+    "Instructions": [
+      "Add this and that",
+      "Test this and that"
+    ],
+    "Tags": [
+      "quick",
+      "easy"
+    ],
+    "Image": "https://localhost:7091/images/b2b9f4cc-b3a1-403e-b508-272beb6b5e81.png",
+    "Favourite": true
   }
 ]
