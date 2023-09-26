@@ -10,10 +10,10 @@ import {
   List,
   ListItemProps,
 } from "semantic-ui-react";
-import { RecipeInfo, RecipesData } from "../state/actions";
+import { RecipeInfo } from "../state/actions";
 
 interface FavouritesListProps {
-  recipesData: RecipesData;
+  recipesData: RecipeInfo[];
 }
 
 const FavouritesList: React.FC<FavouritesListProps> = ({ recipesData }) => {
@@ -24,7 +24,7 @@ const FavouritesList: React.FC<FavouritesListProps> = ({ recipesData }) => {
 
   useEffect(() => {
     setFavouritesList(
-      recipesData.recipes.filter((recipe: RecipeInfo) => recipe.favourite)
+      recipesData.filter((recipe: RecipeInfo) => recipe.favourite)
     );
   }, [recipesData, setFavouritesList]);
 

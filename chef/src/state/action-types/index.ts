@@ -4,6 +4,12 @@ export enum ActionType {
   REQUEST_API_ERROR = "request_endpoint_error",
 }
 
+export enum TagsActionType {
+  REQUEST_TAGS_API = "request_tags_endpoint",
+  REQUEST_TAGS_API_SUCCESS = "request_tags_endpoint_success",
+  REQUEST_TAGS_API_ERROR = "request_tags_endpoint_error",
+}
+
 export enum RecipeActionType {
   REQUEST_RECIPE_API = "request_recipe_endpoint",
   REQUEST_RECIPE_API_SUCCESS = "request_recipe_endpoint_success",

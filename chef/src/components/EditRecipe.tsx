@@ -36,6 +36,7 @@ const EditRecipe: React.FC = (): JSX.Element => {
   const [favourite, setFavourite] = useState<boolean>(false);
   const [image, setImage] = useState<File>();
   const [currentImage, setCurrentImage] = useState<string>("");
+  const { tags } = useTypedSelector((state) => state.tags);
   const { recipesData } = useTypedSelector((state) => state.results);
   const { recipeInfo, loading, error } = useTypedSelector(
     (state) => state.recipe
@@ -72,7 +73,7 @@ const EditRecipe: React.FC = (): JSX.Element => {
     }
     if (typeof data.value === "object") {
       const newTags: number[] = data.value.map((index) => {
-        if (typeof index === "number" && recipesData) {
+        if (typeof index === "number" && tags) {
           return Number(index);
         }
         return -1;
@@ -114,7 +115,7 @@ const EditRecipe: React.FC = (): JSX.Element => {
   };
 
   const tagsOptions: DropdownItemProps[] = _.map(
-    recipesData?.tags,
+    tags,
     (keyword: string, index: number) => ({
       key: index,
       text: keyword,
@@ -150,12 +151,10 @@ const EditRecipe: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     if (recipesData) {
-      const recipe = recipesData.recipes.find(
-        (recipe: RecipeInfo) => recipe.id === id
-      );
-      if (recipe) {
-        const selectedTagIndices = recipe.tags.map((tag) =>
-          recipesData.tags.findIndex((option) => option === tag)
+      const recipe = recipesData.find((recipe: RecipeInfo) => recipe.id === id);
+      if (recipe && tags) {
+        const selectedTagIndices = tags.map((tag) =>
+          tags.findIndex((option) => option === tag)
         );
         setRecipeId(recipe.id);
         setRecipeName(recipe.name);
@@ -167,7 +166,7 @@ const EditRecipe: React.FC = (): JSX.Element => {
         setCurrentImage(recipe.image as string);
       }
     }
-  }, [id, recipesData]);
+  }, [id, recipesData, tags]);
 
   useEffect(() => {
     if (!loading && !error && recipeInfo && updatedRecipe) {

@@ -55,7 +55,7 @@ const Recipe: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     if (recipesData) {
-      const recipe = recipesData.recipes.find(
+      const recipe = recipesData.find(
         (recipe: RecipeInfo) => recipe.id === id
       );
       setRecipe(recipe);

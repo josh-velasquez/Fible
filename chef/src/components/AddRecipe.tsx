@@ -29,10 +29,12 @@ const AddRecipe: React.FC = () => {
   const [prepTime, setPrepTime] = useState("");
   const [instructions, setInstructions] = useState<string[]>([]);
   const [instruction, setInstruction] = useState<string>("");
-  const [tags, setTags] = useState<string[]>();
+  const [tagsList, setTagsList] = useState<string[]>();
   const [favourite, setFavourite] = useState<boolean>(false);
   const [image, setImage] = useState<File>();
-  const { recipesData } = useTypedSelector((state) => state.results);
+  const { tags } = useTypedSelector((state) => state.tags);
+
+  // after creating the new recipe this gets triggered
   const { recipeInfo, loading, error } = useTypedSelector(
     (state) => state.recipe
   );
@@ -63,12 +65,12 @@ const AddRecipe: React.FC = () => {
     }
     if (typeof data.value === "object") {
       const newTags: string[] = data.value.map((index) => {
-        if (typeof index === "number" && recipesData) {
-          return recipesData.tags[index];
+        if (typeof index === "number" && tags) {
+          return tags[index];
         }
         return "";
       });
-      setTags(newTags);
+      setTagsList(newTags);
     }
   };
 
@@ -105,7 +107,7 @@ const AddRecipe: React.FC = () => {
   };
 
   const tagsOptions: DropdownItemProps[] = _.map(
-    recipesData?.tags,
+    tags,
     (keyword: string, index: number) => ({
       key: index,
       text: keyword,
@@ -116,13 +118,13 @@ const AddRecipe: React.FC = () => {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onResetImage();
-    if (image !== undefined && tags !== undefined) {
+    if (image !== undefined && tagsList !== undefined) {
       createNewRecipeApi({
         name: recipeName,
         description: description,
         time: prepTime,
         instructions: instructions,
-        tags: tags,
+        tags: tagsList,
         favourite: favourite,
         image: image,
         // TODO: Fix this on BE? I think the image is not being checked properly

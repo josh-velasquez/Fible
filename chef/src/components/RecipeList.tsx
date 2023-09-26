@@ -10,10 +10,10 @@ import {
   PaginationProps,
 } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
-import { RecipeInfo, RecipesData } from "../state/actions";
+import { RecipeInfo } from "../state/actions";
 
 interface RecipeListProps {
-  recipesData: RecipesData;
+  recipesData: RecipeInfo[];
 }
 
 const RecipeList: React.FC<RecipeListProps> = ({ recipesData }) => {
@@ -39,17 +39,17 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipesData }) => {
       const start =
         paginationData.activePage * MAX_RECIPES_PER_PAGE - MAX_RECIPES_PER_PAGE;
       const end = paginationData.activePage * MAX_RECIPES_PER_PAGE;
-      const recipeCopy = JSON.parse(JSON.stringify(recipesData.recipes));
+      const recipeCopy = JSON.parse(JSON.stringify(recipesData));
       setActiveRecipeList(recipeCopy.splice(start, end - start));
     }
   };
 
   useEffect(() => {
     const totalPageCount = Math.ceil(
-      recipesData.recipes.length / MAX_RECIPES_PER_PAGE
+      recipesData.length / MAX_RECIPES_PER_PAGE
     );
     setTotalPages(totalPageCount);
-    const recipesCopy = JSON.parse(JSON.stringify(recipesData.recipes));
+    const recipesCopy = JSON.parse(JSON.stringify(recipesData));
     const activeRecipes = recipesCopy.splice(0, MAX_RECIPES_PER_PAGE);
     setActiveRecipeList(activeRecipes);
   }, [recipesData, setTotalPages]);

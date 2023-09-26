@@ -64,7 +64,7 @@ const SearchRecipe: React.FC = () => {
 
   useEffect(() => {
     if (recipesData) {
-      setRecipes(recipesData.recipes);
+      setRecipes(recipesData);
     }
   }, [recipesData]);
 

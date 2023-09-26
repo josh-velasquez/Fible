@@ -9,10 +9,11 @@ const Chef: React.FC = () => {
   const { recipesData, error, loading } = useTypedSelector(
     (state) => state.results
   );
-  const { getRecipeListApi } = useActions();
+  const { getRecipeListApi2 } = useActions();
 
   useEffect(() => {
-    getRecipeListApi();
+    // getRecipeListApi();
+    getRecipeListApi2();
   }, []);
 
   return (

@@ -1,16 +1,16 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { ActionType, RecipeActionType } from "../action-types";
+import { ActionType, RecipeActionType, TagsActionType } from "../action-types";
 import {
   RecipesAction,
   RecipeAction,
-  RecipesData,
   NewRecipeInfo,
+  RecipeInfo,
+  TagsAction,
 } from "../actions";
 import serverConfig from "../../serverConfig.json";
-import { saveToLocalStorage } from "../../utils/LocalStorageUtil";
 
-export const getRecipeListApi = (): ((
+export const getRecipeListApi2 = (): ((
   dispatch: Dispatch<RecipesAction>
 ) => Promise<void>) => {
   return async (dispatch: Dispatch<RecipesAction>): Promise<void> => {
@@ -19,14 +19,40 @@ export const getRecipeListApi = (): ((
     });
     try {
       const { data } = await axios.get(
-        `${serverConfig.serverBaseUrl}/api/chef`
+        `${serverConfig.serverBaseUrl}/api/chef/recipes`
       );
-      const recipesData = JSON.parse(JSON.stringify(data)) as RecipesData;
+      // TODO: fix tags list and isntruction to be a string array on the database -- should work
+      const recipesData = JSON.parse(JSON.stringify(data));
+      const recipeInfoList = recipesData.map((recipe: any) => {
+        return {
+          id: recipe.id,
+          name: recipe.name,
+          time: recipe.time,
+          description: recipe.description,
+          instructions: recipe.instruction.split(","),
+          tags: recipe.tags.split(","),
+          image: recipe.image,
+          favourite: recipe.favourite,
+        } as RecipeInfo;
+      });
+      // const recipesData = [
+      //   {
+      //     id: "1",
+      //     name: "Kims tiddies",
+      //     date: "2121",
+      //     time: "kims dogs",
+      //     description: "Kims dogs are litty as a kitty",
+      //     instructions: ["take kims dogs out", "eat kims dogs"],
+      //     tags: ["hot", "not"],
+      //     image: undefined,
+      //     favourite: true,
+      //   },
+      // ];
+      console.warn("TEST: " + JSON.stringify(recipesData));
       dispatch({
         type: ActionType.REQUEST_API_SUCCESS,
         payload: recipesData,
       });
-      saveToLocalStorage("recipes", JSON.stringify(recipesData));
     } catch (error: any) {
       dispatch({
         type: ActionType.REQUEST_API_ERROR,
@@ -35,6 +61,58 @@ export const getRecipeListApi = (): ((
     }
   };
 };
+
+export const getTagsListApi = (): ((
+  dispatch: Dispatch<TagsAction>
+) => Promise<void>) => {
+  return async (dispatch: Dispatch<TagsAction>): Promise<void> => {
+    dispatch({
+      type: TagsActionType.REQUEST_TAGS_API,
+    });
+
+    try {
+      const { data } = await axios.get(
+        `${serverConfig.serverBaseUrl}/api/chef/tags`
+      );
+      const tags = JSON.parse(JSON.stringify(data)) as string[];
+      dispatch({
+        type: TagsActionType.REQUEST_TAGS_API_SUCCESS,
+        payload: tags,
+      });
+    } catch (error: any) {
+      dispatch({
+        type: TagsActionType.REQUEST_TAGS_API_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+// export const getRecipeListApi = (): ((
+//   dispatch: Dispatch<RecipesAction>
+// ) => Promise<void>) => {
+//   return async (dispatch: Dispatch<RecipesAction>): Promise<void> => {
+//     dispatch({
+//       type: ActionType.REQUEST_API,
+//     });
+//     try {
+//       const { data } = await axios.get(
+//         `${serverConfig.serverBaseUrl}/api/chef`
+//       );
+//       const recipesData = JSON.parse(JSON.stringify(data)) as RecipesData;
+//       dispatch({
+//         type: ActionType.REQUEST_API_SUCCESS,
+//         payload: recipesData,
+//       });
+//       saveToLocalStorage("recipes", JSON.stringify(recipesData));
+//     } catch (error: any) {
+//       dispatch({
+//         type: ActionType.REQUEST_API_ERROR,
+//         payload: error.message,
+//       });
+//     }
+//   };
+// };
 
 export const createNewRecipeApi = (
   newRecipeInfo: NewRecipeInfo
@@ -68,7 +146,7 @@ export const createNewRecipeApi = (
         type: RecipeActionType.REQUEST_RECIPE_API_SUCCESS,
         payload: newRecipe,
       });
-      await getRecipeListApi()(dispatch);
+      await getRecipeListApi2()(dispatch);
     } catch (error: any) {
       dispatch({
         type: RecipeActionType.REQUEST_RECIPE_API_ERROR,
@@ -114,7 +192,7 @@ export const updateRecipeApi = (
         type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_SUCCESS,
         payload: newRecipe,
       });
-      await getRecipeListApi()(dispatch);
+      await getRecipeListApi2()(dispatch);
     } catch (error: any) {
       dispatch({
         type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_ERROR,
@@ -140,7 +218,7 @@ export const deleteRecipeApi = (
         type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_SUCCESS,
         payload: newRecipe,
       });
-      await getRecipeListApi()(dispatch);
+      await getRecipeListApi2()(dispatch);
     } catch (error: any) {
       dispatch({
         type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_ERROR,

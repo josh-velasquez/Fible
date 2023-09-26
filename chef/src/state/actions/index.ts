@@ -1,19 +1,25 @@
-import { ActionType, RecipeActionType } from "../action-types";
+import { ActionType, RecipeActionType, TagsActionType } from "../action-types";
 
-export interface RecipesData {
-  id: string;
-  date: string;
-  recipes: RecipeInfo[];
-  tags: string[];
+interface RequestTagsApiAction {
+  type: TagsActionType.REQUEST_TAGS_API;
 }
 
+interface RequestTagsApiActionSuccess {
+  type: TagsActionType.REQUEST_TAGS_API_SUCCESS;
+  payload: string[];
+}
+
+interface RequestTagsApiActionError {
+  type: TagsActionType.REQUEST_TAGS_API_ERROR;
+  payload: string;
+}
 interface RequestApiAction {
   type: ActionType.REQUEST_API;
 }
 
 interface RequestApiSuccessAction {
   type: ActionType.REQUEST_API_SUCCESS;
-  payload: RecipesData;
+  payload: RecipeInfo[];
 }
 
 interface RequestApiErrorAction {
@@ -80,6 +86,11 @@ export type RecipeAction =
   | RequestUpdateRecipeApiAction
   | RequestUpdateRecipeApiSuccessAction
   | RequestUpdateRecipeApiErrorAction;
+
+export type TagsAction =
+  | RequestTagsApiAction
+  | RequestTagsApiActionSuccess
+  | RequestTagsApiActionError;
 
 export type RecipesAction =
   | RequestApiAction
