@@ -43,6 +43,8 @@ const FavouritesList: React.FC<FavouritesListProps> = ({ recipesData }) => {
     navigate(`/recipe/${event.currentTarget.id}`);
   };
 
+  
+
   return (
     <Container textAlign="center">
       <Header textAlign="center">Favourites List</Header>
