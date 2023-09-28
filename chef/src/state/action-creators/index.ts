@@ -51,7 +51,7 @@ export const getRecipeListApi2 = (): ((
       console.warn("TEST: " + JSON.stringify(recipesData));
       dispatch({
         type: ActionType.REQUEST_API_SUCCESS,
-        payload: recipesData,
+        payload: data,
       });
     } catch (error: any) {
       dispatch({

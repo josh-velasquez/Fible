@@ -1,20 +1,14 @@
-using Chef.Data;
-using Microsoft.EntityFrameworkCore;
+using Chef;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+
 
 internal class Program
 {
     private static void Main(string[] args)
     {
+
         var builder = WebApplication.CreateBuilder(args);
-
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        {
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-        }
-        );
-
         builder.Host.UseSerilog();
 
         const string CORSPOLICY = "chefPolicy";
@@ -23,6 +17,17 @@ internal class Program
         {
             // only accepts JSON objects
             option.ReturnHttpNotAcceptable = true;
+        });
+
+        builder.Services.AddSingleton(provider =>
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string fullFilePath = Path.Combine(currentDirectory, "chefdatabase.db");
+
+            string connectionString = $"Data Source={fullFilePath}";
+            var chefDatabase = new ChefDatabase(connectionString);
+            chefDatabase.CreateTable();
+            return chefDatabase;
         });
 
 #if !DEBUG
