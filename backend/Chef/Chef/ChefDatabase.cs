@@ -155,6 +155,7 @@ namespace Chef
                         {
                             var recipe = new RecipeData
                             {
+                                Id = reader.GetInt32(0).ToString(),
                                 Name = reader.GetString(1),
                                 Time = reader.GetString(2),
                                 Description = reader.GetString(3),

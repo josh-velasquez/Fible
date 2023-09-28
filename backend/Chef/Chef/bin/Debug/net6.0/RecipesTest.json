@@ -1,0 +1,28 @@
+﻿[
+  {
+    "id": "93457EEC-7E8E-4DDD-9951-A8528D8BF146",
+    "name": "Mac and cheese",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "This is how you make mac and cheese",
+    "instructions": [ "First step", "Second step" ],
+    "tags": [ "breakfast", "snack", "easy" ],
+    "image": "https://localhost:7091/images/food.png",
+    "favourite": true
+  },
+  {
+    "id": "240D7C7F-3EE8-44BB-B769-2843CC0BA9CC",
+    "name": "Chow mein",
+    "date": "2023-05-04",
+    "time": "20 mins",
+    "description": "Very tasty noodles",
+    "instructions": [
+      "First step",
+      "Second step",
+      "Third step"
+    ],
+    "tags": [ "asian", "quick", "dinner" ],
+    "image": "https://localhost:7091/images/food.png",
+    "favourite": true
+  }
+]

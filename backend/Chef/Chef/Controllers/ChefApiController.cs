@@ -109,13 +109,14 @@ namespace Chef.Controllers
                     Name = recipe.Name,
                     Time = recipe.Time,
                     Description = recipe.Description,
-                    Instructions = recipe.Instructions,
-                    Tags = recipe.Tags,
+                    // TODO: Clean this up into a helper instead
+                    Instructions = recipe.Instructions.Replace("\"", "").Replace("[", "").Replace("]", ""),
+                    Tags = recipe.Tags.Replace("\"", "").Replace("[", "").Replace("]", ""),
                     ImageUrl = payloadImageUrl,
                     Favourite = recipe.Favourite
                 };
                 _chefDatabase.CreateRecipe(newRecipe);
-
+                // TODO: create the recipe then get the newly added recipe instead so we can have a valid id
                 return newRecipe;
             }
             catch (Exception ex)
@@ -124,11 +125,10 @@ namespace Chef.Controllers
             }
         }
 
-        [HttpPut("update-recipe/:recipeId")]
+        [HttpPut("update-recipe/{recipeId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<RecipeData> UpdateRecipe(FrontEndPayloadRecipe recipe)
         {
-            Console.WriteLine("Here");
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
             try
             {
@@ -165,24 +165,7 @@ namespace Chef.Controllers
         }
 
 
-        [HttpGet("kim")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<string> Huh(string isKimHot)
-        {
-            if (isKimHot == "yes")
-            {
-                return "Yes indeed she has nice boobas!";
-            }
-            else if (isKimHot == "no")
-            {
-                return "Jew wrong she has nice boobas";
-            }
-            return ":(";
-        }
-
-
-
-        [HttpDelete("delete-recipe")]
+        [HttpDelete("delete-recipe/{recipeId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<string> DeleteRecipe(int recipeId)
         {
@@ -201,7 +184,7 @@ namespace Chef.Controllers
             }
         }
 
-        [HttpDelete("delete-tag")]
+        [HttpDelete("delete-tag/{tagId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<string> DeleteTag(int tagId)
         {

@@ -56,7 +56,6 @@ export interface NewRecipeInfo {
 export interface RecipeInfo {
   id: string;
   name: string;
-  date: string;
   time: string;
   description: string;
   instructions: string[];

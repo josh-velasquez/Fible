@@ -1,0 +1,49 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/.DS_Store",
+      "PackagePath": "staticwebassets/.DS_Store"
+    },
+    {
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/.DS_Store",
+      "PackagePath": "staticwebassets/images/.DS_Store"
+    },
+    {
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/20c50206-13c7-431f-8456-604454d91208.png",
+      "PackagePath": "staticwebassets/images/20c50206-13c7-431f-8456-604454d91208.png"
+    },
+    {
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/b2b9f4cc-b3a1-403e-b508-272beb6b5e81.png",
+      "PackagePath": "staticwebassets/images/b2b9f4cc-b3a1-403e-b508-272beb6b5e81.png"
+    },
+    {
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/f89058d5-71bc-4b4e-b2c9-418ae09ed68c.png",
+      "PackagePath": "staticwebassets/images/f89058d5-71bc-4b4e-b2c9-418ae09ed68c.png"
+    },
+    {
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/fb801f52-68d2-4a2d-8056-c03d704d8e50.png",
+      "PackagePath": "staticwebassets/images/fb801f52-68d2-4a2d-8056-c03d704d8e50.png"
+    },
+    {
+      "Id": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/food.png",
+      "PackagePath": "staticwebassets/images/food.png"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.Chef.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.build.Chef.props",
+      "PackagePath": "build\\Chef.props"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.Chef.props",
+      "PackagePath": "buildMultiTargeting\\Chef.props"
+    },
+    {
+      "Id": "obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.Chef.props",
+      "PackagePath": "buildTransitive\\Chef.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

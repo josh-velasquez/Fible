@@ -10,7 +10,7 @@ import {
 } from "../actions";
 import serverConfig from "../../serverConfig.json";
 
-export const getRecipeListApi2 = (): ((
+export const getRecipeListApi = (): ((
   dispatch: Dispatch<RecipesAction>
 ) => Promise<void>) => {
   return async (dispatch: Dispatch<RecipesAction>): Promise<void> => {
@@ -21,37 +21,24 @@ export const getRecipeListApi2 = (): ((
       const { data } = await axios.get(
         `${serverConfig.serverBaseUrl}/api/chef/recipes`
       );
-      // TODO: fix tags list and isntruction to be a string array on the database -- should work
       const recipesData = JSON.parse(JSON.stringify(data));
-      const recipeInfoList = recipesData.map((recipe: any) => {
+      const recipeInfoList: RecipeInfo[] = recipesData.map((recipe: any) => {
+        const recipeJSON = JSON.parse(JSON.stringify(recipe));
         return {
-          id: recipe.id,
-          name: recipe.name,
-          time: recipe.time,
-          description: recipe.description,
-          instructions: recipe.instruction.split(","),
-          tags: recipe.tags.split(","),
-          image: recipe.image,
-          favourite: recipe.favourite,
+          id: recipeJSON.id,
+          name: recipeJSON.name,
+          time: recipeJSON.time,
+          description: recipeJSON.description,
+          instructions: recipeJSON.instructions.split(","),
+          tags: recipeJSON.tags.split(","),
+          // TODO: Fix this to switch between
+          image: recipeJSON.image ?? recipeJSON.imageUrl,
+          favourite: recipeJSON.favourite,
         } as RecipeInfo;
       });
-      // const recipesData = [
-      //   {
-      //     id: "1",
-      //     name: "Kims tiddies",
-      //     date: "2121",
-      //     time: "kims dogs",
-      //     description: "Kims dogs are litty as a kitty",
-      //     instructions: ["take kims dogs out", "eat kims dogs"],
-      //     tags: ["hot", "not"],
-      //     image: undefined,
-      //     favourite: true,
-      //   },
-      // ];
-      console.warn("TEST: " + JSON.stringify(recipesData));
       dispatch({
         type: ActionType.REQUEST_API_SUCCESS,
-        payload: data,
+        payload: recipeInfoList,
       });
     } catch (error: any) {
       dispatch({
@@ -82,6 +69,32 @@ export const getTagsListApi = (): ((
     } catch (error: any) {
       dispatch({
         type: TagsActionType.REQUEST_TAGS_API_ERROR,
+        payload: error.message,
+      });
+    }
+  };
+};
+
+export const deleteRecipeApi = (
+  recipeId: string
+): ((dispatch: Dispatch<RecipeAction>) => Promise<void>) => {
+  return async (dispatch: Dispatch<RecipeAction>): Promise<void> => {
+    dispatch({
+      type: RecipeActionType.REQUEST_UPDATE_RECIPE_API,
+    });
+    try {
+      const { data } = await axios.delete(
+        `${serverConfig.serverBaseUrl}/api/chef/delete-recipe/${recipeId}`
+      );
+      const newRecipe = JSON.parse(JSON.stringify(data));
+      dispatch({
+        type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_SUCCESS,
+        payload: newRecipe,
+      });
+      await getRecipeListApi()(dispatch);
+    } catch (error: any) {
+      dispatch({
+        type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_ERROR,
         payload: error.message,
       });
     }
@@ -146,7 +159,7 @@ export const createNewRecipeApi = (
         type: RecipeActionType.REQUEST_RECIPE_API_SUCCESS,
         payload: newRecipe,
       });
-      await getRecipeListApi2()(dispatch);
+      await getRecipeListApi()(dispatch);
     } catch (error: any) {
       dispatch({
         type: RecipeActionType.REQUEST_RECIPE_API_ERROR,
@@ -192,33 +205,7 @@ export const updateRecipeApi = (
         type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_SUCCESS,
         payload: newRecipe,
       });
-      await getRecipeListApi2()(dispatch);
-    } catch (error: any) {
-      dispatch({
-        type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_ERROR,
-        payload: error.message,
-      });
-    }
-  };
-};
-
-export const deleteRecipeApi = (
-  recipeId: string
-): ((dispatch: Dispatch<RecipeAction>) => Promise<void>) => {
-  return async (dispatch: Dispatch<RecipeAction>): Promise<void> => {
-    dispatch({
-      type: RecipeActionType.REQUEST_UPDATE_RECIPE_API,
-    });
-    try {
-      const { data } = await axios.delete(
-        `${serverConfig.serverBaseUrl}/api/chef/delete-recipe?id=${recipeId}`
-      );
-      const newRecipe = JSON.parse(JSON.stringify(data));
-      dispatch({
-        type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_SUCCESS,
-        payload: newRecipe,
-      });
-      await getRecipeListApi2()(dispatch);
+      await getRecipeListApi()(dispatch);
     } catch (error: any) {
       dispatch({
         type: RecipeActionType.REQUEST_UPDATE_RECIPE_API_ERROR,
