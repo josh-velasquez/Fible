@@ -109,14 +109,13 @@ namespace Chef.Controllers
                     Name = recipe.Name,
                     Time = recipe.Time,
                     Description = recipe.Description,
-                    // TODO: Clean this up into a helper instead
-                    Instructions = recipe.Instructions.Replace("\"", "").Replace("[", "").Replace("]", ""),
-                    Tags = recipe.Tags.Replace("\"", "").Replace("[", "").Replace("]", ""),
+                    Instructions = StringUtil.CleanStringArray(recipe.Instructions),
+                    Tags = StringUtil.CleanStringArray(recipe.Tags),
                     ImageUrl = payloadImageUrl,
                     Favourite = recipe.Favourite
                 };
-                _chefDatabase.CreateRecipe(newRecipe);
-                // TODO: create the recipe then get the newly added recipe instead so we can have a valid id
+                var latestCreatedRecipeId = _chefDatabase.CreateRecipe(newRecipe);
+                newRecipe.Id = latestCreatedRecipeId.ToString();
                 return newRecipe;
             }
             catch (Exception ex)
@@ -127,7 +126,7 @@ namespace Chef.Controllers
 
         [HttpPut("update-recipe/{recipeId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<RecipeData> UpdateRecipe(FrontEndPayloadRecipe recipe)
+        public ActionResult<RecipeData> UpdateRecipe(int recipeId, FrontEndPayloadRecipe recipe)
         {
             if (!ModelState.IsValid) { return BadRequest(ModelState); }
             try
@@ -154,8 +153,7 @@ namespace Chef.Controllers
                     Favourite = recipe.Favourite,
                     ImageUrl = payloadImageUrl,
                 };
-                // TODO: Update this id from the params
-                _chefDatabase.UpdateRecipe(2, recipeData);
+                _chefDatabase.UpdateRecipe(recipeId, recipeData);
                 return recipeData;
             }
             catch (Exception ex)
@@ -163,7 +161,6 @@ namespace Chef.Controllers
                 return BadRequest("Error: " + ex);
             }
         }
-
 
         [HttpDelete("delete-recipe/{recipeId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -173,8 +170,6 @@ namespace Chef.Controllers
 
             try
             {
-                // TODO: Update this to use Params instead
-                //Console.WriteLine("ID: " + recipeId);
                 _chefDatabase.DeleteRecipe(recipeId);
                 return Ok("Deleted recipe id: " + recipeId);
             }
@@ -202,157 +197,5 @@ namespace Chef.Controllers
                 return BadRequest("Error: " + ex);
             }
         }
-
-
-        //[HttpGet]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //public ActionResult<RecipePayload> GetRecipes()
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    try
-        //    {
-        //        // TODO: Update this to use local environment folder
-        //        string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
-        //        string recipesFile = System.IO.File.ReadAllText(recipesFilePath);
-        //        // TODO: Fix file path for tags list
-        //        string tagsFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TagsList.json");
-        //        string tagsFile = System.IO.File.ReadAllText(tagsFilePath);
-        //        if (!string.IsNullOrEmpty(recipesFile) || !string.IsNullOrEmpty(tagsFilePath))
-        //        {
-        //            Recipe[] recipes = JsonConvert.DeserializeObject<Recipe[]>(recipesFile) ?? Array.Empty<Recipe>();
-        //            string[] tags = JsonConvert.DeserializeObject<string[]>(tagsFile) ?? Array.Empty<string>();
-        //            return new RecipePayload
-        //            {
-        //                Id = Guid.NewGuid(),
-        //                Date = DateTime.Now,
-        //                Recipes = recipes.ToArray(),
-        //                Tags = tags
-        //            };
-        //        }
-        //    }
-        //    catch(IOException ex)
-        //    {
-        //        return BadRequest("Error: " + ex);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest("Error: " + ex);
-        //    } 
-        //    return BadRequest("Error.");
-        //}
-
-
-
-        //[HttpPost("create-recipe")]
-        //[ProducesResponseType(StatusCodes.Status202Accepted)]
-        //public ActionResult<Recipe> CreateRecipe([FromForm] FrontEndPayloadRecipe recipe)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    try
-        //    {
-        //        var payloadImageUrl = "";
-        //        if (recipe.Image != null)
-        //        {
-        //            // TODO: Fix this url (make sure its https)
-        //            payloadImageUrl = "https://localhost:7091/images/" + DataUtil.SaveImageToServer(imagesFolder, recipe.Image);
-        //        }
-        //        else if (recipe.ImageUrl != null)
-        //        {
-        //            // TODO: We can let user upload an image link from online (implement this on the FE)
-        //            payloadImageUrl = recipe.ImageUrl;
-        //        }
-
-        //        string[] instructions = recipe.Instructions.Split(";");
-        //        string[] tags = recipe.Tags.Split(";");
-        //        var newRecipe = new Recipe
-        //        {
-        //            Id = Guid.NewGuid(),
-        //            Name = recipe.Name,
-        //            Date = DateTime.Now,
-        //            Time = recipe.Time,
-        //            Description = recipe.Description,
-        //            Instructions = instructions,
-        //            Tags = tags,
-        //            Image = payloadImageUrl,
-        //            Favourite = recipe.Favourite,
-        //        };
-        //        // TODO: Update this folder to user the local environments folder
-        //        string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
-        //        DataUtil.SaveRecipeToJson(newRecipe, recipesFilePath);
-        //        return newRecipe;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest("Error: " + ex);
-        //    }
-        //}
-
-        //[HttpPut("update-recipe")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //public ActionResult<Recipe> UpdateRecipe(FrontEndPayloadRecipe recipe)
-        //{
-        //    if (!ModelState.IsValid) { return BadRequest(ModelState); }
-        //    try
-        //    {
-        //        var payloadImageUrl = "";
-        //        if (recipe.Image != null)
-        //        {
-        //            // TODO: Fix this url (make sure its https)
-        //            payloadImageUrl = "https://localhost:7091/images/" + DataUtil.SaveImageToServer(imagesFolder, recipe.Image);
-        //        }
-        //        else if (recipe.ImageUrl != null)
-        //        {
-        //            // TODO: We can let user upload an image link from online (implement this on the FE)
-        //            payloadImageUrl = recipe.ImageUrl;
-        //        }
-        //        string[] instructions = recipe.Instructions.Split(";");
-        //        string[] tags = recipe.Tags.Split(";");
-        //        //Guid.TryParse(recipe.Id, out Guid guidValue);
-        //        var updatedRecipe = new Recipe
-        //        {
-        //            //Id = guidValue,
-        //            Name = recipe.Name,
-        //            Time = recipe.Time,
-        //            Description = recipe.Description,
-        //            Instructions = instructions,
-        //            Tags = tags,
-        //            Favourite = recipe.Favourite,
-        //            Image = payloadImageUrl
-        //        };
-        //        string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
-        //        DataUtil.UpdateRecipe(updatedRecipe, recipesFilePath);
-        //        return updatedRecipe;
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        return BadRequest("Error: " + ex);
-        //    }
-        //}
-
-        //[HttpDelete("delete-recipe")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //public ActionResult<Recipe> DeleteRecipe(Guid id)
-        //{
-        //    if (!ModelState.IsValid) { return BadRequest(ModelState); }
-
-        //    try
-        //    {
-        //        string recipesFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RecipesTest.json");
-        //        DataUtil.DeleteRecipe(id, recipesFilePath);
-        //        return new Recipe();
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        return BadRequest("Error: " + ex);
-        //    }
-
-        //}
     }
 }

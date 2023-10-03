@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "m+DWjT/Dhz3+Gbtv097OTWRD3MtzmTNNK42krnOGpAM=",
+  "Hash": "YK0SD8wKfpqOwGpuGZGCceWJxVaC6sO3U0Zt4f4JRxk=",
   "Source": "Chef",
   "BasePath": "_content/Chef",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "Chef/wwwroot",
       "Source": "Chef",
-      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
+      "ContentRoot": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/",
       "BasePath": "_content/Chef",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/.DS_Store",
+      "Identity": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/.DS_Store",
       "SourceId": "Chef",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
+      "ContentRoot": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/",
       "BasePath": "_content/Chef",
       "RelativePath": ".DS_Store",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot/.DS_Store"
     },
     {
-      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/.DS_Store",
+      "Identity": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/images/.DS_Store",
       "SourceId": "Chef",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
+      "ContentRoot": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/",
       "BasePath": "_content/Chef",
       "RelativePath": "images/.DS_Store",
       "AssetKind": "All",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "wwwroot/images/.DS_Store"
     },
     {
-      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/20c50206-13c7-431f-8456-604454d91208.png",
+      "Identity": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/images/20c50206-13c7-431f-8456-604454d91208.png",
       "SourceId": "Chef",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
+      "ContentRoot": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/",
       "BasePath": "_content/Chef",
       "RelativePath": "images/20c50206-13c7-431f-8456-604454d91208.png",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot/images/20c50206-13c7-431f-8456-604454d91208.png"
     },
     {
-      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/b2b9f4cc-b3a1-403e-b508-272beb6b5e81.png",
+      "Identity": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/images/b2b9f4cc-b3a1-403e-b508-272beb6b5e81.png",
       "SourceId": "Chef",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
+      "ContentRoot": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/",
       "BasePath": "_content/Chef",
       "RelativePath": "images/b2b9f4cc-b3a1-403e-b508-272beb6b5e81.png",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot/images/b2b9f4cc-b3a1-403e-b508-272beb6b5e81.png"
     },
     {
-      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/f89058d5-71bc-4b4e-b2c9-418ae09ed68c.png",
+      "Identity": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/images/f89058d5-71bc-4b4e-b2c9-418ae09ed68c.png",
       "SourceId": "Chef",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
+      "ContentRoot": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/",
       "BasePath": "_content/Chef",
       "RelativePath": "images/f89058d5-71bc-4b4e-b2c9-418ae09ed68c.png",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot/images/f89058d5-71bc-4b4e-b2c9-418ae09ed68c.png"
     },
     {
-      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/fb801f52-68d2-4a2d-8056-c03d704d8e50.png",
+      "Identity": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/images/fb801f52-68d2-4a2d-8056-c03d704d8e50.png",
       "SourceId": "Chef",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
+      "ContentRoot": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/",
       "BasePath": "_content/Chef",
       "RelativePath": "images/fb801f52-68d2-4a2d-8056-c03d704d8e50.png",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot/images/fb801f52-68d2-4a2d-8056-c03d704d8e50.png"
     },
     {
-      "Identity": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/images/food.png",
+      "Identity": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/images/food.png",
       "SourceId": "Chef",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/wwwroot/",
+      "ContentRoot": "/Users/josh/Repositories/Chef/backend/Chef/Chef/wwwroot/",
       "BasePath": "_content/Chef",
       "RelativePath": "images/food.png",
       "AssetKind": "All",

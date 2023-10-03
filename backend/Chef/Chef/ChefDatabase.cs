@@ -40,21 +40,37 @@ namespace Chef
             }
         }
 
-        public void CreateRecipe(RecipeData recipe)
+        public int CreateRecipe(RecipeData recipe)
         {
             using (var command = new SqliteCommand())
             {
-                command.CommandText = "INSERT INTO Recipes (Name, Time, Description, Instructions, Tags, Image, Favourite) VALUES (@Name, @Time, @Description, @Instructions, @Tags, @Image, @Favourite)";
-                command.Parameters.AddWithValue("@Name", recipe.Name);
-                command.Parameters.AddWithValue("@Time", recipe.Time);
-                command.Parameters.AddWithValue("@Description", recipe.Description);
-                command.Parameters.AddWithValue("@Instructions", recipe.Instructions);
-                command.Parameters.AddWithValue("@Tags", recipe.Tags);
-                command.Parameters.AddWithValue("@Image", recipe.ImageUrl);
-                command.Parameters.AddWithValue("@Favourite", recipe.Favourite);
-                ExecuteDatabaseCommand(command);
-            }
+                using (var connection = new SqliteConnection(_connectionString))
+                {
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "INSERT INTO Recipes (Name, Time, Description, Instructions, Tags, Image, Favourite) VALUES (@Name, @Time, @Description, @Instructions, @Tags, @Image, @Favourite); SELECT last_insert_rowid();";
+                    command.Parameters.AddWithValue("@Name", recipe.Name);
+                    command.Parameters.AddWithValue("@Time", recipe.Time);
+                    command.Parameters.AddWithValue("@Description", recipe.Description);
+                    command.Parameters.AddWithValue("@Instructions", recipe.Instructions);
+                    command.Parameters.AddWithValue("@Tags", recipe.Tags);
+                    command.Parameters.AddWithValue("@Image", recipe.ImageUrl);
+                    command.Parameters.AddWithValue("@Favourite", recipe.Favourite);
 
+                    try
+                    {
+                        object? newRecipeId = command.ExecuteScalar();
+                        if (newRecipeId != null)
+                        {
+                            return Convert.ToInt32(newRecipeId);
+                        }
+                    } catch(Exception e)
+                    {
+                        Console.WriteLine("Exception: " + e.Message);
+                    }
+                }
+            }
+            return -1;
         }
 
         public void DeleteRecipe(int recipeId)
