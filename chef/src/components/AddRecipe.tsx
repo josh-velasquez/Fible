@@ -23,6 +23,12 @@ import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { NewRecipeInfo } from "../state/actions";
 
+enum ImageOptions {
+  ImageUpload = "Image Upload",
+  ImageUrl = "Image Url",
+  None = "None",
+}
+
 const AddRecipe: React.FC = () => {
   const [recipeName, setRecipeName] = useState("");
   const [description, setDescription] = useState("");
@@ -32,6 +38,10 @@ const AddRecipe: React.FC = () => {
   const [tagsList, setTagsList] = useState<string[]>();
   const [favourite, setFavourite] = useState<boolean>(false);
   const [image, setImage] = useState<File>();
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [selectedImageOption, setSelectedImageOption] = useState<ImageOptions>(
+    ImageOptions.None
+  );
   const { tags } = useTypedSelector((state) => state.tags);
 
   // after creating the new recipe this gets triggered
@@ -115,6 +125,35 @@ const AddRecipe: React.FC = () => {
     })
   );
 
+  const imageDropdownOptions: DropdownItemProps[] = _.map(
+    ImageOptions,
+    (keyword: string, index: string) => ({
+      key: index,
+      text: keyword,
+      value: index,
+    })
+  );
+
+  const onSelectImageUpload = (
+    _: React.SyntheticEvent<HTMLElement, Event>,
+    data: DropdownProps
+  ) => {
+    if (data.value === null) {
+      return;
+    }
+    if (typeof data.value === "string") {
+      const selectedValue = data.value as string;
+      const matchingEnumKey = Object.keys(ImageOptions).find(
+        (key) => key === selectedValue
+      );
+      if (matchingEnumKey) {
+        setSelectedImageOption(
+          ImageOptions[matchingEnumKey as keyof typeof ImageOptions]
+        );
+      }
+    }
+  };
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onResetImage();
@@ -126,9 +165,9 @@ const AddRecipe: React.FC = () => {
         instructions: instructions,
         tags: tagsList,
         favourite: favourite,
+        // TODO: Make this optional and fix which to check
         image: image,
-        // TODO: Fix this on BE? I think the image is not being checked properly
-        imageUrl: "",
+        imageUrl: imageUrl,
       } as NewRecipeInfo);
     }
   };
@@ -225,14 +264,39 @@ const AddRecipe: React.FC = () => {
             />
           </Form.Field>
           <Form.Field>
-            <Label>Upload image</Label>
-            <UploadImage
-              image={image}
-              onResetImage={onResetImage}
-              onUploadImage={onUploadImage}
+            <Label>Image</Label>
+            <Dropdown
+              placeholder="Select an Image"
+              className="icon input-styling"
+              floating
+              selectOnBlur={true}
+              labeled
+              defaultValue={0}
+              onChange={onSelectImageUpload}
+              selection
+              options={imageDropdownOptions}
             />
-            {/* TODO: add link instead for url */}
           </Form.Field>
+          {selectedImageOption === ImageOptions.ImageUpload ? (
+            <Form.Field>
+              <Label>Upload image</Label>
+              <UploadImage
+                image={image}
+                onResetImage={onResetImage}
+                onUploadImage={onUploadImage}
+              />
+            </Form.Field>
+          ) : selectedImageOption === ImageOptions.ImageUrl ? (
+            <Form.Field>
+              <Label>Image Url</Label>
+              <Input
+                placeholder="Image url"
+                onChange={(e) => setImageUrl(e.target.value)}
+              />
+            </Form.Field>
+          ) : (
+            <></>
+          )}
           <Form.Field>
             <Checkbox
               label="Add to my favourites!"

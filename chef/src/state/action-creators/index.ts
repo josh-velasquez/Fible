@@ -101,32 +101,6 @@ export const deleteRecipeApi = (
   };
 };
 
-// export const getRecipeListApi = (): ((
-//   dispatch: Dispatch<RecipesAction>
-// ) => Promise<void>) => {
-//   return async (dispatch: Dispatch<RecipesAction>): Promise<void> => {
-//     dispatch({
-//       type: ActionType.REQUEST_API,
-//     });
-//     try {
-//       const { data } = await axios.get(
-//         `${serverConfig.serverBaseUrl}/api/chef`
-//       );
-//       const recipesData = JSON.parse(JSON.stringify(data)) as RecipesData;
-//       dispatch({
-//         type: ActionType.REQUEST_API_SUCCESS,
-//         payload: recipesData,
-//       });
-//       saveToLocalStorage("recipes", JSON.stringify(recipesData));
-//     } catch (error: any) {
-//       dispatch({
-//         type: ActionType.REQUEST_API_ERROR,
-//         payload: error.message,
-//       });
-//     }
-//   };
-// };
-
 export const createNewRecipeApi = (
   newRecipeInfo: NewRecipeInfo
 ): ((dispatch: Dispatch<RecipeAction>) => Promise<void>) => {
@@ -144,6 +118,7 @@ export const createNewRecipeApi = (
       formData.append("tags", newRecipeInfo.tags.join(";"));
       formData.append("favourite", newRecipeInfo.favourite.toString());
       formData.append("image", newRecipeInfo.image ?? "");
+      formData.append("imageUrl", newRecipeInfo.imageUrl ?? "");
 
       const { data } = await axios.post(
         `${serverConfig.serverBaseUrl}/api/chef/create-recipe`,

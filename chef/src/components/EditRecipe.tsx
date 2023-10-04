@@ -283,7 +283,7 @@ const EditRecipe: React.FC = (): JSX.Element => {
                 onResetImage={onResetImage}
                 onUploadImage={onUploadImage}
               />
-              // TODO: add link instead for url
+              // TODO: add link instead for url -- this is implemented in the AddRecipe component
             )}
           </Form.Field>
           <Form.Field>
