@@ -4,6 +4,7 @@ import RecipeList from "./RecipeList";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
 import { Container, Dimmer, Loader, Segment } from "semantic-ui-react";
+import Timer from "./Timer";
 
 const Chef: React.FC = () => {
   const { recipesData, error, loading } = useTypedSelector(
@@ -17,7 +18,8 @@ const Chef: React.FC = () => {
 
   return (
     <Container style={{ paddingTop: "30px" }}>
-      {loading && (
+      <Timer startTime="10:00" />
+      {/* {loading && (
         <Segment style={{ padding: 50 }}>
           <Dimmer active inverted>
             <Loader>Fetching recipes...</Loader>
@@ -34,7 +36,7 @@ const Chef: React.FC = () => {
           <FavouritesList recipesData={recipesData} />
           <RecipeList recipesData={recipesData} />
         </>
-      )}
+      )} */}
     </Container>
   );
 };

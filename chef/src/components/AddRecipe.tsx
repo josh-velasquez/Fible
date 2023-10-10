@@ -142,7 +142,7 @@ const AddRecipe: React.FC = () => {
       return;
     }
     if (typeof data.value === "string") {
-      const selectedValue = data.value as string;
+      const selectedValue = data.value;
       const matchingEnumKey = Object.keys(ImageOptions).find(
         (key) => key === selectedValue
       );

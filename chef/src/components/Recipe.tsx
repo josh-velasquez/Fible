@@ -18,6 +18,7 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 import { RecipeInfo } from "../state/actions";
 import DeleteModal from "./DeleteModal";
 import { useActions } from "../hooks/useActions";
+import Timer from "./Timer";
 
 const Recipe: React.FC = (): JSX.Element => {
   const [recipe, setRecipe] = useState<RecipeInfo>();
@@ -55,9 +56,7 @@ const Recipe: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     if (recipesData) {
-      const recipe = recipesData.find(
-        (recipe: RecipeInfo) => recipe.id === id
-      );
+      const recipe = recipesData.find((recipe: RecipeInfo) => recipe.id === id);
       setRecipe(recipe);
     }
   }, [id, recipesData]);
@@ -111,6 +110,7 @@ const Recipe: React.FC = (): JSX.Element => {
               </Button>
             )}
             <Grid.Row>
+              <Timer startTime={recipe.time} />
               <Button size="tiny" color="green">
                 Start Cooking Timer
               </Button>
