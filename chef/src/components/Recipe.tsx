@@ -110,7 +110,7 @@ const Recipe: React.FC = (): JSX.Element => {
               </Button>
             )}
             <Grid.Row>
-              <Timer startTime={recipe.time} />
+              <Timer startTime={20} />
               <Button size="tiny" color="green">
                 Start Cooking Timer
               </Button>

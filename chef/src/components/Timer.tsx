@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 interface TimerProps {
-  startTime: string;
+  startTime: number;
 }
 const Timer: React.FC<TimerProps> = ({ startTime }) => {
   const WARNING_THRESHOLD = 10;
@@ -19,38 +19,46 @@ const Timer: React.FC<TimerProps> = ({ startTime }) => {
       threshold: ALERT_THRESHOLD,
     },
   };
-  const [time, setTime] = useState(startTime);
+  const [time, setTime] = useState<number>(startTime);
   const [timerColor, setTimerColor] = useState<string>(COLOR_CODES.info.color);
+  const [dashStroke, setDashStroke] = useState<string>("283 283");
+
+  useEffect(() => {
+    if (time <= COLOR_CODES.alert.threshold) {
+      setTimerColor(COLOR_CODES.alert.color);
+    } else if (time <= COLOR_CODES.warning.threshold) {
+      setTimerColor(COLOR_CODES.warning.color);
+    } else {
+      setTimerColor(COLOR_CODES.info.color);
+    }
+  }, [time]);
 
   useEffect(() => {
     // https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/
-  }, [time]);
+    const timeFraction = time / startTime;
+    const rawTimeFraction = timeFraction - (1 / startTime) * (1 - timeFraction);
+    const dashStroke = `${(rawTimeFraction * 283).toFixed(0)} 283`;
+    setDashStroke(dashStroke);
+  }, [time, startTime]);
 
   useEffect(() => {
     setInterval(() => {
-      setTime((prevTime) => {
-        const time = prevTime.split(":");
-        const minutes = parseInt(time[0]);
-        const seconds = parseInt(time[1]);
-        if (seconds === 0) {
-          if (minutes === 0) {
-            return prevTime;
-          } else {
-            return `${minutes - 1}:59`;
-          }
-        } else {
-          return `${minutes}:${seconds - 1}`;
-        }
-      });
-    });
+      setTime((time) => (time > 0 ? time - 1 : 0));
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    if (time === 0) {
+      alert("Time's up!");
+    }
   }, [time]);
 
-  const formatTime = (timeStr: string) => {
-    const time = parseInt(timeStr);
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
+  const formatTime = (timer: number) => {
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
     return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
   };
+
   return (
     <div className="base-timer">
       <svg
@@ -61,8 +69,9 @@ const Timer: React.FC<TimerProps> = ({ startTime }) => {
         <g className="base-timer__circle">
           <circle className="base-timer__path-elapsed" cx="50" cy="50" r="45" />
           <path
-            className={`base-timer__path-remaining ${timerColor}`}
-            strokeDasharray={283}
+            className={`base-timer__path-remaining`}
+            strokeDasharray={dashStroke}
+            stroke={timerColor}
             d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"
           ></path>
         </g>

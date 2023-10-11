@@ -18,7 +18,7 @@ const Chef: React.FC = () => {
 
   return (
     <Container style={{ paddingTop: "30px" }}>
-      <Timer startTime="10:00" />
+      <Timer startTime={5} />
       {/* {loading && (
         <Segment style={{ padding: 50 }}>
           <Dimmer active inverted>
