@@ -22,8 +22,6 @@ div.app {
 
 .base-timer {
   position: relative;
-  width: 300px;
-  height: 300px;
 }
 
 .base-timer__circle {
@@ -38,14 +36,11 @@ div.app {
 
 .base-timer__label {
   position: absolute;
-  width: 300px;
-  height: 300px;
   top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
-  color: #ffffff;
+  color: #000;
 }
 
 .base-timer__path-remaining {

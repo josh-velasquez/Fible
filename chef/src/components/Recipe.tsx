@@ -4,6 +4,9 @@ import {
   Checkbox,
   Container,
   Divider,
+  Dropdown,
+  DropdownItemProps,
+  DropdownProps,
   Grid,
   Header,
   Icon,
@@ -19,15 +22,33 @@ import { RecipeInfo } from "../state/actions";
 import DeleteModal from "./DeleteModal";
 import { useActions } from "../hooks/useActions";
 import Timer from "./Timer";
+import Stopwatch from "./Stopwatch";
+import _ from "lodash";
+
+enum TimeOptions {
+  None = "None",
+  Timer = "Timer",
+  Stopwatch = "Stopwatch",
+}
 
 const Recipe: React.FC = (): JSX.Element => {
   const [recipe, setRecipe] = useState<RecipeInfo>();
   const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   const { recipesData } = useTypedSelector((state) => state.results);
+  const [selectedTimeOption, setSelectedTimeOption] = useState<TimeOptions>(
+    TimeOptions.None
+  );
   let navigate = useNavigate();
   const { deleteRecipeApi } = useActions();
 
-  // TODO: Add timer here? We need to have an alarm set for baking etc...
+  const timerDropwdownOptions: DropdownItemProps[] = _.map(
+    TimeOptions,
+    (value: string, key: string) => ({
+      key: key,
+      text: value,
+      value: key,
+    })
+  );
 
   const { id } = useParams<string>();
 
@@ -54,6 +75,40 @@ const Recipe: React.FC = (): JSX.Element => {
     setOpenDeleteModal(true);
   };
 
+  const onSelectTimeOption = (
+    _: React.SyntheticEvent<HTMLElement, Event>,
+    data: DropdownProps
+  ) => {
+    if (data.value === null) {
+      return;
+    }
+    if (typeof data.value === "string") {
+      const selectedValue = data.value;
+      const matchingEnumKey = Object.keys(TimeOptions).find(
+        (key) => key === selectedValue
+      );
+      if (matchingEnumKey) {
+        setSelectedTimeOption(
+          TimeOptions[matchingEnumKey as keyof typeof TimeOptions]
+        );
+      }
+    }
+  };
+
+  const renderTimerOptions = (timer: string) => {
+    // TODO: enforce time for minutes only
+    const timerVal = parseInt(timer.split(" ")[0]);
+    const seconds = timerVal * 60;
+    switch (selectedTimeOption) {
+      case TimeOptions.Timer:
+        return <Timer startTime={seconds} timerDiameter={200} />;
+      case TimeOptions.Stopwatch:
+        return <Stopwatch />;
+      default:
+        return <></>;
+    }
+  };
+
   useEffect(() => {
     if (recipesData) {
       const recipe = recipesData.find((recipe: RecipeInfo) => recipe.id === id);
@@ -71,18 +126,17 @@ const Recipe: React.FC = (): JSX.Element => {
           <Header as="h4">{recipe.description}</Header>
           <Grid centered relaxed="very">
             <Grid.Row>
-              {recipe.tags &&
-                recipe.tags.map((tag: string) => {
-                  return (
-                    <Label
-                      key={recipe.tags.indexOf(tag)}
-                      color="olive"
-                      size="medium"
-                    >
-                      {tag}
-                    </Label>
-                  );
-                })}
+              {recipe.tags?.map((tag: string) => {
+                return (
+                  <Label
+                    key={recipe.tags.indexOf(tag)}
+                    color="olive"
+                    size="medium"
+                  >
+                    {tag}
+                  </Label>
+                );
+              })}
             </Grid.Row>
             <Grid.Row>
               <Label>
@@ -110,25 +164,33 @@ const Recipe: React.FC = (): JSX.Element => {
               </Button>
             )}
             <Grid.Row>
-              <Timer startTime={20} />
-              <Button size="tiny" color="green">
-                Start Cooking Timer
-              </Button>
+              <Container style={{ padding: "10px" }}>
+                <Dropdown
+                  className="icon input=styling"
+                  floating
+                  selectOnBlur={true}
+                  selection
+                  options={timerDropwdownOptions}
+                  onChange={onSelectTimeOption}
+                  defaultValue={TimeOptions.None}
+                />
+                <div style={{ marginTop: "10px" }}>
+                  {renderTimerOptions(recipe.time)}
+                </div>
+              </Container>
             </Grid.Row>
           </Grid>
           <Divider />
           <Segment textAlign="left" inverted>
             <List divided animated ordered inverted>
-              {recipe.instructions.map((instruction: string, index: number) => {
-                return (
-                  <List.Item key={index}>
-                    <List.Content>{instruction}</List.Content>
-                    <List.Content floated="right">
-                      <Checkbox />
-                    </List.Content>
-                  </List.Item>
-                );
-              })}
+              {recipe.instructions.map((instruction: string, index: number) => (
+                <List.Item key={index}>
+                  <List.Content>{instruction}</List.Content>
+                  <List.Content floated="right">
+                    <Checkbox />
+                  </List.Content>
+                </List.Item>
+              ))}
             </List>
           </Segment>
         </React.Fragment>

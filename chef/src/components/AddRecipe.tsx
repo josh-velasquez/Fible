@@ -154,6 +154,34 @@ const AddRecipe: React.FC = () => {
     }
   };
 
+  const renderImageOptions = () => {
+    switch (selectedImageOption) {
+      case ImageOptions.ImageUpload:
+        return (
+          <Form.Field>
+            <Label>Upload image</Label>
+            <UploadImage
+              image={image}
+              onResetImage={onResetImage}
+              onUploadImage={onUploadImage}
+            />
+          </Form.Field>
+        );
+      case ImageOptions.ImageUrl:
+        return (
+          <Form.Field>
+            <Label>Image Url</Label>
+            <Input
+              placeholder="Image url"
+              onChange={(e) => setImageUrl(e.target.value)}
+            />
+          </Form.Field>
+        );
+      default:
+        return <></>;
+    }
+  };
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onResetImage();
@@ -266,37 +294,17 @@ const AddRecipe: React.FC = () => {
           <Form.Field>
             <Label>Image</Label>
             <Dropdown
-              placeholder="Select an Image"
               className="icon input-styling"
               floating
               selectOnBlur={true}
               labeled
-              defaultValue={0}
+              defaultValue={ImageOptions.None}
               onChange={onSelectImageUpload}
               selection
               options={imageDropdownOptions}
             />
           </Form.Field>
-          {selectedImageOption === ImageOptions.ImageUpload ? (
-            <Form.Field>
-              <Label>Upload image</Label>
-              <UploadImage
-                image={image}
-                onResetImage={onResetImage}
-                onUploadImage={onUploadImage}
-              />
-            </Form.Field>
-          ) : selectedImageOption === ImageOptions.ImageUrl ? (
-            <Form.Field>
-              <Label>Image Url</Label>
-              <Input
-                placeholder="Image url"
-                onChange={(e) => setImageUrl(e.target.value)}
-              />
-            </Form.Field>
-          ) : (
-            <></>
-          )}
+          {renderImageOptions()}
           <Form.Field>
             <Checkbox
               label="Add to my favourites!"
