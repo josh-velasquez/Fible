@@ -101,6 +101,7 @@ const Timer: React.FC<TimerProps> = ({ startTime, timerDiameter }) => {
   return (
     <Container style={{ display: "flex", justifyContent: "center" }}>
       <Segment style={{ backgroundColor: "#8ecae6" }}>
+        {/* TODO: add button to set timer */}
         <Container
           textAlign="center"
           style={{
