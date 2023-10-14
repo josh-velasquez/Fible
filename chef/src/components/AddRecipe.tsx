@@ -49,7 +49,7 @@ const AddRecipe: React.FC = () => {
     (state) => state.recipe
   );
   let navigate = useNavigate();
-  const { createNewRecipeApi } = useActions();
+  const { getTagsListApi, createNewRecipeApi } = useActions();
 
   const onUploadImage = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -154,6 +154,10 @@ const AddRecipe: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    getTagsListApi();
+  }, []);
+
   const renderImageOptions = () => {
     switch (selectedImageOption) {
       case ImageOptions.ImageUpload:
@@ -183,9 +187,10 @@ const AddRecipe: React.FC = () => {
   };
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    console.warn("THIS")
     event.preventDefault();
     onResetImage();
-    if (image !== undefined && tagsList !== undefined) {
+    if ((image !== undefined || imageUrl !== undefined) && tagsList !== undefined) {
       createNewRecipeApi({
         name: recipeName,
         description: description,

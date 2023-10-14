@@ -1869,25 +1869,28 @@
     ]
   },
   "packageFolders": {
-    "/Users/josh/.nuget/packages/": {}
+    "/Users/joshuavelasquez/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/josh/Repositories/Chef/backend/Chef/Chef/Chef.csproj",
+      "projectUniqueName": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/Chef.csproj",
       "projectName": "Chef",
-      "projectPath": "/Users/josh/Repositories/Chef/backend/Chef/Chef/Chef.csproj",
-      "packagesPath": "/Users/josh/.nuget/packages/",
-      "outputPath": "/Users/josh/Repositories/Chef/backend/Chef/Chef/obj/",
+      "projectPath": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/Chef.csproj",
+      "packagesPath": "/Users/joshuavelasquez/.nuget/packages/",
+      "outputPath": "/Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/obj/",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "/Users/josh/.nuget/NuGet/NuGet.Config"
+        "/Users/joshuavelasquez/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/sdk/7.0.309/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1964,7 +1967,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.309/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
       }
     }
   }

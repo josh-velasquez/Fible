@@ -109,8 +109,8 @@ namespace Chef.Controllers
                     Name = recipe.Name,
                     Time = recipe.Time,
                     Description = recipe.Description,
-                    Instructions = StringUtil.CleanStringArray(recipe.Instructions),
-                    Tags = StringUtil.CleanStringArray(recipe.Tags),
+                    Instructions = recipe.Instructions,
+                    Tags = recipe.Tags,
                     ImageUrl = payloadImageUrl,
                     Favourite = recipe.Favourite
                 };

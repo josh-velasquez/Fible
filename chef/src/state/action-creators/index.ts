@@ -29,8 +29,8 @@ export const getRecipeListApi = (): ((
           name: recipeJSON.name,
           time: recipeJSON.time,
           description: recipeJSON.description,
-          instructions: recipeJSON.instructions.split(","),
-          tags: recipeJSON.tags.split(","),
+          instructions: recipeJSON.instructions.split(";"),
+          tags: recipeJSON.tags.split(";"),
           // TODO: Fix this to switch between
           image: recipeJSON.image ?? recipeJSON.imageUrl,
           favourite: recipeJSON.favourite,
@@ -134,8 +134,10 @@ export const createNewRecipeApi = (
         type: RecipeActionType.REQUEST_RECIPE_API_SUCCESS,
         payload: newRecipe,
       });
+      console.warn("HERE 0")
       await getRecipeListApi()(dispatch);
     } catch (error: any) {
+      console.warn("HERE")
       dispatch({
         type: RecipeActionType.REQUEST_RECIPE_API_ERROR,
         payload: error.message,
