@@ -23,6 +23,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { NewRecipeInfo, RecipeInfo } from "../state/actions";
 import { useActions } from "../hooks/useActions";
+import { ImageOptions } from "./AddRecipe";
 
 // TODO: Optimize this component as its the same as EditRecipe
 const EditRecipe: React.FC = (): JSX.Element => {
@@ -30,19 +31,24 @@ const EditRecipe: React.FC = (): JSX.Element => {
   const [recipeName, setRecipeName] = useState("");
   const [description, setDescription] = useState("");
   const [prepTime, setPrepTime] = useState("");
+  const [ingredient, setIngredient] = useState<string>("");
+  const [ingredients, setIngredients] = useState<string[]>([]);
   const [instructions, setInstructions] = useState<string[]>([]);
   const [instruction, setInstruction] = useState<string>("");
-  const [selectedTags, setSelectedTags] = useState<number[]>();
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [favourite, setFavourite] = useState<boolean>(false);
   const [image, setImage] = useState<File>();
   const [currentImage, setCurrentImage] = useState<string>("");
   const { tags } = useTypedSelector((state) => state.tags);
   const { recipesData } = useTypedSelector((state) => state.results);
+  const [selectedImageOption, setSelectedImageOption] = useState<ImageOptions>(
+    ImageOptions.None
+  );
+  const [updatedRecipe, setUpdatedRecipe] = useState<boolean>(false);
   const { recipeInfo, loading, error } = useTypedSelector(
     (state) => state.recipe
   );
-  const [updatedRecipe, setUpdatedRecipe] = useState<boolean>(false);
-  const { updateRecipeApi } = useActions();
+  const { getRecipeListApi, getTagsListApi, updateRecipeApi } = useActions();
 
   const { id } = useParams<string>();
 
@@ -60,8 +66,12 @@ const EditRecipe: React.FC = (): JSX.Element => {
     setImage(undefined);
   };
 
-  const onRemoveRecipe = (id: number) => {
+  const onRemoveInstruction = (id: number) => {
     setInstructions(instructions.filter((_, index) => index !== id));
+  };
+
+  const onRemoveIngredient = (id: number) => {
+    setIngredients(ingredients.filter((_, index) => index !== id));
   };
 
   const onAddTags = (
@@ -72,11 +82,11 @@ const EditRecipe: React.FC = (): JSX.Element => {
       return;
     }
     if (typeof data.value === "object") {
-      const newTags: number[] = data.value.map((index) => {
-        if (typeof index === "number" && tags) {
-          return Number(index);
+      const newTags: string[] = data.value.map((tag) => {
+        if (typeof tag === "string" && tags) {
+          return tag;
         }
-        return -1;
+        return "";
       });
       setSelectedTags(newTags);
     }
@@ -88,6 +98,27 @@ const EditRecipe: React.FC = (): JSX.Element => {
     if (event.key === "Enter") {
       event.preventDefault();
       updateInstructions();
+    }
+  };
+
+  const onEnterIngredientPress = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      updateIngredients();
+    }
+  };
+
+  const updateIngredients = (
+    event?: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    if (event) {
+      event.preventDefault();
+    }
+    if (ingredient !== "") {
+      setIngredients([...ingredients, ingredient]);
+      setIngredient("");
     }
   };
 
@@ -119,27 +150,89 @@ const EditRecipe: React.FC = (): JSX.Element => {
     (keyword: string, index: number) => ({
       key: index,
       text: keyword,
+      value: keyword,
+    })
+  );
+
+  const imageDropdownOptions: DropdownItemProps[] = _.map(
+    ImageOptions,
+    (keyword: string, index: string) => ({
+      key: index,
+      text: keyword,
       value: index,
     })
   );
+
+  const renderImageOptions = () => {
+    switch (selectedImageOption) {
+      case ImageOptions.ImageUpload:
+        return (
+          <Form.Field>
+            <Label>Upload image</Label>
+            <UploadImage
+              image={image}
+              onResetImage={onResetImage}
+              onUploadImage={onUploadImage}
+            />
+          </Form.Field>
+        );
+      case ImageOptions.ImageUrl:
+        return (
+          <Form.Field>
+            <Label>Image Url</Label>
+            <Input
+              placeholder="Image url"
+              onChange={(e) => setCurrentImage(e.target.value)}
+            />
+          </Form.Field>
+        );
+      default:
+        return <></>;
+    }
+  };
+
+  const onSelectImageUpload = (
+    _: React.SyntheticEvent<HTMLElement, Event>,
+    data: DropdownProps
+  ) => {
+    if (data.value === null) {
+      return;
+    }
+    if (typeof data.value === "string") {
+      const selectedValue = data.value;
+      const matchingEnumKey = Object.keys(ImageOptions).find(
+        (key) => key === selectedValue
+      );
+      if (matchingEnumKey) {
+        setSelectedImageOption(
+          ImageOptions[matchingEnumKey as keyof typeof ImageOptions]
+        );
+      }
+    }
+  };
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onResetImage();
     if (
-      (image !== undefined || currentImage !== "") &&
+      (image !== undefined || currentImage !== undefined) &&
       selectedTags !== undefined
     ) {
-      const selectedTagValues = selectedTags.map(
-        (index) => tagsOptions[index].text
-      );
+      // if (
+      //   (image !== undefined || currentImage !== "") &&
+      //   selectedTags !== undefined
+      // ) {
+      // const selectedTagValues = selectedTags.map(
+      //   (index) => tagsOptions[index].text
+      // );
       updateRecipeApi({
         id: recipeId,
         name: recipeName,
         description: description,
+        ingredients: ingredients,
         time: prepTime,
         instructions: instructions,
-        tags: selectedTagValues,
+        tags: selectedTags,
         favourite: favourite,
         // TODO: Update this so we only set whatever is updated
         image: image,
@@ -153,15 +246,22 @@ const EditRecipe: React.FC = (): JSX.Element => {
     if (recipesData) {
       const recipe = recipesData.find((recipe: RecipeInfo) => recipe.id === id);
       if (recipe && tags) {
-        const selectedTagIndices = tags.map((tag) =>
+        const selectedTagIndices = recipe.tags.map((tag: string) =>
           tags.findIndex((option) => option === tag)
         );
+        const newTags: string[] = selectedTagIndices.map((index) => {
+          if (typeof index === "number") {
+            return tags[index];
+          }
+          return "";
+        });
         setRecipeId(recipe.id);
         setRecipeName(recipe.name);
         setDescription(recipe.description);
+        setIngredients(recipe.ingredients);
         setPrepTime(recipe.time);
         setInstructions(recipe.instructions);
-        setSelectedTags(selectedTagIndices);
+        setSelectedTags(newTags);
         setFavourite(recipe.favourite);
         setCurrentImage(recipe.image as string);
       }
@@ -169,10 +269,19 @@ const EditRecipe: React.FC = (): JSX.Element => {
   }, [id, recipesData, tags]);
 
   useEffect(() => {
+    if (!tags) {
+      getTagsListApi();
+    }
+    if (recipesData) {
+      getRecipeListApi();
+    }
+  }, []);
+
+  useEffect(() => {
     if (!loading && !error && recipeInfo && updatedRecipe) {
       navigate(`/recipe/${recipeInfo.id}`, { replace: true });
     }
-  }, [recipeInfo, error, loading, navigate, updatedRecipe]);
+  }, [recipeInfo, error, loading, updatedRecipe, navigate]);
 
   // TODO: Add form validation before submission
   return (
@@ -199,6 +308,43 @@ const EditRecipe: React.FC = (): JSX.Element => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
+          </Form.Field>
+          <Form.Field>
+            <Label>Ingredients</Label>
+            <Input
+              action={{
+                icon: "add",
+                onClick: (
+                  event: React.MouseEvent<HTMLInputElement, MouseEvent>
+                ) => updateInstructions(event),
+              }}
+              placeholder="Add ingredient..."
+              value={ingredient}
+              onChange={(e) => setIngredient(e.target.value)}
+              onKeyPress={onEnterIngredientPress}
+            />
+            {ingredients.length !== 0 && (
+              <Segment>
+                <List divided animated ordered>
+                  {ingredients.map((ingredient: string, index: number) => {
+                    return (
+                      <List.Item key={index}>
+                        {ingredient}
+                        <Button
+                          onClick={() => onRemoveIngredient(index)}
+                          size="mini"
+                          floated="right"
+                          color="red"
+                          icon
+                        >
+                          <Icon name="remove" />
+                        </Button>
+                      </List.Item>
+                    );
+                  })}
+                </List>
+              </Segment>
+            )}
           </Form.Field>
           <Form.Field>
             <Label>Prep time</Label>
@@ -230,7 +376,7 @@ const EditRecipe: React.FC = (): JSX.Element => {
                       <List.Item key={index}>
                         {instruction}
                         <Button
-                          onClick={() => onRemoveRecipe(index)}
+                          onClick={() => onRemoveInstruction(index)}
                           size="mini"
                           floated="right"
                           color="red"
@@ -264,6 +410,20 @@ const EditRecipe: React.FC = (): JSX.Element => {
             />
           </Form.Field>
           <Form.Field>
+            <Label>Image</Label>
+            <Dropdown
+              className="icon input-styling"
+              floating
+              selectOnBlur={true}
+              labeled
+              defaultValue={ImageOptions.None}
+              onChange={onSelectImageUpload}
+              selection
+              options={imageDropdownOptions}
+            />
+          </Form.Field>
+          {renderImageOptions()}
+          {/* <Form.Field>
             <Label>Upload image</Label>
             {image ? (
               <UploadImage
@@ -285,7 +445,7 @@ const EditRecipe: React.FC = (): JSX.Element => {
               />
               // TODO: add link instead for url -- this is implemented in the AddRecipe component
             )}
-          </Form.Field>
+          </Form.Field> */}
           <Form.Field>
             <Checkbox
               label="Add to my favourites!"

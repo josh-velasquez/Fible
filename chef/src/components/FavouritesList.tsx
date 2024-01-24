@@ -43,10 +43,8 @@ const FavouritesList: React.FC<FavouritesListProps> = ({ recipesData }) => {
     navigate(`/recipe/${event.currentTarget.id}`);
   };
 
-  
-
   return (
-    <Container textAlign="center">
+    <Container textAlign="center" style={{ width: "1000px" }}>
       <Header textAlign="center">Favourites List</Header>
       <Divider />
       <List
@@ -63,13 +61,13 @@ const FavouritesList: React.FC<FavouritesListProps> = ({ recipesData }) => {
         {favouritesList.map((recipe: RecipeInfo) => {
           return (
             <List.Item id={recipe.id} onClick={onSelectRecipe} key={recipe.id}>
-              <Card>
+              <Card style={{ minHeight: "450px" }}>
                 <Image
                   src={recipe.image}
                   style={{ height: "250px", objectFit: "cover" }}
                   alt={recipe.name}
                 />
-                <Card.Content>
+                <Card.Content style={{ maxHeight: "200px" }}>
                   <Card.Header>{recipe.name}</Card.Header>
                   <Card.Meta>
                     <Container

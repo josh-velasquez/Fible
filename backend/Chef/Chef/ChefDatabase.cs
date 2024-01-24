@@ -17,7 +17,7 @@ namespace Chef
             // Create recipe table
             using (var command = new SqliteCommand())
             {
-                command.CommandText = "CREATE TABLE IF NOT EXISTS Recipes (Id INTEGER PRIMARY KEY, Name TEXT, Time TEXT, Description TEXT, Instructions TEXT, Tags TEXT, Image TEXT, Favourite INTEGER)";
+                command.CommandText = "CREATE TABLE IF NOT EXISTS Recipes (Id INTEGER PRIMARY KEY, Name TEXT, Time TEXT, Description TEXT, Ingredients TEXT, Instructions TEXT, Tags TEXT, Image TEXT, Favourite INTEGER)";
                 ExecuteDatabaseCommand(command);
             }
 
@@ -48,10 +48,11 @@ namespace Chef
                 {
                     connection.Open();
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO Recipes (Name, Time, Description, Instructions, Tags, Image, Favourite) VALUES (@Name, @Time, @Description, @Instructions, @Tags, @Image, @Favourite); SELECT last_insert_rowid();";
+                    command.CommandText = "INSERT INTO Recipes (Name, Time, Description, Ingredients, Instructions, Tags, Image, Favourite) VALUES (@Name, @Time, @Description, @Ingredients, @Instructions, @Tags, @Image, @Favourite); SELECT last_insert_rowid();";
                     command.Parameters.AddWithValue("@Name", recipe.Name);
                     command.Parameters.AddWithValue("@Time", recipe.Time);
                     command.Parameters.AddWithValue("@Description", recipe.Description);
+                    command.Parameters.AddWithValue("@Ingredients", recipe.Ingredients);
                     command.Parameters.AddWithValue("@Instructions", recipe.Instructions);
                     command.Parameters.AddWithValue("@Tags", recipe.Tags);
                     command.Parameters.AddWithValue("@Image", recipe.ImageUrl);
@@ -107,6 +108,7 @@ namespace Chef
                             Name = @NewName,
                             Time = @NewTime,
                             Description = @NewDescription,
+                            Ingredients = @NewIngredients,
                             Instructions = @NewInstructions,
                             Tags = @NewTags,
                             Image = @NewImage,
@@ -117,6 +119,7 @@ namespace Chef
                 command.Parameters.AddWithValue("@NewName", newRecipe.Name);
                 command.Parameters.AddWithValue("@NewTime", newRecipe.Time);
                 command.Parameters.AddWithValue("@NewDescription", newRecipe.Description);
+                command.Parameters.AddWithValue("@NewIngredients", newRecipe.Ingredients);
                 command.Parameters.AddWithValue("@NewInstructions", newRecipe.Instructions);
                 command.Parameters.AddWithValue("@NewTags", newRecipe.Tags);
                 command.Parameters.AddWithValue("@NewImage", newRecipe.ImageUrl);
@@ -163,7 +166,7 @@ namespace Chef
 
                 using (var command = connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT Id, Name, Time, Description, Instructions, Tags, Image, Favourite FROM Recipes";
+                    command.CommandText = "SELECT Id, Name, Time, Description, Ingredients, Instructions, Tags, Image, Favourite FROM Recipes";
 
                     using (var reader = command.ExecuteReader())
                     {
@@ -175,10 +178,11 @@ namespace Chef
                                 Name = reader.GetString(1),
                                 Time = reader.GetString(2),
                                 Description = reader.GetString(3),
-                                Instructions = reader.GetString(4),
-                                Tags = reader.GetString(5),
-                                ImageUrl = reader.GetString(6),
-                                Favourite = reader.GetInt32(7) == 0 ? false : true
+                                Ingredients = reader.GetString(4),
+                                Instructions = reader.GetString(5),
+                                Tags = reader.GetString(6),
+                                ImageUrl = reader.GetString(7),
+                                Favourite = reader.GetInt32(8) == 0 ? false : true
                             };
                             recipes.Add(recipe);
                         }

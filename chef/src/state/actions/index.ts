@@ -46,6 +46,7 @@ export interface NewRecipeInfo {
   name: string;
   time: string;
   description: string;
+  ingredients: string[];
   instructions: string[];
   tags: string[];
   favourite: boolean;
@@ -58,6 +59,7 @@ export interface RecipeInfo {
   name: string;
   time: string;
   description: string;
+  ingredients: string[];
   instructions: string[];
   tags: string[];
   image: File | string | undefined;

@@ -24,7 +24,7 @@ const Chef: React.FC = () => {
           </Dimmer>
         </Segment>
       )}
-      {!recipesData && (
+      {(!recipesData || recipesData.length === 0) && (
         <Segment piled>
           No recipes available. Create some recipes first!
         </Segment>

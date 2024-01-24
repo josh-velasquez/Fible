@@ -29,6 +29,7 @@ export const getRecipeListApi = (): ((
           name: recipeJSON.name,
           time: recipeJSON.time,
           description: recipeJSON.description,
+          ingredients: recipeJSON.ingredients.split(";"),
           instructions: recipeJSON.instructions.split(";"),
           tags: recipeJSON.tags.split(";"),
           // TODO: Fix this to switch between
@@ -113,6 +114,7 @@ export const createNewRecipeApi = (
       formData.append("id", "newId");
       formData.append("name", newRecipeInfo.name);
       formData.append("description", newRecipeInfo.description);
+      formData.append("ingredients", newRecipeInfo.ingredients.join(";"));
       formData.append("instructions", newRecipeInfo.instructions.join(";"));
       formData.append("time", newRecipeInfo.time);
       formData.append("tags", newRecipeInfo.tags.join(";"));
@@ -134,10 +136,8 @@ export const createNewRecipeApi = (
         type: RecipeActionType.REQUEST_RECIPE_API_SUCCESS,
         payload: newRecipe,
       });
-      console.warn("HERE 0")
       await getRecipeListApi()(dispatch);
     } catch (error: any) {
-      console.warn("HERE")
       dispatch({
         type: RecipeActionType.REQUEST_RECIPE_API_ERROR,
         payload: error.message,
@@ -158,6 +158,7 @@ export const updateRecipeApi = (
       formData.append("id", newRecipeInfo.id);
       formData.append("name", newRecipeInfo.name);
       formData.append("description", newRecipeInfo.description);
+      formData.append("ingredients", newRecipeInfo.ingredients.join(";"));
       formData.append("instructions", newRecipeInfo.instructions.join(";"));
       formData.append("time", newRecipeInfo.time);
       formData.append("tags", newRecipeInfo.tags.join(";"));
@@ -169,7 +170,7 @@ export const updateRecipeApi = (
       }
 
       const { data } = await axios.put(
-        `${serverConfig.serverBaseUrl}/api/chef/update-recipe`,
+        `${serverConfig.serverBaseUrl}/api/chef/update-recipe/${newRecipeInfo.id}`,
         formData,
         {
           headers: {

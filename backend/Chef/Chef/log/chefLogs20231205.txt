@@ -1,0 +1,202 @@
+2023-12-05 23:22:39.064 -07:00 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2023-12-05 23:22:39.171 -07:00 [DBG] Hosting starting
+2023-12-05 23:22:39.309 -07:00 [DBG] Using development certificate: CN=localhost (Thumbprint: A377E5170CC74625CE6FB30536DA89F04E571486)
+2023-12-05 23:22:39.336 -07:00 [INF] Now listening on: https://localhost:7091
+2023-12-05 23:22:39.336 -07:00 [INF] Now listening on: http://localhost:5115
+2023-12-05 23:22:39.336 -07:00 [DBG] Loaded hosting startup assembly Chef
+2023-12-05 23:22:39.336 -07:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-12-05 23:22:39.337 -07:00 [INF] Hosting environment: Development
+2023-12-05 23:22:39.337 -07:00 [INF] Content root path: /Users/joshuavelasquez/Desktop/GitHub/Chef/backend/Chef/Chef/
+2023-12-05 23:22:39.337 -07:00 [DBG] Hosting started
+2023-12-05 23:22:51.380 -07:00 [DBG] Connection id "0HMVM4F34A3ID" accepted.
+2023-12-05 23:22:51.380 -07:00 [DBG] Connection id "0HMVM4F34A3ID" started.
+2023-12-05 23:22:51.475 -07:00 [DBG] Connection 0HMVM4F34A3ID established using the following protocol: "Tls12"
+2023-12-05 23:22:51.559 -07:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/api/chef/recipes - -
+2023-12-05 23:22:51.569 -07:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2023-12-05 23:22:51.633 -07:00 [DBG] 1 candidate(s) found for the request path '/api/chef/recipes'
+2023-12-05 23:22:51.643 -07:00 [DBG] Endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)' with route pattern 'api/chef/recipes' is valid for the request path '/api/chef/recipes'
+2023-12-05 23:22:51.643 -07:00 [DBG] Request matched endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:22:51.648 -07:00 [DBG] The request has an origin header: 'http://localhost:3000'.
+2023-12-05 23:22:51.649 -07:00 [INF] CORS policy execution successful.
+2023-12-05 23:22:51.652 -07:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2023-12-05 23:22:51.657 -07:00 [INF] Executing endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:22:51.691 -07:00 [INF] Route matched with {action = "GetRecipes", controller = "ChefApi"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Chef.Models.RecipeData]] GetRecipes() on controller Chef.Controllers.ChefApiController (Chef).
+2023-12-05 23:22:51.693 -07:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2023-12-05 23:22:51.693 -07:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2023-12-05 23:22:51.694 -07:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+2023-12-05 23:22:51.694 -07:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2023-12-05 23:22:51.694 -07:00 [DBG] Execution plan of result filters (in the following order): ["None"]
+2023-12-05 23:22:51.696 -07:00 [DBG] Executing controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:22:51.842 -07:00 [DBG] Executed controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:22:51.855 -07:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2023-12-05 23:22:51.858 -07:00 [DBG] No information found on request to perform content negotiation.
+2023-12-05 23:22:51.858 -07:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2023-12-05 23:22:51.858 -07:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2023-12-05 23:22:51.860 -07:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2023-12-05 23:22:51.860 -07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Chef.Models.RecipeData, Chef, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-12-05 23:22:51.948 -07:00 [INF] Executed action Chef.Controllers.ChefApiController.GetRecipes (Chef) in 246.7505ms
+2023-12-05 23:22:51.950 -07:00 [INF] Executed endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:22:51.950 -07:00 [DBG] Connection id "0HMVM4F34A3ID" completed keep alive response.
+2023-12-05 23:22:51.955 -07:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/api/chef/recipes - - - 200 - application/json;+charset=utf-8 404.2861ms
+2023-12-05 23:23:02.550 -07:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/api/chef/recipes - -
+2023-12-05 23:23:02.553 -07:00 [DBG] 1 candidate(s) found for the request path '/api/chef/recipes'
+2023-12-05 23:23:02.553 -07:00 [DBG] Endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)' with route pattern 'api/chef/recipes' is valid for the request path '/api/chef/recipes'
+2023-12-05 23:23:02.553 -07:00 [DBG] Request matched endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:23:02.554 -07:00 [DBG] The request has an origin header: 'http://localhost:3000'.
+2023-12-05 23:23:02.554 -07:00 [INF] CORS policy execution successful.
+2023-12-05 23:23:02.554 -07:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2023-12-05 23:23:02.554 -07:00 [INF] Executing endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:23:02.554 -07:00 [INF] Route matched with {action = "GetRecipes", controller = "ChefApi"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Chef.Models.RecipeData]] GetRecipes() on controller Chef.Controllers.ChefApiController (Chef).
+2023-12-05 23:23:02.555 -07:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2023-12-05 23:23:02.555 -07:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2023-12-05 23:23:02.555 -07:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+2023-12-05 23:23:02.555 -07:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2023-12-05 23:23:02.555 -07:00 [DBG] Execution plan of result filters (in the following order): ["None"]
+2023-12-05 23:23:02.555 -07:00 [DBG] Executing controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:23:02.555 -07:00 [DBG] Executed controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:23:02.556 -07:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2023-12-05 23:23:02.556 -07:00 [DBG] No information found on request to perform content negotiation.
+2023-12-05 23:23:02.556 -07:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2023-12-05 23:23:02.556 -07:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2023-12-05 23:23:02.556 -07:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2023-12-05 23:23:02.556 -07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Chef.Models.RecipeData, Chef, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-12-05 23:23:02.557 -07:00 [INF] Executed action Chef.Controllers.ChefApiController.GetRecipes (Chef) in 2.2929ms
+2023-12-05 23:23:02.557 -07:00 [INF] Executed endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:23:02.557 -07:00 [DBG] Connection id "0HMVM4F34A3ID" completed keep alive response.
+2023-12-05 23:23:02.557 -07:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/api/chef/recipes - - - 200 - application/json;+charset=utf-8 7.1300ms
+2023-12-05 23:23:06.003 -07:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/api/chef/recipes - -
+2023-12-05 23:23:06.004 -07:00 [DBG] 1 candidate(s) found for the request path '/api/chef/recipes'
+2023-12-05 23:23:06.004 -07:00 [DBG] Endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)' with route pattern 'api/chef/recipes' is valid for the request path '/api/chef/recipes'
+2023-12-05 23:23:06.004 -07:00 [DBG] Request matched endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:23:06.004 -07:00 [DBG] The request has an origin header: 'http://localhost:3000'.
+2023-12-05 23:23:06.004 -07:00 [INF] CORS policy execution successful.
+2023-12-05 23:23:06.004 -07:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2023-12-05 23:23:06.004 -07:00 [INF] Executing endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:23:06.005 -07:00 [INF] Route matched with {action = "GetRecipes", controller = "ChefApi"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Chef.Models.RecipeData]] GetRecipes() on controller Chef.Controllers.ChefApiController (Chef).
+2023-12-05 23:23:06.005 -07:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2023-12-05 23:23:06.005 -07:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2023-12-05 23:23:06.005 -07:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+2023-12-05 23:23:06.005 -07:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2023-12-05 23:23:06.005 -07:00 [DBG] Execution plan of result filters (in the following order): ["None"]
+2023-12-05 23:23:06.005 -07:00 [DBG] Executing controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:23:06.005 -07:00 [DBG] Executed controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:23:06.005 -07:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2023-12-05 23:23:06.005 -07:00 [DBG] No information found on request to perform content negotiation.
+2023-12-05 23:23:06.005 -07:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2023-12-05 23:23:06.005 -07:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2023-12-05 23:23:06.005 -07:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2023-12-05 23:23:06.005 -07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Chef.Models.RecipeData, Chef, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-12-05 23:23:06.006 -07:00 [INF] Executed action Chef.Controllers.ChefApiController.GetRecipes (Chef) in 0.9484ms
+2023-12-05 23:23:06.006 -07:00 [INF] Executed endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:23:06.006 -07:00 [DBG] Connection id "0HMVM4F34A3ID" completed keep alive response.
+2023-12-05 23:23:06.006 -07:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/api/chef/recipes - - - 200 - application/json;+charset=utf-8 2.7004ms
+2023-12-05 23:23:32.775 -07:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/api/chef/tags - -
+2023-12-05 23:23:32.775 -07:00 [DBG] 1 candidate(s) found for the request path '/api/chef/tags'
+2023-12-05 23:23:32.775 -07:00 [DBG] Endpoint 'Chef.Controllers.ChefApiController.GetTags (Chef)' with route pattern 'api/chef/tags' is valid for the request path '/api/chef/tags'
+2023-12-05 23:23:32.775 -07:00 [DBG] Request matched endpoint 'Chef.Controllers.ChefApiController.GetTags (Chef)'
+2023-12-05 23:23:32.775 -07:00 [DBG] The request has an origin header: 'http://localhost:3000'.
+2023-12-05 23:23:32.775 -07:00 [INF] CORS policy execution successful.
+2023-12-05 23:23:32.775 -07:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2023-12-05 23:23:32.775 -07:00 [INF] Executing endpoint 'Chef.Controllers.ChefApiController.GetTags (Chef)'
+2023-12-05 23:23:32.776 -07:00 [INF] Route matched with {action = "GetTags", controller = "ChefApi"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.String]] GetTags() on controller Chef.Controllers.ChefApiController (Chef).
+2023-12-05 23:23:32.777 -07:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2023-12-05 23:23:32.777 -07:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2023-12-05 23:23:32.777 -07:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+2023-12-05 23:23:32.777 -07:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2023-12-05 23:23:32.777 -07:00 [DBG] Execution plan of result filters (in the following order): ["None"]
+2023-12-05 23:23:32.777 -07:00 [DBG] Executing controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:23:32.777 -07:00 [DBG] Executed controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:23:32.778 -07:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2023-12-05 23:23:32.778 -07:00 [DBG] No information found on request to perform content negotiation.
+2023-12-05 23:23:32.778 -07:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2023-12-05 23:23:32.778 -07:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2023-12-05 23:23:32.778 -07:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2023-12-05 23:23:32.778 -07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-12-05 23:23:32.779 -07:00 [INF] Executed action Chef.Controllers.ChefApiController.GetTags (Chef) in 2.338ms
+2023-12-05 23:23:32.779 -07:00 [INF] Executed endpoint 'Chef.Controllers.ChefApiController.GetTags (Chef)'
+2023-12-05 23:23:32.779 -07:00 [DBG] Connection id "0HMVM4F34A3ID" completed keep alive response.
+2023-12-05 23:23:32.779 -07:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/api/chef/tags - - - 200 - application/json;+charset=utf-8 4.6779ms
+2023-12-05 23:23:49.061 -07:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/api/chef/recipes - -
+2023-12-05 23:23:49.061 -07:00 [DBG] 1 candidate(s) found for the request path '/api/chef/recipes'
+2023-12-05 23:23:49.061 -07:00 [DBG] Endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)' with route pattern 'api/chef/recipes' is valid for the request path '/api/chef/recipes'
+2023-12-05 23:23:49.061 -07:00 [DBG] Request matched endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:23:49.061 -07:00 [DBG] The request has an origin header: 'http://localhost:3000'.
+2023-12-05 23:23:49.061 -07:00 [INF] CORS policy execution successful.
+2023-12-05 23:23:49.061 -07:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2023-12-05 23:23:49.061 -07:00 [INF] Executing endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:23:49.061 -07:00 [INF] Route matched with {action = "GetRecipes", controller = "ChefApi"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Chef.Models.RecipeData]] GetRecipes() on controller Chef.Controllers.ChefApiController (Chef).
+2023-12-05 23:23:49.061 -07:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2023-12-05 23:23:49.062 -07:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2023-12-05 23:23:49.062 -07:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+2023-12-05 23:23:49.062 -07:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2023-12-05 23:23:49.062 -07:00 [DBG] Execution plan of result filters (in the following order): ["None"]
+2023-12-05 23:23:49.062 -07:00 [DBG] Executing controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:23:49.062 -07:00 [DBG] Executed controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:23:49.062 -07:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2023-12-05 23:23:49.062 -07:00 [DBG] No information found on request to perform content negotiation.
+2023-12-05 23:23:49.062 -07:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2023-12-05 23:23:49.062 -07:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2023-12-05 23:23:49.062 -07:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2023-12-05 23:23:49.062 -07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Chef.Models.RecipeData, Chef, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-12-05 23:23:49.062 -07:00 [INF] Executed action Chef.Controllers.ChefApiController.GetRecipes (Chef) in 0.8656ms
+2023-12-05 23:23:49.063 -07:00 [INF] Executed endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:23:49.063 -07:00 [DBG] Connection id "0HMVM4F34A3ID" completed keep alive response.
+2023-12-05 23:23:49.063 -07:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/api/chef/recipes - - - 200 - application/json;+charset=utf-8 1.9943ms
+2023-12-05 23:24:41.053 -07:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/api/chef/recipes - -
+2023-12-05 23:24:41.053 -07:00 [DBG] 1 candidate(s) found for the request path '/api/chef/recipes'
+2023-12-05 23:24:41.053 -07:00 [DBG] Endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)' with route pattern 'api/chef/recipes' is valid for the request path '/api/chef/recipes'
+2023-12-05 23:24:41.053 -07:00 [DBG] Request matched endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:24:41.053 -07:00 [DBG] The request has an origin header: 'http://localhost:3000'.
+2023-12-05 23:24:41.053 -07:00 [INF] CORS policy execution successful.
+2023-12-05 23:24:41.053 -07:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2023-12-05 23:24:41.053 -07:00 [INF] Executing endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:24:41.053 -07:00 [INF] Route matched with {action = "GetRecipes", controller = "ChefApi"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[Chef.Models.RecipeData]] GetRecipes() on controller Chef.Controllers.ChefApiController (Chef).
+2023-12-05 23:24:41.054 -07:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2023-12-05 23:24:41.054 -07:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2023-12-05 23:24:41.054 -07:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+2023-12-05 23:24:41.054 -07:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2023-12-05 23:24:41.054 -07:00 [DBG] Execution plan of result filters (in the following order): ["None"]
+2023-12-05 23:24:41.054 -07:00 [DBG] Executing controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:24:41.054 -07:00 [DBG] Executed controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:24:41.054 -07:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2023-12-05 23:24:41.054 -07:00 [DBG] No information found on request to perform content negotiation.
+2023-12-05 23:24:41.054 -07:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2023-12-05 23:24:41.054 -07:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2023-12-05 23:24:41.054 -07:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2023-12-05 23:24:41.054 -07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Chef.Models.RecipeData, Chef, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-12-05 23:24:41.055 -07:00 [INF] Executed action Chef.Controllers.ChefApiController.GetRecipes (Chef) in 1.0166ms
+2023-12-05 23:24:41.055 -07:00 [INF] Executed endpoint 'Chef.Controllers.ChefApiController.GetRecipes (Chef)'
+2023-12-05 23:24:41.055 -07:00 [DBG] Connection id "0HMVM4F34A3ID" completed keep alive response.
+2023-12-05 23:24:41.055 -07:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/api/chef/recipes - - - 200 - application/json;+charset=utf-8 2.2387ms
+2023-12-05 23:25:08.884 -07:00 [INF] Request starting HTTP/1.1 GET https://localhost:7091/api/chef/tags - -
+2023-12-05 23:25:08.885 -07:00 [DBG] 1 candidate(s) found for the request path '/api/chef/tags'
+2023-12-05 23:25:08.885 -07:00 [DBG] Endpoint 'Chef.Controllers.ChefApiController.GetTags (Chef)' with route pattern 'api/chef/tags' is valid for the request path '/api/chef/tags'
+2023-12-05 23:25:08.885 -07:00 [DBG] Request matched endpoint 'Chef.Controllers.ChefApiController.GetTags (Chef)'
+2023-12-05 23:25:08.885 -07:00 [DBG] The request has an origin header: 'http://localhost:3000'.
+2023-12-05 23:25:08.885 -07:00 [INF] CORS policy execution successful.
+2023-12-05 23:25:08.885 -07:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2023-12-05 23:25:08.885 -07:00 [INF] Executing endpoint 'Chef.Controllers.ChefApiController.GetTags (Chef)'
+2023-12-05 23:25:08.885 -07:00 [INF] Route matched with {action = "GetTags", controller = "ChefApi"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[System.String]] GetTags() on controller Chef.Controllers.ChefApiController (Chef).
+2023-12-05 23:25:08.885 -07:00 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2023-12-05 23:25:08.885 -07:00 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2023-12-05 23:25:08.885 -07:00 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)"]
+2023-12-05 23:25:08.885 -07:00 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2023-12-05 23:25:08.885 -07:00 [DBG] Execution plan of result filters (in the following order): ["None"]
+2023-12-05 23:25:08.886 -07:00 [DBG] Executing controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:25:08.886 -07:00 [DBG] Executed controller factory for controller Chef.Controllers.ChefApiController (Chef)
+2023-12-05 23:25:08.886 -07:00 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2023-12-05 23:25:08.886 -07:00 [DBG] No information found on request to perform content negotiation.
+2023-12-05 23:25:08.886 -07:00 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2023-12-05 23:25:08.886 -07:00 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2023-12-05 23:25:08.886 -07:00 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2023-12-05 23:25:08.886 -07:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-12-05 23:25:08.886 -07:00 [INF] Executed action Chef.Controllers.ChefApiController.GetTags (Chef) in 0.8065ms
+2023-12-05 23:25:08.886 -07:00 [INF] Executed endpoint 'Chef.Controllers.ChefApiController.GetTags (Chef)'
+2023-12-05 23:25:08.886 -07:00 [DBG] Connection id "0HMVM4F34A3ID" completed keep alive response.
+2023-12-05 23:25:08.887 -07:00 [INF] Request finished HTTP/1.1 GET https://localhost:7091/api/chef/tags - - - 200 - application/json;+charset=utf-8 2.2472ms
+2023-12-05 23:25:41.386 -07:00 [INF] Application is shutting down...
+2023-12-05 23:25:41.388 -07:00 [DBG] Hosting stopping
+2023-12-05 23:25:41.407 -07:00 [DBG] Connection id "0HMVM4F34A3ID" disconnecting.
+2023-12-05 23:25:41.412 -07:00 [DBG] Connection id "0HMVM4F34A3ID" stopped.
+2023-12-05 23:25:41.413 -07:00 [DBG] Connection id "0HMVM4F34A3ID" sending FIN because: "The Socket transport's send loop completed gracefully."
+2023-12-05 23:25:41.417 -07:00 [DBG] Hosting stopped

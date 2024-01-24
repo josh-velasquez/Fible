@@ -109,6 +109,7 @@ namespace Chef.Controllers
                     Name = recipe.Name,
                     Time = recipe.Time,
                     Description = recipe.Description,
+                    Ingredients = recipe.Ingredients,
                     Instructions = recipe.Instructions,
                     Tags = recipe.Tags,
                     ImageUrl = payloadImageUrl,
@@ -145,9 +146,11 @@ namespace Chef.Controllers
 
                 var recipeData = new RecipeData
                 {
+                    Id = recipeId.ToString(),
                     Name = recipe.Name,
                     Time = recipe.Time,
                     Description = recipe.Description,
+                    Ingredients = recipe.Ingredients,
                     Instructions = recipe.Instructions,
                     Tags = recipe.Tags,
                     Favourite = recipe.Favourite,

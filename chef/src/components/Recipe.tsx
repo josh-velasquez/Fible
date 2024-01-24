@@ -13,6 +13,7 @@ import {
   Image,
   Label,
   List,
+  ListItem,
   Segment,
 } from "semantic-ui-react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -39,7 +40,7 @@ const Recipe: React.FC = (): JSX.Element => {
     TimeOptions.None
   );
   let navigate = useNavigate();
-  const { deleteRecipeApi } = useActions();
+  const { getRecipeListApi, deleteRecipeApi } = useActions();
 
   const timerDropwdownOptions: DropdownItemProps[] = _.map(
     TimeOptions,
@@ -67,8 +68,10 @@ const Recipe: React.FC = (): JSX.Element => {
   };
 
   const handleDeleteRecipe = () => {
-    deleteRecipeApi(id ?? "");
-    navigate("/", { replace: true });
+    if (id) {
+      deleteRecipeApi(id);
+      navigate("/", { replace: true });
+    }
   };
 
   const handleOpenDeleteRecipe = () => {
@@ -113,6 +116,8 @@ const Recipe: React.FC = (): JSX.Element => {
     if (recipesData) {
       const recipe = recipesData.find((recipe: RecipeInfo) => recipe.id === id);
       setRecipe(recipe);
+    } else {
+      getRecipeListApi()
     }
   }, [id, recipesData]);
 
@@ -143,6 +148,23 @@ const Recipe: React.FC = (): JSX.Element => {
                 <Icon name="time" />
                 Prep Time: {recipe.time}
               </Label>
+            </Grid.Row>
+            <Grid.Row
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                margin: "0px 200px",
+              }}
+            >
+              <List bulleted relaxed style={{ textAlign: "left" }}>
+                {recipe.ingredients?.map((ingredient: string) => {
+                  return (
+                    <ListItem key={recipe.ingredients.indexOf(ingredient)}>
+                      {ingredient}
+                    </ListItem>
+                  );
+                })}
+              </List>
             </Grid.Row>
             <Grid.Row style={{ display: "flex", justifyContent: "flex-end" }}>
               <Button size="tiny" color="twitter" icon onClick={editRecipe}>

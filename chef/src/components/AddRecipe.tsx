@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { NewRecipeInfo } from "../state/actions";
 
-enum ImageOptions {
+export enum ImageOptions {
   ImageUpload = "Image Upload",
   ImageUrl = "Image Url",
   None = "None",
@@ -33,12 +33,15 @@ const AddRecipe: React.FC = () => {
   const [recipeName, setRecipeName] = useState("");
   const [description, setDescription] = useState("");
   const [prepTime, setPrepTime] = useState("");
+  const [ingredient, setIngredient] = useState<string>("");
+  const [ingredients, setIngredients] = useState<string[]>([]);
   const [instructions, setInstructions] = useState<string[]>([]);
   const [instruction, setInstruction] = useState<string>("");
   const [tagsList, setTagsList] = useState<string[]>();
   const [favourite, setFavourite] = useState<boolean>(false);
   const [image, setImage] = useState<File>();
   const [imageUrl, setImageUrl] = useState<string>("");
+  const [addedRecipe, setAddedRecipe] = useState<boolean>(false);
   const [selectedImageOption, setSelectedImageOption] = useState<ImageOptions>(
     ImageOptions.None
   );
@@ -62,8 +65,12 @@ const AddRecipe: React.FC = () => {
     setImage(undefined);
   };
 
-  const onRemoveRecipe = (id: number) => {
+  const onRemoveInstruction = (id: number) => {
     setInstructions(instructions.filter((_, index) => index !== id));
+  };
+
+  const onRemoveIngredient = (id: number) => {
+    setIngredients(ingredients.filter((_, index) => index !== id));
   };
 
   const onAddTags = (
@@ -93,6 +100,27 @@ const AddRecipe: React.FC = () => {
     }
   };
 
+  const onEnterIngredientPress = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      updateIngredients();
+    }
+  };
+
+  const updateIngredients = (
+    event?: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    if (event) {
+      event.preventDefault();
+    }
+    if (ingredient !== "") {
+      setIngredients([...ingredients, ingredient]);
+      setIngredient("");
+    }
+  };
+
   const updateInstructions = (
     event?: React.MouseEvent<HTMLInputElement, MouseEvent>
   ) => {
@@ -100,7 +128,7 @@ const AddRecipe: React.FC = () => {
       event.preventDefault();
     }
     if (instruction !== "") {
-      setInstructions([...instructions, instruction]);
+      setInstructions((prevInstructions) => [...prevInstructions, instruction]);
       setInstruction("");
     }
   };
@@ -154,10 +182,6 @@ const AddRecipe: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    getTagsListApi();
-  }, []);
-
   const renderImageOptions = () => {
     switch (selectedImageOption) {
       case ImageOptions.ImageUpload:
@@ -187,14 +211,17 @@ const AddRecipe: React.FC = () => {
   };
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    console.warn("THIS")
     event.preventDefault();
     onResetImage();
-    if ((image !== undefined || imageUrl !== undefined) && tagsList !== undefined) {
+    if (
+      (image !== undefined || imageUrl !== undefined) &&
+      tagsList !== undefined
+    ) {
       createNewRecipeApi({
         name: recipeName,
         description: description,
         time: prepTime,
+        ingredients: ingredients,
         instructions: instructions,
         tags: tagsList,
         favourite: favourite,
@@ -202,11 +229,16 @@ const AddRecipe: React.FC = () => {
         image: image,
         imageUrl: imageUrl,
       } as NewRecipeInfo);
+      setAddedRecipe(true);
     }
   };
 
   useEffect(() => {
-    if (!loading && !error && recipeInfo) {
+    getTagsListApi();
+  }, []);
+
+  useEffect(() => {
+    if (!loading && !error && recipeInfo && addedRecipe) {
       navigate(`/recipe/${recipeInfo.id}`, { replace: true });
     }
   }, [recipeInfo, error, loading, navigate]);
@@ -236,6 +268,43 @@ const AddRecipe: React.FC = () => {
             />
           </Form.Field>
           <Form.Field>
+            <Label>Ingredients</Label>
+            <Input
+              action={{
+                icon: "add",
+                onClick: (
+                  event: React.MouseEvent<HTMLInputElement, MouseEvent>
+                ) => updateInstructions(event),
+              }}
+              placeholder="Add ingredient..."
+              value={ingredient}
+              onChange={(e) => setIngredient(e.target.value)}
+              onKeyPress={onEnterIngredientPress}
+            />
+            {ingredients.length !== 0 && (
+              <Segment>
+                <List divided animated ordered>
+                  {ingredients.map((ingredient: string, index: number) => {
+                    return (
+                      <List.Item key={index}>
+                        {ingredient}
+                        <Button
+                          onClick={() => onRemoveIngredient(index)}
+                          size="mini"
+                          floated="right"
+                          color="red"
+                          icon
+                        >
+                          <Icon name="remove" />
+                        </Button>
+                      </List.Item>
+                    );
+                  })}
+                </List>
+              </Segment>
+            )}
+          </Form.Field>
+          <Form.Field>
             <Label>Prep time</Label>
             <Input
               placeholder="Prep time"
@@ -251,7 +320,7 @@ const AddRecipe: React.FC = () => {
                   event: React.MouseEvent<HTMLInputElement, MouseEvent>
                 ) => updateInstructions(event),
               }}
-              placeholder="Add recipe..."
+              placeholder="Add instruction..."
               value={instruction}
               onChange={(e) => setInstruction(e.target.value)}
               onKeyPress={onEnterInstructionPress}
@@ -264,7 +333,7 @@ const AddRecipe: React.FC = () => {
                       <List.Item key={index}>
                         {instruction}
                         <Button
-                          onClick={() => onRemoveRecipe(index)}
+                          onClick={() => onRemoveInstruction(index)}
                           size="mini"
                           floated="right"
                           color="red"

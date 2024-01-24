@@ -36,14 +36,17 @@ const NavBar: React.FC = () => {
             <Icon name="book" />
           </Menu.Item>
           <Menu.Item>
-            <Link to="/" onClick={() => navigate("/")}>
+            <Link to="/" onClick={() => navigate("/", { replace: true })}>
               <Header inverted as="h1">
-                Chef
+                Fible
               </Header>
             </Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/addRecipe" onClick={() => navigate("/")}>
+            <Link
+              to="/addRecipe"
+              onClick={() => navigate("/addRecipe", { replace: true })}
+            >
               Add Recipe
             </Link>
           </Menu.Item>
