@@ -4,7 +4,7 @@ import { Button, Container, Form, Icon, Image, Label } from "semantic-ui-react";
 interface ImageInformation {
   image: File | undefined;
   onResetImage: () => void;
-  onUploadImage: (event: ChangeEvent<HTMLInputElement>) => void;
+  onUploadImage: (file: File) => void;
 }
 const UploadImage: React.FC<ImageInformation> = ({
   image,
@@ -12,22 +12,24 @@ const UploadImage: React.FC<ImageInformation> = ({
   onResetImage,
 }) => {
   const [newImage, setNewImage] = useState<File>();
+  const onUploadImageFile = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      const file = files[0];
+      setNewImage(file);
+      onUploadImage(file);
+    }
+  };
+
+  const onResetImageFile = () => {
+    setNewImage(undefined);
+    onResetImage()
+  };
+
   return (
     <Container>
       <Form.Field>
         <>
-          {image !== undefined ? (
-            <Form.Field>
-              <Image
-                style={{ maxWidth: 500, maxHeight: 500 }}
-                className="preview"
-                src={image.name}
-                alt=""
-              />
-            </Form.Field>
-          ) : (
-            <></>
-          )}
           <Button
             as="label"
             htmlFor="file"
@@ -45,7 +47,7 @@ const UploadImage: React.FC<ImageInformation> = ({
             id="file"
             hidden
             accept=".png"
-            onChange={onUploadImage}
+            onChange={onUploadImageFile}
           />
           <Container textAlign="right">
             <Button as="div" labelPosition="left">
@@ -56,7 +58,7 @@ const UploadImage: React.FC<ImageInformation> = ({
                 type="button"
                 icon
                 negative
-                onClick={onResetImage}
+                onClick={onResetImageFile}
                 compact
               >
                 <Icon name="remove" />
@@ -64,10 +66,10 @@ const UploadImage: React.FC<ImageInformation> = ({
             </Button>
           </Container>
           <Form.Field>
-            <img
+            <Image
               style={{ maxWidth: 500, maxHeight: 500 }}
               className="preview"
-              src={newImage?.name}
+              src={newImage ? URL.createObjectURL(newImage) : ""}
               alt=""
             />
           </Form.Field>

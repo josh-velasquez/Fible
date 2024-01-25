@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Checkbox,
@@ -54,11 +54,8 @@ const AddRecipe: React.FC = () => {
   let navigate = useNavigate();
   const { getTagsListApi, createNewRecipeApi } = useActions();
 
-  const onUploadImage = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files) {
-      setImage(files[0]);
-    }
+  const onUploadImage = (file: File) => {
+    setImage(file);
   };
 
   const onResetImage = () => {

@@ -39,6 +39,7 @@ const EditRecipe: React.FC = (): JSX.Element => {
   const [favourite, setFavourite] = useState<boolean>(false);
   const [image, setImage] = useState<File>();
   const [currentImage, setCurrentImage] = useState<string>("");
+  const [newImageSelected, setNewImageSelected] = useState<boolean>(false);
   const { tags } = useTypedSelector((state) => state.tags);
   const { recipesData } = useTypedSelector((state) => state.results);
   const [selectedImageOption, setSelectedImageOption] = useState<ImageOptions>(
@@ -54,16 +55,14 @@ const EditRecipe: React.FC = (): JSX.Element => {
 
   let navigate = useNavigate();
 
-  const onUploadImage = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files) {
-      setImage(files[0]);
-      // setCurrentImage("");
-    }
+  const onUploadImage = (file: File) => {
+    setImage(file);
+    setNewImageSelected(true);
   };
 
   const onResetImage = () => {
     setImage(undefined);
+    setNewImageSelected(false);
   };
 
   const onRemoveInstruction = (id: number) => {
@@ -218,13 +217,6 @@ const EditRecipe: React.FC = (): JSX.Element => {
       (image !== undefined || currentImage !== undefined) &&
       selectedTags !== undefined
     ) {
-      // if (
-      //   (image !== undefined || currentImage !== "") &&
-      //   selectedTags !== undefined
-      // ) {
-      // const selectedTagValues = selectedTags.map(
-      //   (index) => tagsOptions[index].text
-      // );
       updateRecipeApi({
         id: recipeId,
         name: recipeName,
@@ -423,29 +415,14 @@ const EditRecipe: React.FC = (): JSX.Element => {
             />
           </Form.Field>
           {renderImageOptions()}
-          {/* <Form.Field>
-            <Label>Upload image</Label>
-            {image ? (
-              <UploadImage
-                image={image}
-                onResetImage={onResetImage}
-                onUploadImage={onUploadImage}
-              />
-            ) : currentImage ? (
-              <Image
-                src={currentImage}
-                style={{ height: "250px", objectFit: "cover" }}
-                alt={currentImage}
-              />
-            ) : (
-              <UploadImage
-                image={image}
-                onResetImage={onResetImage}
-                onUploadImage={onUploadImage}
-              />
-              // TODO: add link instead for url -- this is implemented in the AddRecipe component
-            )}
-          </Form.Field> */}
+          {!newImageSelected && (
+            <Image
+              style={{ maxWidth: 500, maxHeight: 500 }}
+              className="preview"
+              src={currentImage}
+              alt=""
+            />
+          )}
           <Form.Field>
             <Checkbox
               label="Add to my favourites!"

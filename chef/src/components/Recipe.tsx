@@ -117,7 +117,7 @@ const Recipe: React.FC = (): JSX.Element => {
       const recipe = recipesData.find((recipe: RecipeInfo) => recipe.id === id);
       setRecipe(recipe);
     } else {
-      getRecipeListApi()
+      getRecipeListApi();
     }
   }, [id, recipesData]);
 
@@ -127,7 +127,13 @@ const Recipe: React.FC = (): JSX.Element => {
         <React.Fragment>
           <Header as="h1">{recipe.name}</Header>
           <Divider />
-          <Image centered src={recipe.image} size="large" alt="Recipe Image" />
+          <Image
+            centered
+            src={recipe.image}
+            style={{ maxWidth: 500, maxHeight: 500 }}
+            size="large"
+            alt="Recipe Image"
+          />
           <Header as="h4">{recipe.description}</Header>
           <Grid centered relaxed="very">
             <Grid.Row>
